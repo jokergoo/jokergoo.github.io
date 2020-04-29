@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on A Bioinformagician</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on A Bioinformagician</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Substitute with an evaluated expression</title>
+      <link>/2019/10/06/substitute-with-an-evaluated-expression/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/06/substitute-with-an-evaluated-expression/</guid>
+      <description>In Perl, if we want to substitute with an evaluated expression with regular expression, we can do as follows.
+%map = ( &amp;quot;a&amp;quot; =&amp;gt; &amp;quot;one&amp;quot;, &amp;quot;b&amp;quot; =&amp;gt; &amp;quot;two&amp;quot;, &amp;quot;c&amp;quot; =&amp;gt; &amp;quot;three&amp;quot;, ); $txt = &amp;quot;a, b, c&amp;quot;; $txt =~s/([a|b|c])/$map{$1}/g; Here $map{$1} is evaluated and $txt will be one, two, three.
+To be formal, the matched text s is replaced by f(s) where f() is a transformation to the text s.</description>
+    </item>
+    
+    <item>
+      <title>Put Chord diagram horizontally or vertically symmetric</title>
+      <link>/2017/03/17/put-chord-diagram-horizontally-or-vertically-symmetric/</link>
+      <pubDate>Fri, 17 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/03/17/put-chord-diagram-horizontally-or-vertically-symmetric/</guid>
+      <description>In Chord diagram, when there are two groups (which correspond to rows and columns if the input is a adjacency matrix), it is always visually beautiful to rotate the diagram to be symmetric on horizontal direction or vertical direction. Actually it is quite easy to calculate a proper degree that needs to be rotated for the circle. In this post, I will show how to calculate such kind of “rotated degree value”.</description>
+    </item>
+    
+    <item>
+      <title>Reverse x-axis in the circular layout</title>
+      <link>/2016/11/21/reverse-x-axis-in-the-circular-layout/</link>
+      <pubDate>Mon, 21 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/11/21/reverse-x-axis-in-the-circular-layout/</guid>
+      <description>In circlize package, x-axis in always clockwise in each sector, no matter it is on the top of the circle or at the bottom. However, you can manually reverse the original positions on x-axis to pretend you have a reversed x-axis. Take following example:
+library(circlize) ## ======================================== ## circlize version 0.4.9 ## CRAN page: https://cran.r-project.org/package=circlize ## Github page: https://github.com/jokergoo/circlize ## Documentation: https://jokergoo.github.io/circlize_book/book/ ## ## If you use it in published research, please cite: ## Gu, Z.</description>
+    </item>
+    
+    <item>
+      <title>Visualize positive and negative signals in the enriched heatmap</title>
+      <link>/2016/11/21/visualize-positive-and-negative-signals-in-the-enriched-heatmap/</link>
+      <pubDate>Mon, 21 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/11/21/visualize-positive-and-negative-signals-in-the-enriched-heatmap/</guid>
+      <description>Enriched heatmaps are used to visualize the enrichment of genomic signals on a set of genomic targets of interest. It is broadly used to visualize e.g. how histone marks are enriched to specific sites.
+Sometimes we want to visualize the general correlation around certain genomic targets or how the difference between two subgroups looks like in the vicinity of e.g. gene TSS. In this case, the signals contain both positive and negative value and it makes more sense to visualize the enrichment for the positive and negative signals separatedly.</description>
+    </item>
+    
+    <item>
+      <title>Circular scan</title>
+      <link>/2015/11/21/circular-scan/</link>
+      <pubDate>Sat, 21 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/11/21/circular-scan/</guid>
+      <description>library(circlize) circular_scan = function(theta, width, r, x, y) { theta1 = theta %% 360 # enforce theta in [0, 360) theta2 = (theta + width) %% 360 theta_p = circlize:::as.degree(atan(y/x)) # ranging [-90, 90] theta_p = ifelse(x &amp;lt; 0, theta_p + 180, theta_p) theta_p = theta_p %% 360 r_p = sqrt(x^2 + y^2) # rotate to put bottom edge at x-axis offset = 360 - theta1 l = (theta_p + offset) %% 360 &amp;gt;= (theta1 + offset) %% 360 &amp;amp; (theta_p + offset) %% 360 &amp;lt;= (theta2 + offset) %% 360 &amp;amp; r_p &amp;lt;= r par(mar = c(1, 1, 1, 1)) plot(NULL, xlim = c(-r, r), ylim = c(-r, r), axes = FALSE, ann = FALSE) draw.</description>
+    </item>
+    
+    <item>
+      <title>Test 测试</title>
+      <link>/2014/01/01/test-%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Wed, 01 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/01/01/test-%E6%B5%8B%E8%AF%95/</guid>
+      <description>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试 测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试 测试测试测试测试测试测试测试测试</description>
+    </item>
+    
+  </channel>
+</rss>

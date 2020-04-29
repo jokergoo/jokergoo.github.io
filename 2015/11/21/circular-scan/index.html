@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>Circular scan - A Bioinformagician</title>
+<meta property="og:title" content="Circular scan - A Bioinformagician">
+
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">Circular scan</h1>
+
+    
+    <span class="article-date">2015-11-21</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<pre class="r"><code>library(circlize)
+circular_scan = function(theta, width, r, x, y) {
+    theta1 = theta %% 360  # enforce theta in [0, 360)
+    theta2 = (theta + width) %% 360
+    theta_p = circlize:::as.degree(atan(y/x)) # ranging [-90, 90]
+    theta_p = ifelse(x &lt; 0, theta_p + 180, theta_p)
+    theta_p = theta_p %% 360
+    r_p = sqrt(x^2 + y^2)
+    # rotate to put bottom edge at x-axis
+    offset = 360 - theta1
+    l = (theta_p + offset) %% 360 &gt;= (theta1 + offset) %% 360 &amp;
+        (theta_p + offset) %% 360 &lt;= (theta2 + offset) %% 360 &amp;
+        r_p &lt;= r
+    par(mar = c(1, 1, 1, 1))
+    plot(NULL, xlim = c(-r, r), ylim = c(-r, r), axes = FALSE, ann = FALSE)
+    draw.sector(start.degree = theta, end.degree = theta + width, rou1 = r, clock.wise = FALSE, col = &quot;grey&quot;)
+    points(x, y, col = ifelse(l, &quot;red&quot;, &quot;grey&quot;), pch = 16)
+}
+x = runif(40, -2, 2)
+y = runif(40, -2, 2)</code></pre>
+<pre class="r"><code>for(d in 0:360) circular_scan(d, 30, 2, x + runif(40, -0.05, 0.05), y + runif(40, -0.05, 0.05))</code></pre>
+<video width="672"  loop>
+<source src="/post/2015-11-21-circular-scan_files/figure-html/unnamed-chunk-3.webm" />
+</video>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
