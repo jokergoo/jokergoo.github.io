@@ -43,16 +43,15 @@
   </url>
   
   <url>
-    <loc>/software/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/</loc>
   </url>
   
   <url>
     <loc>/publication/</loc>
+  </url>
+  
+  <url>
+    <loc>/software/</loc>
   </url>
   
   <url>
