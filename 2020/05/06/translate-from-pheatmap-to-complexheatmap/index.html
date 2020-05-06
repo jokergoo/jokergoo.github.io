@@ -60,7 +60,7 @@ A Bioinformagician
 
   <article class="article">
     
-    <span class="article-duration">6 min read</span>
+    <span class="article-duration">7 min read</span>
     
 
     <h1 class="article-title">Translate from pheatmap to ComplexHeatmap</h1>
@@ -78,14 +78,16 @@ A Bioinformagician
 <h2>Introduction</h2>
 <p><strong>pheatmap</strong> is a great R package for making heatmaps, inspiring a lot of other
 heatmap packages such as <strong>ComplexHeatmap</strong>. From version 2.5.2 of
-<strong>ComplexHeatmap</strong>, I implemented a new <code>ComplexHeatmap::pheatmap()</code> function which actually
-maps all the parameters in <code>pheatmap::pheatmap()</code> to proper parameters in
-<code>ComplexHeatmap::Heatmap()</code>, which means, it converts a pheatmap to a complex heatmap. By doing
-this, the most significant improvement is now you can add multiple pheatmaps
-and annotations (defined by <code>ComplexHeatmap::rowAnnotation()</code>).</p>
+<strong>ComplexHeatmap</strong>, I implemented a new <code>ComplexHeatmap::pheatmap()</code> function
+which actually maps all the parameters in <code>pheatmap::pheatmap()</code> to proper
+parameters in <code>ComplexHeatmap::Heatmap()</code>, which means, it converts a pheatmap
+to a complex heatmap. By doing this, the most significant improvement is now you
+can add multiple pheatmaps and annotations (defined by
+<code>ComplexHeatmap::rowAnnotation()</code>).</p>
 <p><strong><code>ComplexHeatmap::pheatmap()</code> includes all arguments in <code>pheatmap::pheatmap()</code>,
-which means, you don’t need to do any adaption on your pheatmap code, it will
-automatically and nicely convert to the complex heatmap.</strong></p>
+which means, you don’t need to do any adaption on your pheatmap code, you just
+rerun your pheatmap code and it will automatically and nicely convert to the
+complex heatmap.</strong></p>
 <p>Some arguments in <code>pheatmap::pheatmap()</code> are disabled and ignored in this translation,
 listed as follows:</p>
 <ul>
@@ -123,8 +125,10 @@ rownames(test) = paste(&quot;Gene&quot;, 1:20, sep = &quot;&quot;)</code></pre>
 a similar heatmap as by <code>pheatmap::pheatmap()</code>.</p>
 <pre class="r"><code>pheatmap(test)  # this is ComplexHeatmap::pheatmap</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;" /></p>
-<p>Everything looks the same except the style of the heatmap legend.</p>
-<p>The next one is an example for setting annotations.</p>
+<p>Everything looks the same except the style of the heatmap legend. There are also
+some other visual difference which you can find in the “Comparisons” section in this post.</p>
+<p>The next one is an example for setting annotations (you should be familiar with
+how to set these data frames and color list if you are a pheatmap user).</p>
 <pre class="r"><code>annotation_col = data.frame(
     CellType = factor(rep(c(&quot;CT1&quot;, &quot;CT2&quot;), 5)), 
     Time = 1:5
@@ -177,7 +181,7 @@ inside a function or in a <code>for</code> loop, you need to explicitly use <cod
 <thead>
 <tr class="header">
 <th align="left">Arguments in <code>pheatmap::pheatmap()</code></th>
-<th align="left">Identical settings/arguments in <code>ComplexHeatmap:Heatmap()</code></th>
+<th align="left">Identical settings/arguments in <code>ComplexHeatmap::Heatmap()</code></th>
 </tr>
 </thead>
 <tbody>
@@ -223,11 +227,11 @@ inside a function or in a <code>for</code> loop, you need to explicitly use <cod
 </tr>
 <tr class="odd">
 <td align="left"><code>clustering_distance_rows</code></td>
-<td align="left"><code>clustering_distance_rows</code></td>
+<td align="left"><code>clustering_distance_rows</code>. The value <code>correlation</code> should be changed to <code>pearson</code>.</td>
 </tr>
 <tr class="even">
 <td align="left"><code>clustering_distance_cols</code></td>
-<td align="left"><code>clustering_distance_columns</code></td>
+<td align="left"><code>clustering_distance_columns</code>, The value <code>correlation</code> should be changed to <code>pearson</code>.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>clustering_method</code></td>
@@ -247,7 +251,7 @@ inside a function or in a <code>for</code> loop, you need to explicitly use <cod
 </tr>
 <tr class="odd">
 <td align="left"><code>treeheight_row</code></td>
-<td align="left"><code>row_dend_width = unit(treeheight_row. "pt")</code></td>
+<td align="left"><code>row_dend_width = unit(treeheight_row, "pt")</code></td>
 </tr>
 <tr class="even">
 <td align="left"><code>treeheight_col</code></td>
@@ -343,11 +347,11 @@ inside a function or in a <code>for</code> loop, you need to explicitly use <cod
 </tr>
 <tr class="odd">
 <td align="left"><code>gaps_row</code></td>
-<td align="left">Users should construct a “splitting variable”. E.g. <code>slices = diff(c(0, gaps_row, nrow(mat))); rep(seq_along(slices), times = slices)</code>.</td>
+<td align="left">Users should construct a “splitting variable” and send to <code>row_split</code>. E.g. <code>slices = diff(c(0, gaps_row, nrow(mat))); rep(seq_along(slices), times = slices)</code>.</td>
 </tr>
 <tr class="even">
 <td align="left"><code>gaps_col</code></td>
-<td align="left">Users should construct a “splitting variable”.</td>
+<td align="left">Users should construct a “splitting variable” and send to <code>column_split</code>.</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>labels_row</code></td>
@@ -403,7 +407,8 @@ of the two heatmap implementations.</p>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>compare_pheatmap(test, display_numbers = TRUE, number_format = &quot;%.1e&quot;)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-17-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, display_numbers = matrix(ifelse(test &gt; 5, &quot;*&quot;, &quot;&quot;), nrow(test)))</code></pre>
+<pre class="r"><code>compare_pheatmap(test, 
+    display_numbers = matrix(ifelse(test &gt; 5, &quot;*&quot;, &quot;&quot;), nrow(test)))</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-18-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>compare_pheatmap(test, cluster_row = FALSE, legend_breaks = -1:4, 
     legend_labels = c(&quot;0&quot;, &quot;1e-4&quot;, &quot;1e-3&quot;, &quot;1e-2&quot;, &quot;1e-1&quot;, &quot;1&quot;))</code></pre>
