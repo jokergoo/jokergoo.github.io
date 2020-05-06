@@ -6,10 +6,19 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Translate from pheatmap to ComplexHeatmap</title>
+      <link>/2020/05/06/translate-from-pheatmap-to-complexheatmap/</link>
+      <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/06/translate-from-pheatmap-to-complexheatmap/</guid>
+      <description>Introduction pheatmap is a great R package for making heatmaps, inspiring a lot of other heatmap packages such as ComplexHeatmap. From version 2.5.2 of ComplexHeatmap, I implemented a new ComplexHeatmap::pheatmap() function which actually maps all the parameters in pheatmap::pheatmap() to proper parameters in ComplexHeatmap::Heatmap(), which means, it converts a pheatmap to a complex heatmap. By doing this, the most significant improvement is now you can add multiple pheatmaps and annotations (defined by ComplexHeatmap::rowAnnotation()).</description>
+    </item>
     
     <item>
       <title>Substitute with an evaluated expression</title>
