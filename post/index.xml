@@ -6,10 +6,20 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 11 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Set cell width/height in the heatmap</title>
+      <link>/2020/05/11/set-cell-width/height-in-the-heatmap/</link>
+      <pubDate>Mon, 11 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/11/set-cell-width/height-in-the-heatmap/</guid>
+      <description>When making a heatmap, the width and height of heatmap cells are automatically adjusted to fill in the figure (e.g. the following figure), which means, when you change the width and height of the final figure, the width and height of the cells change accordingly.
+library(ComplexHeatmap) set.seed(123) mat = matrix(rnorm(100), 10) Heatmap(mat, name = &amp;quot;mat&amp;quot;) When the matrix is small, there are scenarios where you might want to manually set the width and height of cells to fixed values, so that you can, e.</description>
+    </item>
     
     <item>
       <title>Translate from pheatmap to ComplexHeatmap</title>
