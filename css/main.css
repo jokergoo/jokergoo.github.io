@@ -393,4 +393,6 @@ td, th {
   padding: 2px 8px;
 }
 
-
+pre {
+  font-size: 13px;
+}

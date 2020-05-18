@@ -6,10 +6,19 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 11 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Interactive ComplexHeatmap</title>
+      <link>/2020/05/15/interactive-complexheatmap/</link>
+      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/15/interactive-complexheatmap/</guid>
+      <description>Key message: heatmaps can be exported into a Shiny app by ht_shiny(ht).  Heatmaps are mainly for visualizing common patterns that are shared by groups of rows and columns. After the patterns have been seen, the next step is to extract the corresponding rows and columns from the heatmap, which requires interactivity on the heatmaps. ComplexHeatmap package is used for generating static heatmaps. From version 2.5.3, it is now possible to make complex heatmaps interactive!</description>
+    </item>
     
     <item>
       <title>Set cell width/height in the heatmap</title>
