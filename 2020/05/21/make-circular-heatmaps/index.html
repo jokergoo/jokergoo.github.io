@@ -601,10 +601,6 @@ code without any modification.</p>
     circos.heatmap(dist, col = col_dist, track.height = 0.01)
     circos.heatmap(anno_enhancer, col = col_enhancer, track.height = 0.03)
 
-    df_link = data.frame(
-        from_index = sample(nrow(mat_meth), 20),
-        to_index = sample(nrow(mat_meth), 20)
-    )
     for(i in seq_len(nrow(df_link))) {
         circos.heatmap.link(df_link$from_index[i],
                             df_link$to_index[i],
