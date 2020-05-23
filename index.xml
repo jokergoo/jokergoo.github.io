@@ -19,7 +19,7 @@
       <guid>/2020/05/21/make-circular-heatmaps/</guid>
       <description>Circular heatmaps are pretty. With circlize package, it is possible to implement circular heatmaps by the low-level function circos.rect(). From version 0.4.10, I implemented a new high-level function circos.heatmap() which simplifies the creation of circular heatmaps. In this post, I will demostrate the usage of the new circos.heatmap() function.
 First let’s generate a random matrix and randomly split it into five groups.
-set.seed(123) mat1 = rbind(cbind(matrix(rnorm(50*5, mean = 1), nr = 50), matrix(rnorm(50*5, mean = -1), nr = 50)), cbind(matrix(rnorm(50*5, mean = -1), nr = 50), matrix(rnorm(50*5, mean = 1), nr = 50)) ) rownames(mat1) = paste0(&amp;quot;R&amp;quot;, 1:100) colnames(mat1) = paste0(&amp;quot;C&amp;quot;, 1:10) mat1 = mat1[sample(100, 100), ] # randomly permute rows split = sample(letters[1:5], 100, replace = TRUE) spilt = factor(split, levels = letters[1:5]) Following plot is the normal layout of the heatmap (by the ComplexHeatmap package).</description>
+set.seed(123) mat1 = rbind(cbind(matrix(rnorm(50*5, mean = 1), nr = 50), matrix(rnorm(50*5, mean = -1), nr = 50)), cbind(matrix(rnorm(50*5, mean = -1), nr = 50), matrix(rnorm(50*5, mean = 1), nr = 50)) ) rownames(mat1) = paste0(&amp;quot;R&amp;quot;, 1:100) colnames(mat1) = paste0(&amp;quot;C&amp;quot;, 1:10) mat1 = mat1[sample(100, 100), ] # randomly permute rows split = sample(letters[1:5], 100, replace = TRUE) split = factor(split, levels = letters[1:5]) Following plot is the normal layout of the heatmap (by the ComplexHeatmap package).</description>
     </item>
     
     <item>
