@@ -17,7 +17,8 @@
       <pubDate>Sun, 31 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/05/31/word-cloud-as-heatmap-annotation/</guid>
-      <description>Word cloud grob set.seed(123) words = sapply(1:30, function(x) strrep(sample(letters, 1), sample(3:10, 1))) fontsize = runif(30, min = 5, max = 30) library(grid) gb = word_cloud_grob(words, fontsize = fontsize, max_width = 100) grid.newpage() grid.draw(gb) grid.rect(width = grobWidth(gb), height = grobHeight(gb), gp = gpar(fill = NA)) gb = word_cloud_grob(words, fontsize = fontsize, max_width = 60) grid.newpage() grid.draw(gb) grid.rect(width = grobWidth(gb), height = grobHeight(gb), gp = gpar(fill = NA)) # color as a single scalar gb = word_cloud_grob(words, fontsize = fontsize, max_width = 100, col = 1) grid.</description>
+      <description>I am recently developing a new package simplifyEnrichment which clusters GO terms into clusters and visualizes the summaries of GO terms in each cluster as word cloud. The results are visualized by ComplexHeatmap where the word clouds are the heatmap annotations. In this post, I will describe how to implement word clouds as the heatmap annotation by ComplexHeatmap.
+To achieve this, we need two functionalities: one draws the word cloud and one links the word cloud to the corresponding rows in the heatmap.</description>
     </item>
     
     <item>
