@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>Word cloud as heatmap annotation - A Bioinformagician</title>
+<meta property="og:title" content="Word cloud as heatmap annotation - A Bioinformagician">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Word cloud as heatmap annotation</h1>
+
+    
+    <span class="article-date">2020-05-31</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<div id="word-cloud-grob" class="section level3">
+<h3>Word cloud grob</h3>
+<pre class="r"><code>set.seed(123)
+words = sapply(1:30, function(x) strrep(sample(letters, 1), sample(3:10, 1)))
+fontsize = runif(30, min = 5, max = 30)</code></pre>
+<pre class="r"><code>library(grid)
+gb = word_cloud_grob(words, fontsize = fontsize, max_width = 100)
+grid.newpage()
+grid.draw(gb)
+grid.rect(width = grobWidth(gb), height = grobHeight(gb), gp = gpar(fill = NA))</code></pre>
+<p><img src="/post/2020-05-31-word-cloud-as-heatmap-annotation_files/figure-html/unnamed-chunk-5-1.png" width="384.971320222828" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>gb = word_cloud_grob(words, fontsize = fontsize, max_width = 60)
+grid.newpage()
+grid.draw(gb)
+grid.rect(width = grobWidth(gb), height = grobHeight(gb), gp = gpar(fill = NA))</code></pre>
+<p><img src="/post/2020-05-31-word-cloud-as-heatmap-annotation_files/figure-html/unnamed-chunk-7-1.png" width="253.009844719874" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># color as a single scalar
+gb = word_cloud_grob(words, fontsize = fontsize, max_width = 100, col = 1)
+grid.newpage(); grid.draw(gb)
+grid.rect(width = grobWidth(gb), height = grobHeight(gb), gp = gpar(fill = NA))</code></pre>
+<p><img src="/post/2020-05-31-word-cloud-as-heatmap-annotation_files/figure-html/unnamed-chunk-9-1.png" width="384.971320222828" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># color as a vector
+gb = word_cloud_grob(words, fontsize = fontsize, max_width = 100, col = 1:30)
+grid.newpage(); grid.draw(gb)
+grid.rect(width = grobWidth(gb), height = grobHeight(gb), gp = gpar(fill = NA))</code></pre>
+<p><img src="/post/2020-05-31-word-cloud-as-heatmap-annotation_files/figure-html/unnamed-chunk-11-1.png" width="384.971320222828" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># color as a function
+library(circlize)
+col_fun = colorRamp2(c(5, 17, 30), c(&quot;blue&quot;, &quot;black&quot;, &quot;red&quot;))
+gb = word_cloud_grob(words, fontsize = fontsize, max_width = 100, 
+    col = function(fs) col_fun(fs))
+grid.newpage(); grid.draw(gb)
+grid.rect(width = grobWidth(gb), height = grobHeight(gb), gp = gpar(fill = NA))</code></pre>
+<p><img src="/post/2020-05-31-word-cloud-as-heatmap-annotation_files/figure-html/unnamed-chunk-13-1.png" width="384.971320222828" style="display: block; margin: auto;" /></p>
+</div>
+<div id="as-a-heatmap-annotation" class="section level3">
+<h3>As a heatmap annotation</h3>
+<pre class="r"><code>gb = word_cloud_grob(words, fontsize = fontsize, max_width = 100)
+gb_h = grobHeight(gb)
+gb_w = grobWidth(gb)
+
+library(ComplexHeatmap)
+m = matrix(rnorm(100), 10)
+ht = Heatmap(m, cluster_rows = FALSE)
+panel_fun = function(index, nm) {
+    grid.rect(gp = gpar(fill = &quot;#EEEEEE&quot;, col = NA))
+    grid.draw(gb)
+}
+
+ht + rowAnnotation(word_cloud = 
+    anno_link(align_to = 1:3, which = &quot;row&quot;, 
+        panel_fun = panel_fun, size = gb_h, width = gb_w + unit(5, &quot;mm&quot;),
+        link_gp = gpar(fill = &quot;#EEEEEE&quot;, col = NA)
+    ))</code></pre>
+<p><img src="/post/2020-05-31-word-cloud-as-heatmap-annotation_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="a-real-world-example" class="section level3">
+<h3>A real-world example</h3>
+<pre class="r"><code>load(&quot;~/word_cloud_annotation_example.RData&quot;)
+ht = Heatmap(mat, col = colorRamp2(c(0, 1), c(&quot;white&quot;, &quot;red&quot;)),
+    name = &quot;Similarity&quot;,
+    show_row_names = FALSE, show_column_names = FALSE,
+    show_row_dend = FALSE, show_column_dend = FALSE,
+    row_split = cl, column_split = cl, 
+    border = &quot;#404040&quot;, row_title = NULL, column_title = NULL,
+    row_gap = unit(0, &quot;mm&quot;), column_gap = unit(0, &quot;mm&quot;))
+
+align_to = split(seq_len(nrow(mat)), cl)
+align_to = align_to[names(align_to) != &quot;0&quot;]
+align_to = align_to[names(align_to) %in% names(keywords)]</code></pre>
+<pre class="r"><code>fontsize_range = c(4, 16)
+gbl = lapply(names(align_to), function(nm) {
+    kw = rev(keywords[[nm]][, 1])
+    freq = rev(keywords[[nm]][, 2])
+    fontsize = scale_fontsize(freq, rg = c(1, max(10, freq)), fs = fontsize_range)
+
+    word_cloud_grob(text = kw, fontsize = fontsize)
+})
+names(gbl) = names(align_to)</code></pre>
+<pre class="r"><code>margin = unit(8, &quot;pt&quot;)
+gbl_h = lapply(gbl, function(x) convertHeight(grobHeight(x), &quot;cm&quot;) + margin)
+gbl_h = do.call(unit.c, gbl_h)
+
+gbl_w = lapply(gbl, function(x) convertWidth(grobWidth(x), &quot;cm&quot;))
+gbl_w = do.call(unit.c, gbl_w)
+gbl_w = max(gbl_w) + margin
+
+panel_fun = function(index, nm) {
+    grid.rect(gp = gpar(fill = &quot;#DDDDDD&quot;, col = NA))
+    grid.lines(c(0, 1, 1, 0), c(0, 0, 1, 1), gp = gpar(col = &quot;#AAAAAA&quot;), 
+        default.units = &quot;npc&quot;)
+    gb = gbl[[nm]]
+    pushViewport(viewport(x = margin/2, y = margin/2, 
+        width = grobWidth(gb), height = grobHeight(gb),
+        just = c(&quot;left&quot;, &quot;bottom&quot;)))
+    grid.draw(gb)
+    popViewport()
+}</code></pre>
+<pre class="r"><code>ht = ht + rowAnnotation(keywords = anno_link(align_to = align_to, 
+    which = &quot;row&quot;, panel_fun = panel_fun, 
+    size = gbl_h, gap = unit(2, &quot;mm&quot;), width = gbl_w + unit(5, &quot;mm&quot;),
+    link_gp = gpar(fill = &quot;#DDDDDD&quot;, col = &quot;#AAAAAA&quot;), internal_line = FALSE))
+draw(ht, ht_gap = unit(2, &quot;pt&quot;))</code></pre>
+<p><img src="/post/2020-05-31-word-cloud-as-heatmap-annotation_files/figure-html/unnamed-chunk-18-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("pre").not(".r").prepend("<input class='switch_hljs' type='button' value='show/hide output' />");
+    $(".switch_hljs").next().hide();
+    $(".switch_hljs").click(function() {
+        $(this).next().toggle();
+    })
+});
+</script>
+</div>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

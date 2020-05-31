@@ -6,10 +6,19 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 31 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Word cloud as heatmap annotation</title>
+      <link>/2020/05/31/word-cloud-as-heatmap-annotation/</link>
+      <pubDate>Sun, 31 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/31/word-cloud-as-heatmap-annotation/</guid>
+      <description>Word cloud grob set.seed(123) words = sapply(1:30, function(x) strrep(sample(letters, 1), sample(3:10, 1))) fontsize = runif(30, min = 5, max = 30) library(grid) gb = word_cloud_grob(words, fontsize = fontsize, max_width = 100) grid.newpage() grid.draw(gb) grid.rect(width = grobWidth(gb), height = grobHeight(gb), gp = gpar(fill = NA)) gb = word_cloud_grob(words, fontsize = fontsize, max_width = 60) grid.newpage() grid.draw(gb) grid.rect(width = grobWidth(gb), height = grobHeight(gb), gp = gpar(fill = NA)) # color as a single scalar gb = word_cloud_grob(words, fontsize = fontsize, max_width = 100, col = 1) grid.</description>
+    </item>
     
     <item>
       <title>Make circular heatmaps</title>
