@@ -1,0 +1,19 @@
+Usage: Rscript foo.R [options]
+
+Options:
+  --number, -n integer
+    Number of items.
+ 
+  --cutoff, -c numeric
+    Cutoff for filtering results.
+    [default: 0.05]
+ 
+  --verbose
+    Print message.
+ 
+  --help, -h
+    Print help message and exit.
+ 
+  --version
+    Print version information and exit.
+ 

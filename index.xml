@@ -6,10 +6,19 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 31 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 06 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Parse command-line arguments</title>
+      <link>/2020/06/06/parse-command-line-arguments/</link>
+      <pubDate>Sat, 06 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/06/parse-command-line-arguments/</guid>
+      <description>pre.terminal { background: hsl(70, 0%, 15%); color: white; } pre.terminal .hljs { background: hsl(70, 0%, 15%); color: white; }  There are already several R packages which parse command-line arguments such as getopt, optparse, argparse, docopt. Here GetoptLong is another command-line argument parser (actually it was developed very early. The first CRAN version was in 2013) which wraps the powerful Perl module Getopt::Long. GetoptLong package also provides some adaptations for easier use in R.</description>
+    </item>
     
     <item>
       <title>Word cloud as heatmap annotation</title>
