@@ -6,10 +6,21 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Multiple-group Chord diagram</title>
+      <link>/2020/06/08/multiple-group-chord-diagram/</link>
+      <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/08/multiple-group-chord-diagram/</guid>
+      <description>From verion 0.4.10 of the circlize package, there is a new group argument in chordDiagram() function which is very convenient for making multiple-group Chord diagrams.
+I first generate a random matrix where there are three groups (A, B, and C). Note this new functionality works the same for the input as a data frame.
+library(circlize) mat1 = matrix(rnorm(25), nrow = 5) rownames(mat1) = paste0(&amp;quot;A&amp;quot;, 1:5) colnames(mat1) = paste0(&amp;quot;B&amp;quot;, 1:5) mat2 = matrix(rnorm(25), nrow = 5) rownames(mat2) = paste0(&amp;quot;A&amp;quot;, 1:5) colnames(mat2) = paste0(&amp;quot;C&amp;quot;, 1:5) mat3 = matrix(rnorm(25), nrow = 5) rownames(mat3) = paste0(&amp;quot;B&amp;quot;, 1:5) colnames(mat3) = paste0(&amp;quot;C&amp;quot;, 1:5) mat = matrix(0, nrow = 10, ncol = 10) rownames(mat) = c(rownames(mat2), rownames(mat3)) colnames(mat) = c(colnames(mat1), colnames(mat2)) mat[rownames(mat1), colnames(mat1)] = mat1 mat[rownames(mat2), colnames(mat2)] = mat2 mat[rownames(mat3), colnames(mat3)] = mat3 mat ## B1 B2 B3 B4 B5 C1 C2 C3 C4 C5 ## A1 1.</description>
+    </item>
     
     <item>
       <title>Parse command-line arguments</title>
