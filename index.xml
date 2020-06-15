@@ -18,7 +18,7 @@
       
       <guid>/2020/06/14/changes-in-circlize-0.4.10/</guid>
       <description>circlize 0.4.10 is now on CRAN. Besides the bug fixes, following are the user-visible changes/features.
-library(circlize) set.seed(123) Add circos.barplot() and circos.boxplot() circos.barplot() and circos.boxplot() are used inside the panel.fun. Please note the values on x-axes are the integer indices of bars or boxes for which xlim should be properly set in circos.initialize().
+library(circlize) set.seed(123) Add circos.barplot(), circos.boxplot() and circos.violin() circos.barplot(), circos.boxplot() and circos.violin() are used inside the panel.fun. Please note the values on x-axes are the integer indices of bars, boxes or violins for which xlim should be properly set in circos.initialize().
 Barplots For circular barplots, you can either specify a vector which generates a “normal” barplot, or a matrix which generates a stacked barplot.</description>
     </item>
     

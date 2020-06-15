@@ -78,10 +78,10 @@ A Bioinformagician
 CRAN. Besides the bug fixes, following are the user-visible changes/features.</p>
 <pre class="r"><code>library(circlize)
 set.seed(123)</code></pre>
-<div id="add-circos.barplot-and-circos.boxplot" class="section level2">
-<h2>Add circos.barplot() and circos.boxplot()</h2>
-<p><code>circos.barplot()</code> and <code>circos.boxplot()</code> are used inside the <code>panel.fun</code>. Please note
-the values on x-axes are the integer indices of bars or boxes for which <code>xlim</code> should
+<div id="add-circos.barplot-circos.boxplot-and-circos.violin" class="section level2">
+<h2>Add circos.barplot(), circos.boxplot() and circos.violin()</h2>
+<p><code>circos.barplot()</code>, <code>circos.boxplot()</code> and <code>circos.violin()</code> are used inside the <code>panel.fun</code>. Please note
+the values on x-axes are the integer indices of bars, boxes or violins for which <code>xlim</code> should
 be properly set in <code>circos.initialize()</code>.</p>
 <div id="barplots" class="section level3">
 <h3>Barplots</h3>
@@ -129,6 +129,30 @@ circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
 <p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>circos.clear()</code></pre>
 </div>
+<div id="violin-plots" class="section level3">
+<h3>Violin plots</h3>
+<p>For circular violin plots, the violins can be drawn one-by-one by providing
+a vector for each violin, or drawn in batch with a list/matrix as input.</p>
+<p>Please note, to make it comparable between violins, <code>max_density</code> argument
+should be set.</p>
+<pre class="r"><code>par(mfrow = c(1, 2))
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    for(pos in seq(0.5, 9.5, by = 1)) {
+        value = runif(10)
+        circos.violin(value, pos)
+    }
+})
+circos.clear()
+
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = replicate(runif(10), n = 10, simplify = FALSE)
+    circos.violin(value, 1:10 - 0.5, col = 1:10)
+})</code></pre>
+<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>circos.clear()</code></pre>
+</div>
 </div>
 <div id="physical-units" class="section level2">
 <h2>Physical units</h2>
@@ -162,7 +186,7 @@ circos.track(ylim = c(0, 1), track.height = inch_h(0.5),
         line_length_on_y = cm_y(1*sqrt(2)/2)
         circos.lines(c(0, line_length_on_x), c(0, line_length_on_y), col = &quot;orange&quot;)
     })</code></pre>
-<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>circos.clear()</code></pre>
 </div>
 <div id="set-gaps-between-tracks" class="section level2">
@@ -178,7 +202,7 @@ set_track_gap(mm_h(2)) # 2mm
 circos.track(ylim = c(0, 1))
 set_track_gap(cm_h(0.5)) # 0.5cm
 circos.track(ylim = c(0, 1))</code></pre>
-<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>circos.clear()</code></pre>
 </div>
 <div id="gap.degree-with-names" class="section level2">
