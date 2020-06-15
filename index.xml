@@ -6,10 +6,21 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 08 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Changes in circlize 0.4.10</title>
+      <link>/2020/06/14/changes-in-circlize-0.4.10/</link>
+      <pubDate>Sun, 14 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/14/changes-in-circlize-0.4.10/</guid>
+      <description>circlize 0.4.10 is now on CRAN. Besides the bug fixes, following are the user-visible changes/features.
+library(circlize) set.seed(123) Add circos.barplot() and circos.boxplot() circos.barplot() and circos.boxplot() are used inside the panel.fun. Please note the values on x-axes are the integer indices of bars or boxes for which xlim should be properly set in circos.initialize().
+Barplots For circular barplots, you can either specify a vector which generates a “normal” barplot, or a matrix which generates a stacked barplot.</description>
+    </item>
     
     <item>
       <title>Multiple-group Chord diagram</title>
