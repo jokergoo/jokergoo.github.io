@@ -6,10 +6,22 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Which heatmap function is faster?</title>
+      <link>/2020/06/19/which-heatmap-function-is-faster/</link>
+      <pubDate>Fri, 19 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/19/which-heatmap-function-is-faster/</guid>
+      <description>In this post I test the performance (the running time) of four heatmap functions: gplots::heatmap.2(), heatmap() which is natively supported in R, ComplexHeatmap::Heatmap() and pheatmap::pheatmap().
+We generate a 1000x1000 random matrix.
+library(ComplexHeatmap) library(pheatmap) library(gplots) library(microbenchmark) set.seed(123) n = 1000 mat = matrix(rnorm(n*n), nrow = n) First I test drawing heatmaps as well as drawing dendrograms (with applying clustering):
+t1 = microbenchmark( &amp;quot;heatmap()&amp;quot; = { pdf(NULL) heatmap(mat) dev.off() }, &amp;quot;heatmap.</description>
+    </item>
     
     <item>
       <title>Changes in circlize 0.4.10</title>

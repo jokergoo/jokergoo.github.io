@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>Which heatmap function is faster? - A Bioinformagician</title>
+<meta property="og:title" content="Which heatmap function is faster? - A Bioinformagician">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Which heatmap function is faster?</h1>
+
+    
+    <span class="article-date">2020-06-19</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>In this post I test the performance (the running time) of four heatmap
+functions: <code>gplots::heatmap.2()</code>, <code>heatmap()</code> which is natively supported in R,
+<code>ComplexHeatmap::Heatmap()</code> and <code>pheatmap::pheatmap()</code>.</p>
+<p>We generate a 1000x1000 random matrix.</p>
+<pre class="r"><code>library(ComplexHeatmap)
+library(pheatmap)
+library(gplots)
+library(microbenchmark)
+
+set.seed(123)
+n = 1000
+mat = matrix(rnorm(n*n), nrow = n)</code></pre>
+<p>First I test drawing heatmaps as well as drawing dendrograms (with applying
+clustering):</p>
+<pre class="r"><code>t1 = microbenchmark(
+    &quot;heatmap()&quot; = {
+        pdf(NULL) 
+        heatmap(mat) 
+        dev.off()
+    },
+    &quot;heatmap.2()&quot; = {
+        pdf(NULL) 
+        heatmap.2(mat, trace = &quot;none&quot;) 
+        dev.off()
+    },
+    &quot;Heatmap()&quot; = {
+        pdf(NULL)
+        draw(Heatmap(mat)) 
+        dev.off()
+    },
+    &quot;pheatmap()&quot; = {
+        pdf(NULL) 
+        pheatmap(mat)
+        dev.off()
+    },
+    times = 5
+)
+print(t1, unit = &quot;s&quot;)</code></pre>
+<pre><code>## Unit: seconds
+##         expr   min    lq  mean median    uq   max neval
+##    heatmap() 12.57 12.63 13.10  12.83 12.87 14.58     5
+##  heatmap.2() 12.95 13.04 13.50  13.07 13.42 15.04     5
+##    Heatmap() 14.94 14.95 15.60  15.23 15.60 17.29     5
+##   pheatmap() 12.24 12.37 15.41  12.51 13.32 26.60     5</code></pre>
+<p>The running time for all four heatmap functions looks similar, it might due to that
+clustering uses most of the running time. <code>Heatmap()</code> runs the longest, perhaps
+because <code>Heatmap()</code> applies additional manipulations on the dendrograms such as
+dendrogram reordering.</p>
+<p>Next I suppress the clustering on both rows and columns and with no dendrogram.</p>
+<pre class="r"><code>t2 = microbenchmark(
+    &quot;heatmap()&quot; = {
+        pdf(NULL)
+        heatmap(mat, Rowv = NA, Colv = NA)
+        dev.off()
+    },
+    &quot;heatmap.2()&quot; = {
+        pdf(NULL)
+        heatmap.2(mat, dendrogram = &quot;none&quot;, trace = &quot;none&quot;)
+        dev.off()
+    },
+    &quot;Heatmap()&quot; = {
+        pdf(NULL)
+        draw(Heatmap(mat, cluster_rows = FALSE, cluster_columns = FALSE))
+        dev.off()
+    },
+    &quot;pheatmap()&quot; = {
+        pdf(NULL)
+        pheatmap(mat, cluster_rows = FALSE, cluster_cols = FALSE)
+        dev.off()
+    },
+    times = 5
+)
+print(t2, unit = &quot;s&quot;)</code></pre>
+<pre><code>## Unit: seconds
+##         expr     min      lq    mean  median      uq     max neval
+##    heatmap()  0.2129  0.2249  0.2306  0.2344  0.2379  0.2428     5
+##  heatmap.2() 12.2219 12.3413 12.5452 12.3610 12.7655 13.0364     5
+##    Heatmap()  2.2294  2.2386  2.3144  2.3346  2.3606  2.4088     5
+##   pheatmap()  0.9348  0.9451  3.2378  0.9507  1.1314 12.2270     5</code></pre>
+<p>Now <code>heatmap.2()</code> now is the slowest if only draw the heatmap bodies.</p>
+<p>Next I perform clustering in advance and send the clustering objects to the heatmap
+functions. In this setting, dendrograms are also drawn along with the heatmaps.</p>
+<pre class="r"><code>row_hc = hclust(dist(mat))
+col_hc = hclust(dist(t(mat)))</code></pre>
+<pre class="r"><code>t3 = microbenchmark(
+    &quot;heatmap()&quot; = {
+        pdf(NULL)
+        heatmap(mat, Rowv = as.dendrogram(row_hc), Colv = as.dendrogram(col_hc))
+        dev.off()
+    },
+    &quot;heatmap.2()&quot; = {
+        pdf(NULL)
+        heatmap.2(mat, Rowv = row_hc, Colv = col_hc, trace = &quot;none&quot;)
+        dev.off()
+    },
+    &quot;Heatmap()&quot; = {
+        pdf(NULL)
+        draw(Heatmap(mat, cluster_rows = row_hc, cluster_columns = col_hc))
+        dev.off()
+    },
+    &quot;pheatmap()&quot; = {
+        pdf(NULL)
+        pheatmap(mat, cluster_rows = row_hc, cluster_cols = col_hc)
+        dev.off()
+    },
+    times = 5
+)
+print(t3, unit = &quot;s&quot;)</code></pre>
+<pre><code>## Unit: seconds
+##         expr     min      lq   mean median     uq    max neval
+##    heatmap()  0.9964  1.0290  1.074  1.046  1.138  1.162     5
+##  heatmap.2() 12.6316 13.4816 13.771 13.955 14.214 14.571     5
+##    Heatmap()  3.3830  3.4908  3.492  3.523  3.529  3.535     5
+##   pheatmap()  0.9721  0.9967  3.322  1.160  1.169 12.312     5</code></pre>
+<p>Finally I put the mean running time into a table for easy comparison:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td></td>
+<td align="left"><code>heatmap()</code></td>
+<td align="left"><code>heatmap.2()</code></td>
+<td align="left"><code>Heatmap()</code></td>
+<td align="left"><code>pheatmap()</code></td>
+</tr>
+<tr class="even">
+<td>do clustering, draw dendrograms</td>
+<td align="left"><code>13.10s</code></td>
+<td align="left"><code>13.50s</code></td>
+<td align="left"><strong><code>15.60s</code></strong></td>
+<td align="left"><code>15.41s</code></td>
+</tr>
+<tr class="odd">
+<td>no clusteirng, no dendrogram</td>
+<td align="left"><code>0.23s</code></td>
+<td align="left"><strong><code>12.55s</code></strong></td>
+<td align="left"><code>2.31s</code></td>
+<td align="left"><code>3.24s</code></td>
+</tr>
+<tr class="even">
+<td>only draw dendrograms</td>
+<td align="left"><code>1.07s</code></td>
+<td align="left"><strong><code>13.77s</code></strong></td>
+<td align="left"><code>3.49s</code></td>
+<td align="left"><code>3.32s</code></td>
+</tr>
+</tbody>
+</table>
+<p>The following plots illustrate the mean running time for the four matrices with different dimensions.</p>
+<p><img src="/post/2020-06-19-which-heatmap-function-is-faster_files/figure-html/unnamed-chunk-10-1.png" width="700px" style="display: block; margin: auto;" /></p>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
