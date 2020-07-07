@@ -6,10 +6,31 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Block annotation over several slices</title>
+      <link>/2020/07/06/block-annotation-over-several-slices/</link>
+      <pubDate>Mon, 06 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/07/06/block-annotation-over-several-slices/</guid>
+      <description>In ComplexHeatmap package, anno_block() function draws rectangles for row/column slices, like in the following plot. Then what if we want to draw the rectangles over several slices to show they belong to certain groups?
+set.seed(123) mat = matrix(rnorm(50*50), nrow = 50) library(ComplexHeatmap) ha = HeatmapAnnotation(foo = anno_block(gp = gpar(fill = 2:6), labels = LETTERS[1:5])) split = rep(1:5, each = 10) Heatmap(mat, name = &amp;quot;mat&amp;quot;, column_split = split, top_annotation = ha, column_title = NULL) Currently, it is difficult to directly support it in anno_block(), however, there is workaround for it.</description>
+    </item>
+    
+    <item>
+      <title>Rasterization in ComplexHeatmap</title>
+      <link>/2020/06/30/rasterization-in-complexheatmap/</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/30/rasterization-in-complexheatmap/</guid>
+      <description>In this post, I discussed the support for raster image in ComplexHeatmap.
+resize the original matrix and 2. resize the image  Let’s assume a matrix with \(n_r\) rows and \(n_c\) columns and \(p_r\) pixels and \(p_c\) pixels, \(n_r &amp;gt; p_r\) and/or \(n_c &amp;gt; p_c\).
+ the default rasterization by grid::grid.raster(). a image (in a specified format, e.g. png, jpeg) with \(n_r\)\(n_c\) resolution, read back as a raster image by e.</description>
+    </item>
     
     <item>
       <title>Align heatmap legends</title>

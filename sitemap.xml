@@ -4,16 +4,26 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-06-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-07-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2020/06/29/align-heatmap-legends/</loc>
-    <lastmod>2020-06-29T00:00:00+00:00</lastmod>
+    <loc>/2020/07/06/block-annotation-over-several-slices/</loc>
+    <lastmod>2020-07-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2020-07-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/06/30/rasterization-in-complexheatmap/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/06/29/align-heatmap-legends/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
   </url>
   
