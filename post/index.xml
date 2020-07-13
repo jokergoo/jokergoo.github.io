@@ -27,9 +27,8 @@ set.seed(123) mat = matrix(rnorm(50*50), nrow = 50) library(ComplexHeatmap) ha =
       <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/06/30/rasterization-in-complexheatmap/</guid>
-      <description>In this post, I discussed the support for raster image in ComplexHeatmap.
-resize the original matrix and 2. resize the image  Let’s assume a matrix with \(n_r\) rows and \(n_c\) columns and \(p_r\) pixels and \(p_c\) pixels, \(n_r &amp;gt; p_r\) and/or \(n_c &amp;gt; p_c\).
- the default rasterization by grid::grid.raster(). a image (in a specified format, e.g. png, jpeg) with \(n_r\)\(n_c\) resolution, read back as a raster image by e.</description>
+      <description>Guillaume Devailly recently wrote an article on image rasterization to efficiently visualize huge matrices in R, as well as comparing several R functions that support image rasterization. In this post, I discusse the support for raster image in ComplexHeatmap in more details.
+When we produce so-called “high quality figures”, normally we save the figures as vector graphics in the format of e.g. pdf or svg. The vector graphics basically store details of every single graphic elements, thus, if a heatmap made from a very huge matrix is saved as vector graphics, the final file size would be very big.</description>
     </item>
     
     <item>
