@@ -6,10 +6,22 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Integrate ComplexHeatmap with cowplot package</title>
+      <link>/2020/07/14/integrate-complexheatmap-with-cowplot-package/</link>
+      <pubDate>Tue, 14 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/07/14/integrate-complexheatmap-with-cowplot-package/</guid>
+      <description>The cowplot package is used to combine multiple plots into a single figure. In most cases, ComplexHeatmap works perfectly with cowplot, but there are some cases that need special attention.
+Also there are some other packages that combine multiple plots, such as multipanelfigure, but I think the mechanism behind is the same.
+Following functionalities in ComplexHeatmap cause problems with using cowplot.
+anno_zoom()/anno_link(). The adjusted positions by these two functions rely on the size of the graphics device.</description>
+    </item>
     
     <item>
       <title>Block annotation over several slices</title>
