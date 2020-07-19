@@ -1,0 +1,17 @@
+---
+title: "Add math symbols in ComplexHeatmap"
+date: 2020-07-17
+---
+
+```{r, echo = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    error = FALSE,
+    tidy  = FALSE,
+    message = FALSE,
+    warning = FALSE,
+    fig.align = "center"
+)
+library(GetoptLong)
+options(digits = 4)
+```
