@@ -6,19 +6,10 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Add math symbols in ComplexHeatmap</title>
-      <link>/2020/07/17/add-math-symbols-in-complexheatmap/</link>
-      <pubDate>Fri, 17 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/07/17/add-math-symbols-in-complexheatmap/</guid>
-      <description>  </description>
-    </item>
     
     <item>
       <title>Integrate ComplexHeatmap with cowplot package</title>
@@ -229,7 +220,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  pkgndep: Check the Heaviness of Package Dependencies.  simplifyEnrichment: Simplify functional enrichment results.   bsub: Submitter and monitor of LSF cluster.  cola: A Framework for Consensus Partitioning.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.   HilbertCurve: Making 2D Hilbert Curve.</description>
+      <description>R  pkgndep: Check the Heaviness of Package Dependencies.   simplifyEnrichment: Simplify functional enrichment results.   bsub: Submitter and monitor of LSF cluster.   cola: A Framework for Consensus Partitioning.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.   HilbertCurve: Making 2D Hilbert Curve.</description>
     </item>
     
   </channel>
