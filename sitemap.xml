@@ -4,16 +4,21 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2020/07/14/integrate-complexheatmap-with-cowplot-package/</loc>
-    <lastmod>2020-07-14T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2020-08-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/08/17/reverse-x-axes-in-the-circular-plot/</loc>
+    <lastmod>2020-08-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/07/14/integrate-complexheatmap-with-cowplot-package/</loc>
     <lastmod>2020-07-14T00:00:00+00:00</lastmod>
   </url>
   

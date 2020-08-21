@@ -6,10 +6,20 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reverse x-axes in the circular plot</title>
+      <link>/2020/08/17/reverse-x-axes-in-the-circular-plot/</link>
+      <pubDate>Mon, 17 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/08/17/reverse-x-axes-in-the-circular-plot/</guid>
+      <description>By default, in circlize, the directions of x-axes of all cells are clockwise, which means, in the cells located on top of the circle, the direction of x-axes is from left to right, which fits how we normally read the figures. For example, the following figure shows several tracks with different graphics.
+library(circlize) circos.par(gap.degree = 4) circos.initialize(letters[1:8], xlim = c(0, 10)) circos.track(ylim = c(0, 10), panel.fun = function(x, y) { circos.</description>
+    </item>
     
     <item>
       <title>Integrate ComplexHeatmap with cowplot package</title>
