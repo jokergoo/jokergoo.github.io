@@ -6,10 +6,33 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Visualize traffic intersection loads with Chord diagram</title>
+      <link>/2020/10/13/visualize-traffic-intersection-loads-with-chord-diagram/</link>
+      <pubDate>Tue, 13 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/13/visualize-traffic-intersection-loads-with-chord-diagram/</guid>
+      <description>In this blog post, the author demonstrated how to visualize the traffic loads with Sankey diagram. It looks very nice and here I implemente it with Chord diagram.
+Following data frame contains data for the traffic loads, which is basically the number of vehicles that travel through every two directions.
+df = read.table(textConnection( &amp;quot;B A 1000 C A 5000 D A 690 A B 2200 C B 1240 D B 5000 A C 5000 B C 2400 D C 2000 A D 2000 B D 3000 C D 3000 &amp;quot;)) The colors for the four directions:</description>
+    </item>
+    
+    <item>
+      <title>Host massive analysis reports with GitHub Page</title>
+      <link>/2020/09/26/host-massive-analysis-reports-with-github-page/</link>
+      <pubDate>Sat, 26 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/09/26/host-massive-analysis-reports-with-github-page/</guid>
+      <description>https://github.com/pricing
+https://docs.github.com/en/free-pro-team@latest/github/managing-large-files/what-is-my-disk-quota
+https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token
+username = ... token = ... library(GetoptLong) library(gh) delete_repo = function(repo, dir, where = c(&amp;quot;remote&amp;quot;, &amp;quot;local&amp;quot;)) { qqcat(&amp;quot;delete repo @{repo}\n&amp;quot;) if(&amp;quot;remote&amp;quot; %in% where) { gh(&amp;quot;DELETE /repos/:owner/:repo&amp;quot;, owner = username, repo = repo, .token = token) } if(&amp;quot;local&amp;quot; %in% where) { owd = getwd() on.exit(setwd(owd)) setwd(dir) if(file.exists(&amp;quot;.git&amp;quot;)) { unlink(&amp;quot;.git&amp;quot;, recursive = TRUE, force = TRUE) } } } create_repo = function(repo, dir, ignore = &amp;quot;^.*&amp;quot;, where = c(&amp;quot;remote&amp;quot;, &amp;quot;local&amp;quot;)) { all_repos = gh(qq(&amp;quot;GET /users/@{username}/repos&amp;quot;)) all_repos = vapply(all_repos, &amp;quot;[[&amp;quot;, &amp;quot;&amp;quot;, &amp;quot;name&amp;quot;) if(repo %in% all_repos) { delete_repo(repo, dir) } else { delete_repo(repo, dir, where = &amp;quot;local&amp;quot;) } qqcat(&amp;quot;creating repo for @{repo}\n&amp;quot;) if(&amp;quot;remote&amp;quot; %in% where) { new_repo = gh(&amp;quot;POST /user/repos&amp;quot;, name = repo, owner = username, .</description>
+    </item>
     
     <item>
       <title>Reverse x-axes in the circular plot</title>
