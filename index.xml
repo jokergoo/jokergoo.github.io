@@ -6,10 +6,20 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Concatenate two genomes in the circular plot</title>
+      <link>/2020/10/16/concatenate-two-genomes-in-the-circular-plot/</link>
+      <pubDate>Fri, 16 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/16/concatenate-two-genomes-in-the-circular-plot/</guid>
+      <description>There are some scenarios where users want to visualize more than one genomes in the circular plots. This can be done by making “a combined genome”. In the following example, I combine both human and mouse genomes.
+library(circlize) human_cytoband = read.cytoband(species = &amp;quot;hg19&amp;quot;)$df mouse_cytoband = read.cytoband(species = &amp;quot;mm10&amp;quot;)$df One thing important is since the two genome will be combined, the chromosome names for each genome need to be adjusted.</description>
+    </item>
     
     <item>
       <title>Visualize traffic intersection loads with Chord diagram</title>
