@@ -6,10 +6,20 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 28 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Changes in ComplexHeatmap 2.6.0</title>
+      <link>/2020/10/28/changes-in-complexheatmap-2.6.0/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/28/changes-in-complexheatmap-2.6.0/</guid>
+      <description>The ComplexHeatmap package is still growing. Till now, there are 62 CRAN/Bioconductor packages that depend on ComplexHeatmap where 7 packages are also mine :). It has approxiamtely 10k downloads per month, 600 issues on GitHub and nearly 600 GitHub stars. The ComplexHeatmap paper has more than 1100 citations. Thank you for liking ComplexHeatmap!
+In version 2.6.0 which corresponds to the new Bioconductor release, there are following major changes that are user-visible:</description>
+    </item>
     
     <item>
       <title>Concatenate two genomes in the circular plot</title>
