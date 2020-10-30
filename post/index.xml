@@ -6,10 +6,21 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Make genome-scale heatmap</title>
+      <link>/2020/10/29/make-genome-scale-heatmap/</link>
+      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/29/make-genome-scale-heatmap/</guid>
+      <description>Many people are interested in making genome-scale heatmap with multiple tracks, like examples here and here. In this blog post, I will demonstrate how to implement it with ComplexHeatmap.
+To make genome-scale plot, we first need the ranges on chromosome-level. There are many ways to obtain this information. In following, I use circlize::read.chromInfo() function.
+library(circlize) library(GenomicRanges) chr_df = read.chromInfo()$df chr_df = chr_df[chr_df$chr %in% paste0(&amp;quot;chr&amp;quot;, 1:22), ] chr_gr = GRanges(seqnames = chr_df[, 1], ranges = IRanges(chr_df[, 2] + 1, chr_df[, 3])) chr_gr ## GRanges object with 22 ranges and 0 metadata columns: ## seqnames ranges strand ## &amp;lt;Rle&amp;gt; &amp;lt;IRanges&amp;gt; &amp;lt;Rle&amp;gt; ## [1] chr1 1-249250621 * ## [2] chr2 1-243199373 * ## [3] chr3 1-198022430 * ## [4] chr4 1-191154276 * ## [5] chr5 1-180915260 * ## .</description>
+    </item>
     
     <item>
       <title>Changes in ComplexHeatmap 2.6.0</title>
