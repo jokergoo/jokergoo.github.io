@@ -23,6 +23,19 @@ library(circlize) library(GenomicRanges) chr_df = read.chromInfo()$df chr_df = c
     </item>
     
     <item>
+      <title>Recent improvements on legends</title>
+      <link>/2020/10/29/recent-improvements-on-legends/</link>
+      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/29/recent-improvements-on-legends/</guid>
+      <description>In this post, I will demonstrate several improvements on the legends in ComplexHeatmap package (version 2.7.1).
+First I load the ComplexHeatmap package.
+library(ComplexHeatmap) Discrete legends Now it works with multi-line labels:
+lgd = Legend(labels = c(&amp;quot;aaaaa\naaaaa&amp;quot;, &amp;quot;bbbbb\nbbbbb&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;), legend_gp = gpar(fill = 1:4)) When the multi-line legend labels are in different rows:
+lgd = Legend(labels = c(&amp;quot;aaaaa\naaaaa&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;bbbbb\nbbbbb&amp;quot;), legend_gp = gpar(fill = 1:4), nrow = 2) Legend() function has a new argument graphics where users can self-define the graphics drawn in the legend.</description>
+    </item>
+    
+    <item>
       <title>Changes in ComplexHeatmap 2.6.0</title>
       <link>/2020/10/28/changes-in-complexheatmap-2.6.0/</link>
       <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
