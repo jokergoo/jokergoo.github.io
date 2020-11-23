@@ -6,10 +6,15 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sun, 22 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Helper functions for genome-scale heatmap</title>
+      <link>/2020/11/22/helper-functions-for-genome-scale-heatmap/</link>
+      <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/22/helper-functions-for-genome-scale-heatmap/</guid>
+      <description>In my previous blog post, I demonstrated how to make a genome-scale heatmap with multiple other tracks. The key thing there is to split the genome into bins and to normalize various genomic signals to average them into every bin of the genome. From ComplexHeatmap version 2.7.1.1003, I added some helper functions which simplify the binning of the genome and the overlapping between genomic bins and genomic signals with two new functions bin_genome() and normalize_genomic_signals_to_bins().</description>
+    </item>
     
     <item>
       <title>Make genome-scale heatmap</title>
@@ -288,7 +293,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>By year   By citation   2020 Elisa Espinet, Zuguang Gu, Charles D Imbusch, Nathalia A Giese, Magdalena Buscher, Mariam Safavi, Silke Weisenburger, Corinna Klein, Vanessa Vogel, Mattia Falcone, Jacob Insua-Rodriguez, Manuel Reitberger, Vera Thiel, Steffi O Kossi, Alexander Muckenhuber, Karnjit Sarai, Alex Yl Lee, Elyne Backx, Soheila Zarei, Matthias M Gaida, Manuel Rodriguez-Paredes, Elisa Donato, Hsi-Yu Yen, Roland Eils, Matthias Schlesner, Nicole Pfarr, Thilo Hackert, Christoph Plass, Benedikt Brors, Katja Steiger, Dieter Weichenhan, H Efsun Arda, Ilse Rooman, Janel L Kopp, Oliver Strobel, Wilko Weichert, Martin R Sprick, Andreas Trumpp, Aggressive PDACs show hypomethylation of repetitive elements and the execution of an intrinsic IFN program linked to a ductal cell-of-origin.</description>
+      <description>By year   By citation   2020 Daniel Hübschmann, Lea Jopp-Saile, Carolin Andresen, Stephen Krämer, Zuguang Gu, Christoph E Heilig, Simon Kreutzfeldt, Veronica Teleanu, Stefan Fröhling, Roland Eils, Matthias Schlesner, Analysis of Mutational Signatures with YAPSA (Yet Another Package for Signature Analysis). Genes, chromosomes &amp;amp; cancer 2020. PubMed.  Elisa Espinet, Zuguang Gu, Charles D Imbusch, Nathalia A Giese, Magdalena Buscher, Mariam Safavi, Silke Weisenburger, Corinna Klein, Vanessa Vogel, Mattia Falcone, Jacob Insua-Rodriguez, Manuel Reitberger, Vera Thiel, Steffi O Kossi, Alexander Muckenhuber, Karnjit Sarai, Alex Yl Lee, Elyne Backx, Soheila Zarei, Matthias M Gaida, Manuel Rodriguez-Paredes, Elisa Donato, Hsi-Yu Yen, Roland Eils, Matthias Schlesner, Nicole Pfarr, Thilo Hackert, Christoph Plass, Benedikt Brors, Katja Steiger, Dieter Weichenhan, H Efsun Arda, Ilse Rooman, Janel L Kopp, Oliver Strobel, Wilko Weichert, Martin R Sprick, Andreas Trumpp, Aggressive PDACs show hypomethylation of repetitive elements and the execution of an intrinsic IFN program linked to a ductal cell-of-origin.</description>
     </item>
     
     <item>
@@ -297,7 +302,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  pkgndep: Check the Heaviness of Package Dependencies.   simplifyEnrichment: Simplify functional enrichment results.   bsub: Submitter and monitor of LSF cluster.   cola: A Framework for Consensus Partitioning.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.   HilbertCurve: Making 2D Hilbert Curve.</description>
+      <description>R  pkgndep: Check the Heaviness of Package Dependencies.   simplifyEnrichment: Simplify functional enrichment results.   bsub: Submitter and monitor of LSF cluster.   cola: A Framework for Consensus Partitioning.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.</description>
     </item>
     
   </channel>

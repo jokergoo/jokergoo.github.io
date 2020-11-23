@@ -6,10 +6,15 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 29 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sun, 22 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Helper functions for genome-scale heatmap</title>
+      <link>/2020/11/22/helper-functions-for-genome-scale-heatmap/</link>
+      <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/22/helper-functions-for-genome-scale-heatmap/</guid>
+      <description>In my previous blog post, I demonstrated how to make a genome-scale heatmap with multiple other tracks. The key thing there is to split the genome into bins and to normalize various genomic signals to average them into every bin of the genome. From ComplexHeatmap version 2.7.1.1003, I added some helper functions which simplify the binning of the genome and the overlapping between genomic bins and genomic signals with two new functions bin_genome() and normalize_genomic_signals_to_bins().</description>
+    </item>
     
     <item>
       <title>Make genome-scale heatmap</title>
