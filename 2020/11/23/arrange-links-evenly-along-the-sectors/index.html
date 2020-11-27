@@ -166,8 +166,8 @@ are there four or five links?).</p>
 <code>arrange_links_evenly()</code> which can arrange the links on the sectors so that
 the neighouring distance between links are evenly distributed. It also adjusts
 positions of links to make the overall intersection of linkes minimal.
-Additionally, it considers directional links,<em>i.e.</em>, on each sector, the
-starting links and the ending links are grouped.</p>
+Additionally, it considers directional links, <em>i.e.</em>, on each sector, the
+starting links and the ending links are put into separate groups.</p>
 <pre class="r"><code>circos.initialize(sectors, xlim = c(0, 1))
 circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
     circos.text(CELL_META$xcenter, CELL_META$ycenter, CELL_META$sector.index)

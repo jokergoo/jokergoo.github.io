@@ -6,7 +6,17 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Visualize relations between genes and pathways</title>
+      <link>/2020/11/27/visualize-relations-between-genes-and-pathways/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/27/visualize-relations-between-genes-and-pathways/</guid>
+      <description>@venkan provides an interesting use case for circlize which is to visualize the relations bewteen genes and pathways with integrating genes’ genomic positions. An example plot looks like:
+In that plot, the “pathway” is in the same track as the ideograms. Thus, to use circlize to implement it, we need to make “pathway” as a fake chromosome and concatenate it to the normal chromosomes. In this blog post, I will demonstrate how to implement it.</description>
+    </item>
+    
     <item>
       <title>Arrange links evenly along the sectors</title>
       <link>/2020/11/23/arrange-links-evenly-along-the-sectors/</link>
