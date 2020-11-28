@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Make some fun circular plots</title>
+      <link>/2020/11/28/make-some-fun-circular-plots/</link>
+      <pubDate>Sat, 28 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/28/make-some-fun-circular-plots/</guid>
+      <description>The same set of data and plotting rules, but one is in the normal coordinate system and the other is in the circular-transformed coordinate system.
+library(circlize) par(mar = c(1, 1, 1, 1)) layout(cbind(1:2), heights = c(1, 2)) x0 = runif(1000) x1 = runif(1000) plot(NULL, xlim = c(0, 1), ylim = c(0, 1), axes = FALSE, ann = FALSE) segments(x0, 0, x1, 1, col = rand_color(1000, luminosity = &amp;quot;bright&amp;quot;, transparency = 0.</description>
+    </item>
+    
     <item>
       <title>Visualize relations between genes and pathways</title>
       <link>/2020/11/27/visualize-relations-between-genes-and-pathways/</link>
