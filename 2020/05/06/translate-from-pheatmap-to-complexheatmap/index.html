@@ -72,6 +72,8 @@ A Bioinformagician
     <div class="article-content">
       
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <div id="introduction" class="section level2">
@@ -148,6 +150,12 @@ ann_colors = list(
 <pre class="r"><code>pheatmap(test, annotation_col = annotation_col, annotation_row = annotation_row, 
     annotation_colors = ann_colors)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-7-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>You can split the heatmap by rows or by columns, which is a unique feature of <strong>ComplexHeatmap</strong>.</p>
+<pre class="r"><code>pheatmap(test, annotation_col = annotation_col, annotation_row = annotation_row, 
+    annotation_colors = ann_colors, 
+    row_split = annotation_row$GeneClass,
+    column_split = annotation_col$CellType)</code></pre>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p><code>ComplexHeatmap::pheatmap()</code> returns a <code>Heatmap</code> object, so it can be added with
 other heatmaps and annotations. Or in other words, you can add multiple pheatmaps
 and annotations. Cool!</p>
@@ -158,7 +166,7 @@ p3 = pheatmap(test, name = &quot;mat2&quot;,
 # or you can simply specify as
 # p3 = pheatmap(test, name = &quot;mat2&quot;, col = c(&quot;navy&quot;, &quot;white&quot;, &quot;firebrick3&quot;))
 p1 + p2 + p3</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-9-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Nevertheless, if you really want to add multiple pheatmaps, I still suggest you
 to directly use the <code>Heatmap()</code> function. You can find how to migrate from
 <code>pheatmap::pheatmap()</code> to <code>ComplexHeatmap::Heatmap()</code> in the next section.</p>
@@ -393,28 +401,28 @@ set of arguments for <code>pheatmap::pheatmap()</code> and <code>ComplexHeatmap:
 draws two heatmaps, so that you can directly see the similarity and difference
 of the two heatmap implementations.</p>
 <pre class="r"><code>compare_pheatmap(test)</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, scale = &quot;row&quot;, clustering_distance_rows = &quot;correlation&quot;)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-12-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>compare_pheatmap(test, scale = &quot;row&quot;, clustering_distance_rows = &quot;correlation&quot;)</code></pre>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-13-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>compare_pheatmap(test, 
     color = colorRampPalette(c(&quot;navy&quot;, &quot;white&quot;, &quot;firebrick3&quot;))(50))</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-13-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, cluster_row = FALSE)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, legend = FALSE)</code></pre>
+<pre class="r"><code>compare_pheatmap(test, cluster_row = FALSE)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-15-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, display_numbers = TRUE)</code></pre>
+<pre class="r"><code>compare_pheatmap(test, legend = FALSE)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-16-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, display_numbers = TRUE, number_format = &quot;%.1e&quot;)</code></pre>
+<pre class="r"><code>compare_pheatmap(test, display_numbers = TRUE)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-17-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>compare_pheatmap(test, display_numbers = TRUE, number_format = &quot;%.1e&quot;)</code></pre>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-18-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>compare_pheatmap(test, 
     display_numbers = matrix(ifelse(test &gt; 5, &quot;*&quot;, &quot;&quot;), nrow(test)))</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-18-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-19-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>compare_pheatmap(test, cluster_row = FALSE, legend_breaks = -1:4, 
     legend_labels = c(&quot;0&quot;, &quot;1e-4&quot;, &quot;1e-3&quot;, &quot;1e-2&quot;, &quot;1e-1&quot;, &quot;1&quot;))</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-19-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, cellwidth = 15, cellheight = 12, main = &quot;Example heatmap&quot;)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>compare_pheatmap(test, cellwidth = 15, cellheight = 12, main = &quot;Example heatmap&quot;)</code></pre>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-21-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>annotation_col = data.frame(
     CellType = factor(rep(c(&quot;CT1&quot;, &quot;CT2&quot;), 5)), 
     Time = 1:5
@@ -427,17 +435,17 @@ annotation_row = data.frame(
 rownames(annotation_row) = paste(&quot;Gene&quot;, 1:20, sep = &quot;&quot;)
 
 compare_pheatmap(test, annotation_col = annotation_col)</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-21-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, annotation_legend = FALSE)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-22-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, 
-    annotation_row = annotation_row)</code></pre>
+<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, annotation_legend = FALSE)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-23-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, 
-    annotation_row = annotation_row, angle_col = &quot;45&quot;)</code></pre>
+    annotation_row = annotation_row)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-24-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, angle_col = &quot;0&quot;)</code></pre>
+<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, 
+    annotation_row = annotation_row, angle_col = &quot;45&quot;)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-25-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, angle_col = &quot;0&quot;)</code></pre>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-26-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>ann_colors = list(
     Time = c(&quot;white&quot;, &quot;firebrick&quot;),
     CellType = c(CT1 = &quot;#1B9E77&quot;, CT2 = &quot;#D95F02&quot;),
@@ -446,32 +454,32 @@ compare_pheatmap(test, annotation_col = annotation_col)</code></pre>
 
 compare_pheatmap(test, annotation_col = annotation_col, 
     annotation_colors = ann_colors, main = &quot;Title&quot;)</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-26-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, 
-    annotation_row = annotation_row, annotation_colors = ann_colors)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-27-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, 
-    annotation_colors = ann_colors[2]) </code></pre>
+    annotation_row = annotation_row, annotation_colors = ann_colors)</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-28-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, cluster_rows = FALSE, 
-    gaps_row = c(10, 14))</code></pre>
+<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, 
+    annotation_colors = ann_colors[2]) </code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-29-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, cluster_rows = FALSE, 
-    gaps_row = c(10, 14), cutree_col = 2)</code></pre>
+    gaps_row = c(10, 14))</code></pre>
 <p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-30-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>compare_pheatmap(test, annotation_col = annotation_col, cluster_rows = FALSE, 
+    gaps_row = c(10, 14), cutree_col = 2)</code></pre>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-31-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>labels_row = c(&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 
     &quot;&quot;, &quot;&quot;, &quot;Il10&quot;, &quot;Il15&quot;, &quot;Il1b&quot;)
 compare_pheatmap(test, annotation_col = annotation_col, labels_row = labels_row)</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-31-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-32-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>drows = dist(test, method = &quot;minkowski&quot;)
 dcols = dist(t(test), method = &quot;minkowski&quot;)
 compare_pheatmap(test, clustering_distance_rows = drows, 
     clustering_distance_cols = dcols)</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-32-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-33-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>library(dendsort)
 callback = function(hc, ...){dendsort(hc)}
 compare_pheatmap(test, clustering_callback = callback)</code></pre>
-<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-33-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2020-05-06-translate-from-pheatmap-to-complexheatmap_files/figure-html/unnamed-chunk-34-1.png" width="768" style="display: block; margin: auto;" /></p>
 </div>
 
     </div>
@@ -516,6 +524,9 @@ compare_pheatmap(test, clustering_callback = callback)</code></pre>
 
 
     
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 
     
   </body>
