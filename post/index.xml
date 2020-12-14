@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Translate from other heatmap functions to ComplexHeatmap</title>
+      <link>/2020/12/14/translate-from-other-heatmap-functions-to-complexheatmap/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/12/14/translate-from-other-heatmap-functions-to-complexheatmap/</guid>
+      <description>In my previous post “Translate from pheatmap to ComplexHeatmap”, I introduced a ComplexHeatmap::pheatmap() which smoothly executes pheatmap::pheatmap() code without any problem. With the newly developed InteractiveComplexHeatmap package, the output of pheatmap() can be directly exported as an interactive Shiny app.
+library(ComplexHeatmap) ht = pheatmap(...) library(InteractiveComplexHeatmap) ht_shiny(ht) To facilitate the users who are still using heatmap() and heatmap.2() functions, to make the output of these two functions can be exported as interactive Shiny apps as well, I implemented two similar translation functions ComplexHeatmap::heatmap() and ComplexHeatmap::heatmap.</description>
+    </item>
+    
     <item>
       <title>Make some fun circular plots</title>
       <link>/2020/11/28/make-some-fun-circular-plots/</link>
