@@ -6,7 +6,18 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Set heatmap cell width in circos.heatmap function</title>
+      <link>/2021/01/07/set-heatmap-cell-width-in-circos.heatmap-function/</link>
+      <pubDate>Thu, 07 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/01/07/set-heatmap-cell-width-in-circos.heatmap-function/</guid>
+      <description>In a previous post I introduced making circular heatmaps with the circlize package. From version 0.4.12, I add a new argument cell_width in circos.heatmap() function so that the heatmap cell width is adjustable.
+First I generate a random dataset for making the heatmaps.
+library(circlize) set.seed(123) mat1 = rbind(cbind(matrix(rnorm(50*5, mean = 1), nr = 50), matrix(rnorm(50*5, mean = -1), nr = 50)), cbind(matrix(rnorm(50*5, mean = -1), nr = 50), matrix(rnorm(50*5, mean = 1), nr = 50)) ) rownames(mat1) = paste0(&amp;quot;R&amp;quot;, 1:100) colnames(mat1) = paste0(&amp;quot;C&amp;quot;, 1:10) mat1 = mat1[sample(100, 100), ] # randomly permute rows split = sample(letters[1:5], 100, replace = TRUE) split = factor(split, levels = letters[1:5]) col_fun1 = colorRamp2(c(-2, 0, 2), c(&amp;quot;blue&amp;quot;, &amp;quot;white&amp;quot;, &amp;quot;red&amp;quot;)) The value for cell_width is simply a numeric vector with the same length as the number of rows of the input matrix.</description>
+    </item>
+    
     <item>
       <title>Translate from other heatmap functions to ComplexHeatmap</title>
       <link>/2020/12/14/translate-from-other-heatmap-functions-to-complexheatmap/</link>
@@ -334,7 +345,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>By year   By citation   2020 Yonghe Wu, Michael Fletcher, Zuguang Gu, Qi Wang, Barbara Costa, Anna Bertoni, Ka-Hou Man, Magdalena Schlotter, Jörg Felsberg, Jasmin Mangei, Martje Barbus, Ann-Christin Gaupel, Wei Wang, Tobias Weiss, Roland Eils, Michael Weller, Haikun Liu, Guido Reifenberger, Andrey Korshunov, Peter Angel, Peter Lichter, Carl Herrmann, Bernhard Radlwimmer, Glioblastoma epigenome profiling identifies SOX10 as a master regulator of molecular tumour subtype.</description>
+      <description>By year   By citation   2021 Nina Hensel, Zuguang Gu, Dominik Sagar, Katharina Wieland, Janine Jechow, Sian Kemming, Emma Llewellyn-Lacey, Oezlem Gostick, Florian Sogukpinar, David A Emmerich, Bertram Price, Tobias Bengsch, Christoph Boettler, Roland Neumann-Haefelin, Christian Eils, Ralf Conrad, Dominic Bartenschlager, Naveed Grün, Robert Ishaque, Maike Thimme, Nina Hofmann, Memory-like HCV-specific CD8+ T cells retain a molecular scar after cure of chronic HCV infection.</description>
     </item>
     
     <item>
