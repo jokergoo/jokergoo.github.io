@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Interactivate indirect use of pheatmap(), heatmap.2() and heatmap()</title>
+      <link>/2021/01/22/interactivate-indirect-use-of-pheatmap-heatmap.2-and-heatmap/</link>
+      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/01/22/interactivate-indirect-use-of-pheatmap-heatmap.2-and-heatmap/</guid>
+      <description>With InteractiveComplexHeatmap, the following heatmaps can be exported as an interactive Shiny app:
+heatmaps directly produced from ComplexHeatmap, heatmaps from other functions or packages which are implement with ComplexHeatmap, heatmaps originally produced by stats::heatmap(), gplots::heatmap.2() and pheatmap::pheatmap(), but can be reproduced by the “translation functions”: ComplexHeatmap:::heatmap(), ComplexHeatmap:::heatmap.2() and ComplexHeatmap::pheatmap().  All these types of heatmaps can be turned into interactive just by calling htShiny() after the heatmaps are drawn.</description>
+    </item>
+    
     <item>
       <title>Set heatmap cell width in circos.heatmap function</title>
       <link>/2021/01/07/set-heatmap-cell-width-in-circos.heatmap-function/</link>
