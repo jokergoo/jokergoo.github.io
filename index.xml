@@ -6,7 +6,16 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 20 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Differentiate brush and click event in Shiny</title>
+      <link>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</link>
+      <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</guid>
+      <description>I am recently developing a package InteractiveComplexHeatmap which generates interactive heatmaps as Shiny apps. One basic interactivity on heatmap is to click on heatmap cells or to select a region from it. Shiny allows to set click and brush arguments in plotOutput() to perform clicking or brushing on the heatmap image, and on the server side, to respond to these two actions. In InteractiveComplexHeatmap, I defined an action to respond to click event and an action to respond to brush event.</description>
+    </item>
+    
     <item>
       <title>Interactivate indirect use of pheatmap(), heatmap.2() and heatmap()</title>
       <link>/2021/01/22/interactivate-indirect-use-of-pheatmap-heatmap.2-and-heatmap/</link>
@@ -355,7 +364,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>By year   By citation   2021 Ana Maia, Zuguang Gu, André Koch, Mireia Berdiel-Acer, Rainer Will, Matthias Schlesner, Stefan Wiemann, IFNβ1 secreted by breast cancer cells undergoing chemotherapy reprograms stromal fibroblasts to support tumour growth after treatment. Molecular oncology 2021. PubMed.  Nina Hensel, Zuguang Gu, Dominik Sagar, Katharina Wieland, Janine Jechow, Sian Kemming, Emma Llewellyn-Lacey, Oezlem Gostick, Florian Sogukpinar, David A Emmerich, Bertram Price, Tobias Bengsch, Christoph Boettler, Roland Neumann-Haefelin, Christian Eils, Ralf Conrad, Dominic Bartenschlager, Naveed Grün, Robert Ishaque, Maike Thimme, Nina Hofmann, Memory-like HCV-specific CD8+ T cells retain a molecular scar after cure of chronic HCV infection.</description>
+      <description>By year   By citation   2021 Marina Laplana, Matthias Bieg, Christian Faltus, Svitlana Melnik, Olga Bogatyrova, Zuguang Gu, Thomas Muley, Michael Meister, Hendrik Dienemann, Esther Herpel, Christopher I Amos, Matthias Schlesner, Roland Eils, Christoph Plass, Angela Risch, Differentially methylated regions within lung cancer risk loci are enriched in deregulated enhancers. Epigenetics 2021. PubMed.  Ana Maia, Zuguang Gu, André Koch, Mireia Berdiel-Acer, Rainer Will, Matthias Schlesner, Stefan Wiemann, IFNβ1 secreted by breast cancer cells undergoing chemotherapy reprograms stromal fibroblasts to support tumour growth after treatment.</description>
     </item>
     
     <item>
