@@ -153,13 +153,13 @@ your finger. The difference between <code>click</code> and <code>brush</code> is
 change the mouse positions between <code>mousedown</code> and <code>mouseup</code>, while <code>brush</code>
 changes. Once we can differentiate <code>click</code> and <code>brush</code>, when either of the two
 actions finishes, we can create or update a reactive value by
-<code>Shiny.setInputValue</code> in Javescript which triggers the response in Shiny
+<code>Shiny.setInputValue</code> in JaveScript to trigger the response in Shiny
 server function.</p>
 <p>I demonstrate this idea with the following code. When either of <code>click</code> or
 <code>brush</code> finishes, the reactive variable <code>action</code> is created or updated
 by <code>Shiny.setInputValue('action', Math.random());</code>. In the server function,
 we do not observe <code>input$click</code> or <code>input$brush</code> anymore, while now we
-observe <code>input$action</code>. By compareing the positions of mouse, we can choose
+observe <code>input$action</code>. By comparing the positions of mouse, we can choose
 whether to update click output or brush output.</p>
 <pre class="r"><code>library(shiny)
 library(grid)
@@ -232,6 +232,68 @@ shinyApp(ui, server)</code></pre>
 <p>As you can see the following figure, now the click and brush are independent. Brushing
 on the plot won’t conflict to the clicks.</p>
 <p><img src="https://user-images.githubusercontent.com/449218/108605376-00d1f780-73b4-11eb-97dd-271adf827562.gif" /></p>
+<p>Note, here the aim is to remove click event from brush, thus actually the code
+for brush does not need to be changed (which means we still observe <code>output$brush</code>).
+We can only observe <code>input$action</code> and respond to click only when the mouse
+positions are unchanged (see how <code>observeEvent(input$action, ...)</code> is defined in following code).</p>
+<pre class="r"><code>ui = fluidPage(
+    plotOutput(&quot;plot&quot;, width = 600, height = 400,
+        click = &quot;click&quot;, brush = &quot;brush&quot;),
+    tags$script(HTML(&quot;
+        $(&#39;#plot&#39;).mousedown(function(e) {
+            var parentOffset = $(this).offset();
+            var relX = e.pageX - parentOffset.left;
+            var relY = e.pageY - parentOffset.top;
+            Shiny.setInputValue(&#39;x1&#39;, relX);
+            Shiny.setInputValue(&#39;y1&#39;, relY);
+        }).mouseup(function(e) {
+            var parentOffset = $(this).offset();
+            var relX = e.pageX - parentOffset.left;
+            var relY = e.pageY - parentOffset.top;
+            Shiny.setInputValue(&#39;x2&#39;, relX);
+            Shiny.setInputValue(&#39;y2&#39;, relY);
+            Shiny.setInputValue(&#39;action&#39;, Math.random());
+        });
+    &quot;)),
+    fluidRow(
+        column(3, htmlOutput(&quot;output1&quot;)),
+        column(3, htmlOutput(&quot;output2&quot;))
+    )
+)
+
+server = function(input, output, session) {
+    output$plot = renderPlot({
+        grid.newpage()
+        grid.rect()
+    })
+
+    observeEvent(input$action, {
+        if(!(input$x1 == input$x2 &amp;&amp; input$y1 == input$y2)) {
+            return(NULL)
+        }
+
+        output$output1 = renderText({
+            isolate(glue(&quot;
+&lt;pre style=&#39;background-color:{rand_color(1)}&#39;&gt;
+a click:
+input$click$coords_css$x = {input$click$coords_css$x}
+input$click$coords_css$y = {input$click$coords_css$y}&lt;/pre&gt;&quot;))
+        })
+    })
+
+
+    observeEvent(input$brush, {
+        output$output2 = renderText({
+            isolate(glue(&quot;
+&lt;pre style=&#39;background-color:{rand_color(1)}&#39;&gt;
+a brush:
+input$brush$coords_css$xmin = {input$brush$coords_css$xmin}
+input$brush$coords_css$ymin = {input$brush$coords_css$ymin}
+input$brush$coords_css$xmax = {input$brush$coords_css$xmax}
+input$brush$coords_css$ymax = {input$brush$coords_css$ymax}&lt;/pre&gt;&quot;))
+        })
+    })
+}</code></pre>
 
     </div>
   </article>
