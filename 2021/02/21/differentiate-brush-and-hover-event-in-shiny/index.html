@@ -83,7 +83,7 @@ default hover in <code>plotOutput</code>. Here I implement my own one. The imple
 <li>the hover event is invoked after the mouse position keeps unchanged for a peroid of time, e.g. 300ms.</li>
 <li>the brush action starts with a hover action, then instantly, a <code>div</code> which corresponds to the brush is created.</li>
 </ol>
-<p>For part 1, we need to a mouse event which stops at a certain position for a period of time. Here I use
+<p>For part 1, we need a mouse event which stops at a certain position for a period of time. Here I use
 <a href="https://github.com/websanova/mousestop">mousestop.js</a>. And for the part 2, we just simply test whether
 the brush div exists or not.</p>
 <p>In the following example code, since <code>mousestop</code> does not support a function with event as argument, I additionally use <code>mousemove</code> to catch the mouse position and assign in <code>mousestop</code>.</p>

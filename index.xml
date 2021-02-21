@@ -27,15 +27,6 @@ Similar as click, brush also intializes a hover event. To distinguish hover and 
     </item>
     
     <item>
-      <title>Differentiate brush and click event in Shiny</title>
-      <link>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</link>
-      <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</guid>
-      <description>I am recently developing a package InteractiveComplexHeatmap which generates interactive heatmaps as Shiny apps. One basic interactivity on heatmap is to click on heatmap cells or to select a region from it. Shiny allows to set click and brush arguments in plotOutput() to perform clicking or brushing on the heatmap image, and on the server side, to respond to these two actions. In InteractiveComplexHeatmap, I defined an action to respond to click event and an action to respond to brush event.</description>
-    </item>
-    
-    <item>
       <title>Interactivate indirect use of pheatmap(), heatmap.2() and heatmap()</title>
       <link>/2021/01/22/interactivate-indirect-use-of-pheatmap-heatmap.2-and-heatmap/</link>
       <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
