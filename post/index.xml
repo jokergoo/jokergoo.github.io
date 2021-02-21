@@ -6,7 +6,26 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Differentiate brush and hover event in Shiny</title>
+      <link>/2021/02/21/differentiate-brush-and-hover-event-in-shiny/</link>
+      <pubDate>Sun, 21 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/02/21/differentiate-brush-and-hover-event-in-shiny/</guid>
+      <description>In my last post I described how I distinguish click and brush event in plotOutput in Shiny. In this post I try to solve another problem which is to differentiate hover and brush event.
+Similar as click, brush also intializes a hover event. To distinguish hover and brush, I didn’t use the default hover in plotOutput. Here I implement my own one. The implementation contains two parts:</description>
+    </item>
+    
+    <item>
+      <title>Differentiate brush and click event in Shiny</title>
+      <link>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</link>
+      <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</guid>
+      <description>I am recently developing a package InteractiveComplexHeatmap which generates interactive heatmaps as Shiny apps. One basic interactivity on heatmap is to click on heatmap cells or to select a region from it. Shiny allows to set click and brush arguments in plotOutput() to perform clicking or brushing on the heatmap image, and on the server side, to respond to these two actions. In InteractiveComplexHeatmap, I defined an action to respond to click event and an action to respond to brush event.</description>
+    </item>
+    
     <item>
       <title>Differentiate brush and click event in Shiny</title>
       <link>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</link>
