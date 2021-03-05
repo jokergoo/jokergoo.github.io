@@ -6,7 +6,16 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cluster groups in ComplexHeatmap</title>
+      <link>/2021/03/05/cluster-groups-in-complexheatmap/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/03/05/cluster-groups-in-complexheatmap/</guid>
+      <description>When making heatmaps, we always have many additionally grouping information for the samples, sush as subtypes, phenotypes. To emphasize the difference between groups, we might want to only perform clustering on group level, while not on the complete dataset. For these scenarios, ComplexHeatmap has two functions: cluster_between_groups() and cluster_within_group(). The two functions all perform clustering on group level. The difference is, in cluster_between_groups(), inside each group, the order of samples is unchanged, while in cluster_within_group(), samples in each group are still clustered.</description>
+    </item>
+    
     <item>
       <title>Differentiate brush and hover event in Shiny</title>
       <link>/2021/02/21/differentiate-brush-and-hover-event-in-shiny/</link>
