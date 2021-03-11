@@ -6,7 +6,16 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control labels in anno_block()</title>
+      <link>/2021/03/11/control-labels-in-anno_block/</link>
+      <pubDate>Thu, 11 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/03/11/control-labels-in-anno_block/</guid>
+      <description>In ComplexHeatmap, labels and other related settings in anno_block() always correspond to the heatmap slices from top to bottom after the heatmap is generated, which means, you always need to first generate the heatmap, then to observe how the heatmap slices are ordered and finally to set a proper value for labels. It is difficult to map the labels in anno_block() to the heatmap slices if clustering is applied, or when the ordering is unknown before the heatmap is drawn.</description>
+    </item>
+    
     <item>
       <title>Cluster groups in ComplexHeatmap</title>
       <link>/2021/03/05/cluster-groups-in-complexheatmap/</link>
