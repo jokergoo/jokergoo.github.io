@@ -1,120 +1,216 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
   <url>
     <loc>/</loc>
-    <lastmod>2021-02-21T00:00:00+00:00</lastmod>
-  </url><url>
+    <lastmod>2021-03-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2021/03/11/control-labels-in-anno_block/</loc>
+    <lastmod>2021-03-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2021-03-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2021/03/05/cluster-groups-in-complexheatmap/</loc>
+    <lastmod>2021-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2021/02/21/differentiate-brush-and-hover-event-in-shiny/</loc>
     <lastmod>2021-02-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>/post/</loc>
-    <lastmod>2021-02-21T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</loc>
     <lastmod>2021-02-20T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2021/01/22/interactivate-indirect-use-of-pheatmap-heatmap.2-and-heatmap/</loc>
     <lastmod>2021-01-22T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2021/01/07/set-heatmap-cell-width-in-circos.heatmap-function/</loc>
     <lastmod>2021-01-07T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/12/14/translate-from-other-heatmap-functions-to-complexheatmap/</loc>
     <lastmod>2020-12-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/11/28/make-some-fun-circular-plots/</loc>
     <lastmod>2020-11-28T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/11/27/visualize-relations-between-genes-and-pathways/</loc>
     <lastmod>2020-11-27T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/11/23/arrange-links-evenly-along-the-sectors/</loc>
     <lastmod>2020-11-23T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/11/22/helper-functions-for-genome-scale-heatmap/</loc>
     <lastmod>2020-11-22T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/10/29/make-genome-scale-heatmap/</loc>
     <lastmod>2020-10-29T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/10/29/recent-improvements-on-legends/</loc>
     <lastmod>2020-10-29T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/10/28/changes-in-complexheatmap-2.6.0/</loc>
     <lastmod>2020-10-28T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/10/16/concatenate-two-genomes-in-the-circular-plot/</loc>
     <lastmod>2020-10-16T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/10/13/visualize-traffic-intersection-loads-with-chord-diagram/</loc>
     <lastmod>2020-10-13T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/09/26/host-massive-analysis-reports-with-github-page/</loc>
     <lastmod>2020-09-26T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/08/17/reverse-x-axes-in-the-circular-plot/</loc>
     <lastmod>2020-08-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/07/14/integrate-complexheatmap-with-cowplot-package/</loc>
     <lastmod>2020-07-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/07/06/block-annotation-over-several-slices/</loc>
     <lastmod>2020-07-06T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/06/30/rasterization-in-complexheatmap/</loc>
     <lastmod>2020-06-30T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/06/29/align-heatmap-legends/</loc>
     <lastmod>2020-06-29T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/06/19/which-heatmap-function-is-faster/</loc>
     <lastmod>2020-06-19T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/06/14/changes-in-circlize-0.4.10/</loc>
     <lastmod>2020-06-14T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/06/08/multiple-group-chord-diagram/</loc>
     <lastmod>2020-06-08T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/06/06/parse-command-line-arguments/</loc>
     <lastmod>2020-06-06T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/05/31/word-cloud-as-heatmap-annotation/</loc>
     <lastmod>2020-05-31T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/05/21/make-circular-heatmaps/</loc>
     <lastmod>2020-05-21T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/05/15/interactive-complexheatmap/</loc>
     <lastmod>2020-05-15T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/05/11/set-cell-width/height-in-the-heatmap/</loc>
     <lastmod>2020-05-11T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2020/05/06/translate-from-pheatmap-to-complexheatmap/</loc>
     <lastmod>2020-05-06T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2019/10/06/substitute-with-an-evaluated-expression/</loc>
     <lastmod>2019-10-06T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2017/03/17/put-chord-diagram-horizontally-or-vertically-symmetric/</loc>
     <lastmod>2017-03-17T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2016/11/21/reverse-x-axis-in-the-circular-layout/</loc>
     <lastmod>2016-11-21T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2016/11/21/visualize-positive-and-negative-signals-in-the-enriched-heatmap/</loc>
     <lastmod>2016-11-21T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/2014/01/01/test-%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2014-01-01T00:00:00+00:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
-  </url><url>
+  </url>
+  
+  <url>
+    <loc>/publication/</loc>
+  </url>
+  
+  <url>
+    <loc>/software/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
   </url>
+  
 </urlset>

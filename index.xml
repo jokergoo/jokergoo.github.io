@@ -6,7 +6,25 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Control labels in anno_block()</title>
+      <link>/2021/03/11/control-labels-in-anno_block/</link>
+      <pubDate>Thu, 11 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/03/11/control-labels-in-anno_block/</guid>
+      <description>In ComplexHeatmap, labels and other related settings in anno_block() always correspond to the heatmap slices from top to bottom after the heatmap is generated, which means, you always need to first generate the heatmap, then to observe how the heatmap slices are ordered and finally to set a proper value for labels. It is difficult to map the labels in anno_block() to the heatmap slices if clustering is applied, or when the ordering is unknown before the heatmap is drawn.</description>
+    </item>
+    
+    <item>
+      <title>Cluster groups in ComplexHeatmap</title>
+      <link>/2021/03/05/cluster-groups-in-complexheatmap/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/03/05/cluster-groups-in-complexheatmap/</guid>
+      <description>When making heatmaps, we always have many additionally grouping information for the samples, sush as subtypes, phenotypes. To emphasize the difference between groups, we might want to only perform clustering on group level, while not on the complete dataset. For these scenarios, ComplexHeatmap has two functions: cluster_between_groups() and cluster_within_group(). The two functions all perform clustering on group level. The difference is, in cluster_between_groups(), inside each group, the order of samples is unchanged, while in cluster_within_group(), samples in each group are still clustered.</description>
+    </item>
+    
     <item>
       <title>Differentiate brush and hover event in Shiny</title>
       <link>/2021/02/21/differentiate-brush-and-hover-event-in-shiny/</link>
@@ -366,6 +384,24 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       
       <guid>/2014/01/01/test-%E6%B5%8B%E8%AF%95/</guid>
       <description>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试 测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试 测试测试测试测试测试测试测试测试</description>
+    </item>
+    
+    <item>
+      <title>Publication</title>
+      <link>/publication/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/</guid>
+      <description>By year   By citation   2021 Marina Laplana, Matthias Bieg, Christian Faltus, Svitlana Melnik, Olga Bogatyrova, Zuguang Gu, Thomas Muley, Michael Meister, Hendrik Dienemann, Esther Herpel, Christopher I Amos, Matthias Schlesner, Roland Eils, Christoph Plass, Angela Risch, Differentially methylated regions within lung cancer risk loci are enriched in deregulated enhancers. Epigenetics 2021. PubMed.  Ana Maia, Zuguang Gu, André Koch, Mireia Berdiel-Acer, Rainer Will, Matthias Schlesner, Stefan Wiemann, IFNβ1 secreted by breast cancer cells undergoing chemotherapy reprograms stromal fibroblasts to support tumour growth after treatment.</description>
+    </item>
+    
+    <item>
+      <title>Software</title>
+      <link>/software/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/software/</guid>
+      <description>R  pkgndep: Check the Heaviness of Package Dependencies.   simplifyEnrichment: Simplify functional enrichment results.   bsub: Submitter and monitor of LSF cluster.   cola: A Framework for Consensus Partitioning.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.  EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.</description>
     </item>
     
   </channel>
