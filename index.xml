@@ -6,7 +6,17 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 11 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>3D Heatmap</title>
+      <link>/2021/03/24/3d-heatmap/</link>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/03/24/3d-heatmap/</guid>
+      <description>From version 2.7.9, ComplexHeatmap can make simple 3D heatmap with a new function Heatmap3D().  Motivation ComplexHeatmap has a densityHeatmap() to visualize a list of density distributions, such as in the following example:
+library(ComplexHeatmap) set.seed(123) mat = matrix(rnorm(500), ncol = 10) colnames(mat) = letters[1:10] densityHeatmap(mat) In basic R graphics, since distributions can also be visualized by histograms, from ComplexHeatmap version 2.7.9, I added a new function frequencyHeatmap() which is like a histogram-version of density heatmap.</description>
+    </item>
+    
     <item>
       <title>Control labels in anno_block()</title>
       <link>/2021/03/11/control-labels-in-anno_block/</link>
