@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
-    <lastmod>2021-03-11T00:00:00+00:00</lastmod>
+    <loc>/2021/03/24/3d-heatmap/</loc>
+    <lastmod>2021-03-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2021/03/11/control-labels-in-anno_block/</loc>
-    <lastmod>2021-03-11T00:00:00+00:00</lastmod>
+    <loc>/</loc>
+    <lastmod>2021-03-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2021-03-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2021/03/11/control-labels-in-anno_block/</loc>
     <lastmod>2021-03-11T00:00:00+00:00</lastmod>
   </url>
   
