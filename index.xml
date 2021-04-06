@@ -6,7 +6,16 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Implement interactive heatmap from scratch</title>
+      <link>/2021/04/05/implement-interactive-heatmap-from-scratch/</link>
+      <pubDate>Mon, 05 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/04/05/implement-interactive-heatmap-from-scratch/</guid>
+      <description>In InteractiveComplexHeatmap, we mainly use the combination of InteractiveComplexHeatmapOutput() and makeInteractiveComplexHeatmap() to create the interactive heatmap widget in the Shiny application. The interactive widgets contains many tools for manipulating heatmaps. However, sometimes users may want to build their own interactive heatmap widget, e.g. to define their own logic to respond to the clicking or brushing event on heatmaps, while not use the one provided by InteractiveComplexHeatmap. What they only want is the information of the heatmap cells that were selected from heatmaps.</description>
+    </item>
+    
     <item>
       <title>3D Heatmap</title>
       <link>/2021/03/24/3d-heatmap/</link>
