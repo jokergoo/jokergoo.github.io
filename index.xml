@@ -6,7 +6,17 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 05 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Multiple color themes in a single heatmap</title>
+      <link>/2021/05/11/multiple-color-themes-in-a-single-heatmap/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/11/multiple-color-themes-in-a-single-heatmap/</guid>
+      <description>Some people might want to use multiple color schemas in a single heatmap to highlight group-wise patterns. If groups are also separated in heatmap, then actually each group can be treated as a single heatmap with its own color theme, later these heatmaps can be concatenated into the final heatmap.
+In the following example, we assume there are two groups on columns. Colors for group A use the theme “green-black-red” and colors for group B use “purple-white-orange”.</description>
+    </item>
+    
     <item>
       <title>Implement interactive heatmap from scratch</title>
       <link>/2021/04/05/implement-interactive-heatmap-from-scratch/</link>
