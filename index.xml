@@ -421,7 +421,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>By year   By citation   2021 Marina Laplana, Matthias Bieg, Christian Faltus, Svitlana Melnik, Olga Bogatyrova, Zuguang Gu, Thomas Muley, Michael Meister, Hendrik Dienemann, Esther Herpel, Christopher I Amos, Matthias Schlesner, Roland Eils, Christoph Plass, Angela Risch, Differentially methylated regions within lung cancer risk loci are enriched in deregulated enhancers. Epigenetics 2021. PubMed.  Ana Maia, Zuguang Gu, André Koch, Mireia Berdiel-Acer, Rainer Will, Matthias Schlesner, Stefan Wiemann, IFNβ1 secreted by breast cancer cells undergoing chemotherapy reprograms stromal fibroblasts to support tumour growth after treatment.</description>
+      <description>Updated on 2021-07-02.
+  By year   By citation   2021 Marina Laplana, Matthias Bieg, Christian Faltus, Svitlana Melnik, Olga Bogatyrova, Zuguang Gu, Thomas Muley, Michael Meister, Hendrik Dienemann, Esther Herpel, Christopher I Amos, Matthias Schlesner, Roland Eils, Christoph Plass, Angela Risch, Differentially methylated regions within lung cancer risk loci are enriched in deregulated enhancers. Epigenetics 2021. PubMed.  Ana Maia, Zuguang Gu, André Koch, Mireia Berdiel-Acer, Rainer Will, Matthias Schlesner, Stefan Wiemann, IFNβ1 secreted by breast cancer cells undergoing chemotherapy reprograms stromal fibroblasts to support tumour growth after treatment.</description>
     </item>
     
     <item>
@@ -430,7 +431,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  pkgndep: Check the Heaviness of Package Dependencies.   simplifyEnrichment: Simplify functional enrichment results.   bsub: Submitter and monitor of LSF cluster.   cola: A Framework for Consensus Partitioning.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.  EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.</description>
+      <description>R Visualization  spiralize: Visualize data on spirals.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.  EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.   HilbertCurve: Making 2D Hilbert Curve.   gtrellis: genome-level trellis layout.     Data analysis  simplifyEnrichment: Simplify functional enrichment results.</description>
     </item>
     
   </channel>
