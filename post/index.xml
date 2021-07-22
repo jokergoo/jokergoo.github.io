@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Make triangle heatmap</title>
+      <link>/2021/07/22/make-triangle-heatmap/</link>
+      <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/07/22/make-triangle-heatmap/</guid>
+      <description>For the following heatmap symmetric to the diagonal, users might only want to draw the lower or upper triangle heatmap.
+library(ComplexHeatmap) m = cor(matrix(rnorm(100), 10)) Heatmap(m) By observing the heatmap, the simplest way is to compare the row index and column index of the heatmap. Note here since the heatmap rows and columns are already reordered by clusering, we need to reorder the matrix before sending to heatmap, and in the heatmap, no reordering should be applied.</description>
+    </item>
+    
     <item>
       <title>Multiple color themes in a single heatmap</title>
       <link>/2021/05/11/multiple-color-themes-in-a-single-heatmap/</link>
