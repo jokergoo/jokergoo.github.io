@@ -6,7 +6,18 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 04 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Create self-defined annotations</title>
+      <link>/2021/08/04/create-self-defined-annotations/</link>
+      <pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/08/04/create-self-defined-annotations/</guid>
+      <description>ComplexHeatmap already provides many annotation functions that draw various types of graphics, but still, users might want more new types. Here I demonstrate how to create new annotation graphics.
+In the ComplexHeatmap book (https://jokergoo.github.io/ComplexHeatmap-reference/book/heatmap-annotations.html#implement-new-annotation-functions), I have already explained how to create new annotations with the function AnnotationFunction(). Here I demonstrate a simplified way to construct a new annotation type which also allows reordering, subsetting and splitting.
+From version 2.</description>
+    </item>
+    
     <item>
       <title>Make triangle heatmap</title>
       <link>/2021/07/22/make-triangle-heatmap/</link>
