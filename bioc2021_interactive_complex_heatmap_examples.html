@@ -11,7 +11,7 @@
 
 <meta name="author" content="Zuguang Gu (z.gu@dkfz.de)" />
 
-<meta name="date" content="2021-08-02" />
+<meta name="date" content="2021-08-06" />
 
 <title>Examples of the InteractiveComplexHeatmap package</title>
 
@@ -167,11 +167,20 @@ pre code {
 
 <h1 class="title toc-ignore">Examples of the InteractiveComplexHeatmap package</h1>
 <h4 class="author">Zuguang Gu (<a href="mailto:z.gu@dkfz.de" class="email">z.gu@dkfz.de</a>)</h4>
-<h4 class="date">2021-08-02</h4>
+<h4 class="date">2021-08-06</h4>
 
 </div>
 
 
+<div id="install" class="section level2">
+<h2>Install</h2>
+<p>You can install it from Bioconductor:</p>
+<pre class="r"><code>BiocManager::install(&quot;InteractiveComplexHeatmap&quot;)</code></pre>
+<p><strong>InteractiveComplexHeatmap</strong> is a new package and it is improved quite frequently. If you have errors with the one from Biocondcutor, you can always directly install it from GitHub:</p>
+<pre class="r"><code>devtools::install_github(&quot;jokergoo/InteractiveComplexHeatmap&quot;)</code></pre>
+</div>
+<div id="usage" class="section level2">
+<h2>Usage</h2>
 <p>The simplest example is as follows. You just simply call <code>htShiny()</code> after the heatmap is drawn:</p>
 <pre class="r"><code>library(ComplexHeatmap)
 library(InteractiveComplexHeatmap)
@@ -179,7 +188,10 @@ m = matrix(rnorm(100*100), nrow = 100)
 Heatmap(m)
 
 htShiny()</code></pre>
-<p>There are the following examples that have already been distributed on shinyapp.io:</p>
+</div>
+<div id="examples" class="section level2">
+<h2>Examples</h2>
+<p>There are the following examples that have already been deployed on shinyapp.io:</p>
 <ul>
 <li><a href="https://jokergoo.shinyapps.io/interactive_complexheatmap/" class="uri">https://jokergoo.shinyapps.io/interactive_complexheatmap/</a></li>
 <li><a href="https://jokergoo.shinyapps.io/interactive_complexheatmap_vertical/" class="uri">https://jokergoo.shinyapps.io/interactive_complexheatmap_vertical/</a></li>
@@ -290,6 +302,7 @@ htShiny()</code></pre>
 ##  10.3 A Shiny dashboard with two tabs.
 ##  10.4 Only contain the original heatmap where output floats.
 ##  10.5 A complex dashboard that visualizes a DESeq2 results.</code></pre>
+</div>
 
 
 
