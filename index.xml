@@ -452,7 +452,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R Visualization  spiralize: Visualize data on spirals.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.   EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.   HilbertCurve: Making 2D Hilbert Curve.   gtrellis: genome-level trellis layout.     Data analysis  simplifyEnrichment: Simplify functional enrichment results.</description>
+      <description>R  Downloads are from CRAN/Bioconductor/anaconda. Visualization  spiralize: Visualize data on spirals.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.   EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.   HilbertCurve: Making 2D Hilbert Curve.   gtrellis: genome-level trellis layout.     Data analysis  simplifyEnrichment: Simplify functional enrichment results.</description>
     </item>
     
   </channel>
