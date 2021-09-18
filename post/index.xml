@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Visualize the &#39;real&#39; circular genome</title>
+      <link>/2021/09/18/visualize-the-real-circular-genome/</link>
+      <pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/09/18/visualize-the-real-circular-genome/</guid>
+      <description>circlize applies circular visualization. Essentially, it visualizes data in categories. E.g. for genomic data, the circle is segmented and each segment (or called sector) corresponds to one single chromosome. The following code visualizes 24 chromosomes of human genome.
+library(circlize) circos.initializeWithIdeogram() Now the question is how to visualize a “real” circular genome where the complete circle corresponds to the genome and the “end” of the genome goes smoothly over the “start” of the genome.</description>
+    </item>
+    
     <item>
       <title>Create self-defined annotations</title>
       <link>/2021/08/04/create-self-defined-annotations/</link>
