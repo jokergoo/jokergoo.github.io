@@ -6,7 +6,18 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A completely customized annotation</title>
+      <link>/2021/10/17/a-completely-customized-annotation/</link>
+      <pubDate>Sun, 17 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/10/17/a-completely-customized-annotation/</guid>
+      <description>For most annotation functions implemented in ComplexHeatmap, they only draw one same type of annotation graphics, e.g. anno_points() only draws points. From ComplexHeatmap version 2.9.4, I added a new annotation function anno_customize(), with which you can completely freely define graphics for every annotation cell.
+The input for anno_customize() should be a categorical vector.
+library(ComplexHeatmap) x = c(&amp;quot;a&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;d&amp;quot;) For each level, you need to define a graphics function for it.</description>
+    </item>
+    
     <item>
       <title>Visualize the &#39;real&#39; circular genome</title>
       <link>/2021/09/18/visualize-the-real-circular-genome/</link>
@@ -452,7 +463,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2021-09-18.
+      <description>Updated on 2021-10-15.
   By year   By citation   2021 Marina Laplana, Matthias Bieg, Christian Faltus, Svitlana Melnik, Olga Bogatyrova, Zuguang Gu, Thomas Muley, Michael Meister, Hendrik Dienemann, Esther Herpel, Christopher I Amos, Matthias Schlesner, Roland Eils, Christoph Plass, Angela Risch, Differentially methylated regions within lung cancer risk loci are enriched in deregulated enhancers. Epigenetics 2021. PubMed.  Ana Maia, Zuguang Gu, André Koch, Mireia Berdiel-Acer, Rainer Will, Matthias Schlesner, Stefan Wiemann, IFNβ1 secreted by breast cancer cells undergoing chemotherapy reprograms stromal fibroblasts to support tumour growth after treatment.</description>
     </item>
     
@@ -462,7 +473,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2021-09-18. Visualization  spiralize: Visualize data on spirals.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.   EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.   HilbertCurve: Making 2D Hilbert Curve.   gtrellis: genome-level trellis layout.</description>
+      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2021-10-15. Visualization  spiralize: Visualize data on spirals.   circlize: circular visualization in R. [#circlize on stackoverflow]   ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.   InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.   EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.   HilbertCurve: Making 2D Hilbert Curve.   gtrellis: genome-level trellis layout.</description>
     </item>
     
   </channel>
