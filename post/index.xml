@@ -6,7 +6,16 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 17 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spiral visualization of daily git commits</title>
+      <link>/2022/02/03/spiral-visualization-of-daily-git-commits/</link>
+      <pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/02/03/spiral-visualization-of-daily-git-commits/</guid>
+      <description>library(lubridate) library(spiralize) library(ComplexHeatmap) calc_pt_size = function(x, x_max = 30, x_min = 2, pt_max = 20, pt_min = 2) { size = (pt_max - pt_min)/(x_max - x_min)*(x - x_min) + pt_min size[size &amp;lt; pt_min] = pt_min size[size &amp;gt; pt_max] = pt_max size } git_commits_spiral = function(repo) { owd = getwd() setwd(repo) on.exit(setwd(owd)) if(!file.exists(&amp;quot;.git&amp;quot;)) { stop(&amp;quot;`repo` should be a git repo folder.&amp;quot;) } df = read.table(pipe(&amp;quot;git log --date=short --pretty=format:%ad | sort | uniq -c&amp;quot;)) colnames(df) = c(&amp;quot;commits&amp;quot;, &amp;quot;date&amp;quot;) df$date = as.</description>
+    </item>
+    
     <item>
       <title>A completely customized annotation</title>
       <link>/2021/10/17/a-completely-customized-annotation/</link>
