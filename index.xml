@@ -13,7 +13,8 @@
       <pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate>
       
       <guid>/2022/02/03/spiral-visualization-of-daily-git-commits/</guid>
-      <description>library(lubridate) library(spiralize) library(ComplexHeatmap) calc_pt_size = function(x, x_max = 30, x_min = 2, pt_max = 20, pt_min = 2) { size = (pt_max - pt_min)/(x_max - x_min)*(x - x_min) + pt_min size[size &amp;lt; pt_min] = pt_min size[size &amp;gt; pt_max] = pt_max size } git_commits_spiral = function(repo) { owd = getwd() setwd(repo) on.exit(setwd(owd)) if(!file.exists(&amp;quot;.git&amp;quot;)) { stop(&amp;quot;`repo` should be a git repo folder.&amp;quot;) } df = read.table(pipe(&amp;quot;git log --date=short --pretty=format:%ad | sort | uniq -c&amp;quot;)) colnames(df) = c(&amp;quot;commits&amp;quot;, &amp;quot;date&amp;quot;) df$date = as.</description>
+      <description>In this blog, I will apply spiral visualization on git daily commits. The following three plots are for R package circlize (which is developed by me), the R package ggplot2 and the JavaScript library jQuery. Each loop is a complete year. The point size corresponds to the number of commits on that day.
+Next we visualize the git commits for the five programming languages: R, Perl, Python, PHP and Julia.</description>
     </item>
     
     <item>
@@ -472,8 +473,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2022-02-03.
-  By year   By citation   2021 Zuguang Gu, Daniel Hübschmann, Make Interactive Complex Heatmaps in R. Bioinformatics (Oxford, England) 2021. PubMed citescites33.  Zuguang Gu, Daniel Hübschmann, spiralize: an R package for Visualizing Data on Spirals. Bioinformatics (Oxford, England) 2021. PubMed.  Marina Laplana, Matthias Bieg, Christian Faltus, Svitlana Melnik, Olga Bogatyrova, Zuguang Gu, Thomas Muley, Michael Meister, Hendrik Dienemann, Esther Herpel, Christopher I Amos, Matthias Schlesner, Roland Eils, Christoph Plass, Angela Risch, Differentially methylated regions within lung cancer risk loci are enriched in deregulated enhancers.</description>
+      <description>Updated on 2022-02-05.
+  By year   By citation   2021 Zuguang Gu, Daniel Hübschmann, Make Interactive Complex Heatmaps in R. Bioinformatics (Oxford, England) 2021. PubMed citescites44.  Zuguang Gu, Daniel Hübschmann, spiralize: an R package for Visualizing Data on Spirals. Bioinformatics (Oxford, England) 2021. PubMed.  Marina Laplana, Matthias Bieg, Christian Faltus, Svitlana Melnik, Olga Bogatyrova, Zuguang Gu, Thomas Muley, Michael Meister, Hendrik Dienemann, Esther Herpel, Christopher I Amos, Matthias Schlesner, Roland Eils, Christoph Plass, Angela Risch, Differentially methylated regions within lung cancer risk loci are enriched in deregulated enhancers.</description>
     </item>
     
     <item>
