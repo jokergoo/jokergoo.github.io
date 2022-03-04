@@ -18,6 +18,17 @@
     </item>
     
     <item>
+      <title>Re-analyze an AML proteomics dataset</title>
+      <link>/2022/03/01/re-analyze-an-aml-proteomics-dataset/</link>
+      <pubDate>Tue, 01 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/03/01/re-analyze-an-aml-proteomics-dataset/</guid>
+      <description>I recently came across a paper entitled “The proteogenomic subtypes of acute myeloid leukemia” published on Cancer Cell, which performed subtype classifications on acute myeloid leukemia (AML) with the proteomics data. In the paper, the classification was performed by hierarchical clustering on the distance matrix of the proteomics dataset.
+The motivations for me to reanalyze this dataset are the following two:
+I have never analyzed proteomics data, thus I want to see how the data looks like; I have never applied cola package on proteomics datasets.</description>
+    </item>
+    
+    <item>
       <title>Spiral visualization of daily git commits</title>
       <link>/2022/02/03/spiral-visualization-of-daily-git-commits/</link>
       <pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate>
