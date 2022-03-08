@@ -29,6 +29,16 @@ I have never analyzed proteomics data, thus I want to see how the data looks lik
     </item>
     
     <item>
+      <title>Support HCL colormaps in ComplexHeatmap</title>
+      <link>/2022/03/01/support-hcl-colormaps-in-complexheatmap/</link>
+      <pubDate>Tue, 01 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/03/01/support-hcl-colormaps-in-complexheatmap/</guid>
+      <description>To demonstrate this new feature, I first generate a small random matrix.
+set.seed(123) nr1 = 4; nr2 = 8; nr3 = 6; nr = nr1 + nr2 + nr3 nc1 = 6; nc2 = 8; nc3 = 10; nc = nc1 + nc2 + nc3 mat = cbind(rbind(matrix(rnorm(nr1*nc1, mean = 1, sd = 0.5), nr = nr1), matrix(rnorm(nr2*nc1, mean = 0, sd = 0.5), nr = nr2), matrix(rnorm(nr3*nc1, mean = 0, sd = 0.</description>
+    </item>
+    
+    <item>
       <title>Spiral visualization of daily git commits</title>
       <link>/2022/02/03/spiral-visualization-of-daily-git-commits/</link>
       <pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate>
