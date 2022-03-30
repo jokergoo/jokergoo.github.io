@@ -504,7 +504,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2022-03-25.
+      <description>Updated on 2022-03-30.
   By year   By citation   2022 Zuguang Gu, Daniel Hübschmann, Improve consensus partitioning via a hierarchical procedure. Briefings in bioinformatics 2022. PubMed.  Marina Laplana, Matthias Bieg, Christian Faltus, Svitlana Melnik, Olga Bogatyrova, Zuguang Gu, Thomas Muley, Michael Meister, Hendrik Dienemann, Esther Herpel, Christopher I Amos, Matthias Schlesner, Roland Eils, Christoph Plass, Angela Risch, Differentially methylated regions within lung cancer risk loci are enriched in deregulated enhancers.</description>
     </item>
     
@@ -514,7 +514,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2022-03-25. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.</description>
+      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2022-03-30. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.</description>
     </item>
     
   </channel>
