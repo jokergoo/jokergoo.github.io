@@ -6,7 +6,17 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to change font family globally in ComplexHeatmap</title>
+      <link>/2022/05/31/how-to-change-font-family-globally-in-complexheatmap/</link>
+      <pubDate>Tue, 31 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/05/31/how-to-change-font-family-globally-in-complexheatmap/</guid>
+      <description>In grid, every viewport is associated with its own graphics parameters and it by default inherits graphics parameters from its parent viewport. So, to globally change the font family in a ComplexHeatmap plot, we can simply put the heatmap into a “global viewport” where we can set a specific font family (also other graphics parameters) there:
+library(ComplexHeatmap) m = matrix(rnorm(100), 10) pushViewport(viewport(gp = gpar(fontfamily = &amp;quot;HersheyScript&amp;quot;))) ht = Heatmap(m, top_annotation = HeatmapAnnotation(foo = 1:10), right_annotation = rowAnnotation(bar = anno_text(month.</description>
+    </item>
+    
     <item>
       <title>Set cell_fun/layer_fun in InteractiveComplexHeatmap</title>
       <link>/2022/04/01/set-cell_fun/layer_fun-in-interactivecomplexheatmap/</link>
@@ -522,8 +532,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2022-05-10.
-  By year   By citation   2022 Zuguang Gu, Daniel Hübschmann, Improve consensus partitioning via a hierarchical procedure. Briefings in bioinformatics 2022. PubMed.  Marina Laplana, Matthias Bieg, Christian Faltus, Svitlana Melnik, Olga Bogatyrova, Zuguang Gu, Thomas Muley, Michael Meister, Hendrik Dienemann, Esther Herpel, Christopher I Amos, Matthias Schlesner, Roland Eils, Christoph Plass, Angela Risch, Differentially methylated regions within lung cancer risk loci are enriched in deregulated enhancers.</description>
+      <description>Updated on 2022-05-31.
+  By year   By citation   2022 Josefine Radke, Naveed Ishaque, Randi Koll, Zuguang Gu, Elisa Schumann, Lina Sieverling, Sebastian Uhrig, Daniel Hübschmann, Umut H Toprak, Cristina López, Xavier Pastor Hostench, Simone Borgoni, Dilafruz Juraeva, Fabienne Pritsch, Nagarajan Paramasivam, Gnana Prakash Balasubramanian, Matthias Schlesner, Shashwat Sahay, Marc Weniger, Debora Pehl, Helena Radbruch, Anja Osterloh, Agnieszka Korfel, Martin Misch, Julia Onken, Katharina Faust, Peter Vajkoczy, Dag Moskopp, Yawen Wang, Andreas Jödicke, Lorenz Trümper, Ioannis Anagnostopoulos, Dido Lenze, Ralf Küppers, Michael Hummel, Clemens A Schmitt, Otmar D Wiestler, Stephan Wolf, Andreas Unterberg, Roland Eils, Christel Herold-Mende, Benedikt Brors, Reiner Siebert, Stefan Wiemann, Frank L Heppner, The genomic and transcriptional landscape of primary central nervous system lymphoma.</description>
     </item>
     
     <item>
@@ -532,7 +542,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2022-05-10. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.</description>
+      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2022-05-31. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.</description>
     </item>
     
   </channel>
