@@ -6,7 +6,18 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 31 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Textbox annotation</title>
+      <link>/2022/06/15/textbox-annotation/</link>
+      <pubDate>Wed, 15 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/06/15/textbox-annotation/</guid>
+      <description>In a previous post “Word cloud as heatmap annotation”, I introduced how to make word clouds and attach them to heatmaps as annotations. Here I will introduce a more general solution for making textboxes.
+The following new functions are implemented in ComplexHeatmap from version 2.13.1. Now you need to update ComplexHeatmap from GitHub.
+First I will demonstrate a low-level grid.* family function grid.textbox(). The function simply accepts a vector of texts.</description>
+    </item>
+    
     <item>
       <title>How to change font family globally in ComplexHeatmap</title>
       <link>/2022/05/31/how-to-change-font-family-globally-in-complexheatmap/</link>
