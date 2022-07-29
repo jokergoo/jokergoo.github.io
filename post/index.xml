@@ -6,7 +6,18 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Add labels to circular heatmap</title>
+      <link>/2022/07/29/add-labels-to-circular-heatmap/</link>
+      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/07/29/add-labels-to-circular-heatmap/</guid>
+      <description>Assume we have a huge matrix with 1000 rows. First the circular heatmap:
+set.seed(123) m = matrix(rnorm(1000*10), nrow = 1000) library(circlize) circos.heatmap(m, col = colorRamp2(c(-2, 0, 2), c(&amp;quot;blue&amp;quot;, &amp;quot;white&amp;quot;, &amp;quot;red&amp;quot;))) It is basically impossible to add labels for all 1000 rows. Normally what we do is to only add labels for a small amount of rows. E.g., in the following example, we randomly select 50 rows.
+row_ind = sample(1000, 50) To correctly add these 50 labels to the circular heatmap, the key thing is to find the positions of these rows on heatmap.</description>
+    </item>
+    
     <item>
       <title>Textbox annotation</title>
       <link>/2022/06/15/textbox-annotation/</link>

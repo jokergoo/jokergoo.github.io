@@ -6,7 +6,18 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Add labels to circular heatmap</title>
+      <link>/2022/07/29/add-labels-to-circular-heatmap/</link>
+      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/07/29/add-labels-to-circular-heatmap/</guid>
+      <description>Assume we have a huge matrix with 1000 rows. First the circular heatmap:
+set.seed(123) m = matrix(rnorm(1000*10), nrow = 1000) library(circlize) circos.heatmap(m, col = colorRamp2(c(-2, 0, 2), c(&amp;quot;blue&amp;quot;, &amp;quot;white&amp;quot;, &amp;quot;red&amp;quot;))) It is basically impossible to add labels for all 1000 rows. Normally what we do is to only add labels for a small amount of rows. E.g., in the following example, we randomly select 50 rows.
+row_ind = sample(1000, 50) To correctly add these 50 labels to the circular heatmap, the key thing is to find the positions of these rows on heatmap.</description>
+    </item>
+    
     <item>
       <title>Textbox annotation</title>
       <link>/2022/06/15/textbox-annotation/</link>
@@ -543,8 +554,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2022-07-18.
- Total Google Scholar citations: 7092.   By year   By citation   2022 Zuguang Gu, Daniel Hübschmann, pkgndep: a tool for analyzing dependency heaviness of R packages. Bioinformatics (Oxford, England) 2022. PubMed.  Zuguang Gu, Daniel Hübschmann, Simplify enrichment: A bioconductor package for clustering and visualizing functional enrichment results. Genomics, proteomics &amp;amp; bioinformatics 2022. PubMed citescites1414.  Josefine Radke, Naveed Ishaque, Randi Koll, Zuguang Gu, Elisa Schumann, Lina Sieverling, Sebastian Uhrig, Daniel Hübschmann, Umut H Toprak, Cristina López, Xavier Pastor Hostench, Simone Borgoni, Dilafruz Juraeva, Fabienne Pritsch, Nagarajan Paramasivam, Gnana Prakash Balasubramanian, Matthias Schlesner, Shashwat Sahay, Marc Weniger, Debora Pehl, Helena Radbruch, Anja Osterloh, Agnieszka Korfel, Martin Misch, Julia Onken, Katharina Faust, Peter Vajkoczy, Dag Moskopp, Yawen Wang, Andreas Jödicke, Lorenz Trümper, Ioannis Anagnostopoulos, Dido Lenze, Ralf Küppers, Michael Hummel, Clemens A Schmitt, Otmar D Wiestler, Stephan Wolf, Andreas Unterberg, Roland Eils, Christel Herold-Mende, Benedikt Brors, Reiner Siebert, Stefan Wiemann, Frank L Heppner, The genomic and transcriptional landscape of primary central nervous system lymphoma.</description>
+      <description>Updated on 2022-07-29.
+ Total Google Scholar citations: 7210.   By year   By citation   2022 Zuguang Gu, Daniel Hübschmann, pkgndep: a tool for analyzing dependency heaviness of R packages. Bioinformatics (Oxford, England) 2022. PubMed.  Zuguang Gu, Daniel Hübschmann, Simplify enrichment: A bioconductor package for clustering and visualizing functional enrichment results. Genomics, proteomics &amp;amp; bioinformatics 2022. PubMed citescites1515.  Josefine Radke, Naveed Ishaque, Randi Koll, Zuguang Gu, Elisa Schumann, Lina Sieverling, Sebastian Uhrig, Daniel Hübschmann, Umut H Toprak, Cristina López, Xavier Pastor Hostench, Simone Borgoni, Dilafruz Juraeva, Fabienne Pritsch, Nagarajan Paramasivam, Gnana Prakash Balasubramanian, Matthias Schlesner, Shashwat Sahay, Marc Weniger, Debora Pehl, Helena Radbruch, Anja Osterloh, Agnieszka Korfel, Martin Misch, Julia Onken, Katharina Faust, Peter Vajkoczy, Dag Moskopp, Yawen Wang, Andreas Jödicke, Lorenz Trümper, Ioannis Anagnostopoulos, Dido Lenze, Ralf Küppers, Michael Hummel, Clemens A Schmitt, Otmar D Wiestler, Stephan Wolf, Andreas Unterberg, Roland Eils, Christel Herold-Mende, Benedikt Brors, Reiner Siebert, Stefan Wiemann, Frank L Heppner, The genomic and transcriptional landscape of primary central nervous system lymphoma.</description>
     </item>
     
     <item>
@@ -553,7 +564,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2022-07-08. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.</description>
+      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2022-07-29. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.    gtrellis: genome-level trellis layout.</description>
     </item>
     
   </channel>
