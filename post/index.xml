@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 29 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Visualize lift over between two assemblies</title>
+      <link>/2022/09/13/visualize-lift-over-between-two-assemblies/</link>
+      <pubDate>Tue, 13 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/09/13/visualize-lift-over-between-two-assemblies/</guid>
+      <description>In this post, I will simply demonstrate how to visualize lift overs between two assemblies. In the package rtracklayer, there is a function liftOver() that can convert genomic regions according to the mapping encoded in a “chain” file.
+In the following code, I will demonstrate the lift overs from hg19 to hg38. I first download the chain file from UCSC database. Note the .gz file needs to be uncompressed.</description>
+    </item>
+    
     <item>
       <title>Add labels to circular heatmap</title>
       <link>/2022/07/29/add-labels-to-circular-heatmap/</link>

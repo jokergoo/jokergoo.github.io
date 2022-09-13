@@ -6,7 +6,17 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 29 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Visualize lift over between two assemblies</title>
+      <link>/2022/09/13/visualize-lift-over-between-two-assemblies/</link>
+      <pubDate>Tue, 13 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/09/13/visualize-lift-over-between-two-assemblies/</guid>
+      <description>In this post, I will simply demonstrate how to visualize lift overs between two assemblies. In the package rtracklayer, there is a function liftOver() that can convert genomic regions according to the mapping encoded in a “chain” file.
+In the following code, I will demonstrate the lift overs from hg19 to hg38. I first download the chain file from UCSC database. Note the .gz file needs to be uncompressed.</description>
+    </item>
+    
     <item>
       <title>Add labels to circular heatmap</title>
       <link>/2022/07/29/add-labels-to-circular-heatmap/</link>
@@ -554,8 +564,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2022-08-13.
- Total Google Scholar citations: 7317.   By year   By citation   2022 Zuguang Gu, Daniel Hübschmann, pkgndep: a tool for analyzing dependency heaviness of R packages. Bioinformatics (Oxford, England) 2022. PubMed.  Zuguang Gu, Daniel Hübschmann, Simplify enrichment: A bioconductor package for clustering and visualizing functional enrichment results. Genomics, proteomics &amp;amp; bioinformatics 2022. PubMed citescites1818.  Josefine Radke, Naveed Ishaque, Randi Koll, Zuguang Gu, Elisa Schumann, Lina Sieverling, Sebastian Uhrig, Daniel Hübschmann, Umut H Toprak, Cristina López, Xavier Pastor Hostench, Simone Borgoni, Dilafruz Juraeva, Fabienne Pritsch, Nagarajan Paramasivam, Gnana Prakash Balasubramanian, Matthias Schlesner, Shashwat Sahay, Marc Weniger, Debora Pehl, Helena Radbruch, Anja Osterloh, Agnieszka Korfel, Martin Misch, Julia Onken, Katharina Faust, Peter Vajkoczy, Dag Moskopp, Yawen Wang, Andreas Jödicke, Lorenz Trümper, Ioannis Anagnostopoulos, Dido Lenze, Ralf Küppers, Michael Hummel, Clemens A Schmitt, Otmar D Wiestler, Stephan Wolf, Andreas Unterberg, Roland Eils, Christel Herold-Mende, Benedikt Brors, Reiner Siebert, Stefan Wiemann, Frank L Heppner, The genomic and transcriptional landscape of primary central nervous system lymphoma.</description>
+      <description>Updated on 2022-09-13.
+ Total Google Scholar citations: 7559.   By year   By citation   2022 Zuguang Gu, Daniel Hübschmann, pkgndep: a tool for analyzing dependency heaviness of R packages. Bioinformatics (Oxford, England) 2022. PubMed.  Zuguang Gu, Daniel Hübschmann, Simplify enrichment: A bioconductor package for clustering and visualizing functional enrichment results. Genomics, proteomics &amp;amp; bioinformatics 2022. PubMed citescites2424.  Josefine Radke, Naveed Ishaque, Randi Koll, Zuguang Gu, Elisa Schumann, Lina Sieverling, Sebastian Uhrig, Daniel Hübschmann, Umut H Toprak, Cristina López, Xavier Pastor Hostench, Simone Borgoni, Dilafruz Juraeva, Fabienne Pritsch, Nagarajan Paramasivam, Gnana Prakash Balasubramanian, Matthias Schlesner, Shashwat Sahay, Marc Weniger, Debora Pehl, Helena Radbruch, Anja Osterloh, Agnieszka Korfel, Martin Misch, Julia Onken, Katharina Faust, Peter Vajkoczy, Dag Moskopp, Yawen Wang, Andreas Jödicke, Lorenz Trümper, Ioannis Anagnostopoulos, Dido Lenze, Ralf Küppers, Michael Hummel, Clemens A Schmitt, Otmar D Wiestler, Stephan Wolf, Andreas Unterberg, Roland Eils, Christel Herold-Mende, Benedikt Brors, Reiner Siebert, Stefan Wiemann, Frank L Heppner, The genomic and transcriptional landscape of primary central nervous system lymphoma.</description>
     </item>
     
     <item>
@@ -564,7 +574,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2022-08-13. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.    gtrellis: genome-level trellis layout.</description>
+      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2022-09-13. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.    gtrellis: genome-level trellis layout.</description>
     </item>
     
   </channel>
