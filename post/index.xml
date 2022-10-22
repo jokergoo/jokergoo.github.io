@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 13 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Partially change default values of arguments</title>
+      <link>/2022/10/22/partially-change-default-values-of-arguments/</link>
+      <pubDate>Sat, 22 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/10/22/partially-change-default-values-of-arguments/</guid>
+      <description>This is the problem I have. For example, in the Heatmap() function in the ComplexHeatmap package, one of its argument row_title_gp has a default value gpar(fontsize = 13.2):
+Heatmap = function(..., row_title_gp = gpar(fontsize = 13.2), ...) { ... } Here row_title_gp controls the graphics parameters for the row title and it accepts a list of other parameters, such as col and fontfamily. Now the problem is when users set row_title_gp with other parameters, e.</description>
+    </item>
+    
     <item>
       <title>Visualize lift over between two assemblies</title>
       <link>/2022/09/13/visualize-lift-over-between-two-assemblies/</link>
