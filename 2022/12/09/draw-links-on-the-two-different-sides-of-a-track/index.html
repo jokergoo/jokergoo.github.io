@@ -62,7 +62,7 @@ A Bioinformagician
 
   <article class="article">
     
-    <span class="article-duration">7 min read</span>
+    <span class="article-duration">8 min read</span>
     
 
     <h1 class="article-title">Draw links on the two different sides of a track</h1>
@@ -81,7 +81,7 @@ categories of those having short distances and those having large distances, and
 distinguishing them by putting them onto different sides of a track can sometimes
 improve the visualization. One typical example is to separate intergenic
 translocations and intragenic translocations of genes.</p>
-<p>In the next example, I first generate positions for three genes (A, B, and C).
+<p>In the next example, I first generate positions for three genes (<code>A</code>, <code>B</code>, and <code>C</code>).
 Note for simplicity, the positions are not really bases.</p>
 <pre class="r"><code>set.seed(123)
 x = sort(runif(20))
@@ -255,7 +255,7 @@ closer to each other. We can dynamically calculate the value of <code>h</code> a
 to the distance of a link’s two ends. Intuitively, we measure the distance by
 the degree difference of the two ends on the circle.</p>
 <p>We first write a simple function which returns <code>h</code> based on the degree difference.
-in <code>get_h()</code>, if the degree difference is larger than 90 degrees, we let <code>h</code> take -0.15,
+in <code>get_h()</code>, if the degree difference is larger than 120 degrees, we let <code>h</code> take -0.15,
 and if the degree difference is smaller than 20 degrees, we let <code>h</code> take -0.05.</p>
 <pre class="r"><code>get_h = function(degree_difference) {
     max_degree_difference = 120
@@ -276,7 +276,7 @@ and if the degree difference is smaller than 20 degrees, we let <code>h</code> t
 }</code></pre>
 <p>Next we write another function which calculates the degree difference. Note for simplicity, we only look at the link where
 its two ends are in the same sector. In <code>get_degree_difference()</code>, <code>get.cell.meta.data("cell.xlim", ...)</code> is used to get
-the data range on a specific sector, <code>get.cell.meta.data("xplot", ...)</code> is used to get the width of the sector measured by degree.</p>
+the data range on a specific sector, <code>get.cell.meta.data("xplot", ...)</code> is used to get the width of the sector measured by degree. Note since the data coordinates in sectors are always clockwise, <code>xplot[1]</code> is larger than <code>xplot[2]</code>.</p>
 <pre class="r"><code>get_degree_difference = function(sector, x1, x2) {
     cell.xlim = get.cell.meta.data(&quot;cell.xlim&quot;, sector.index = sector, track.index = 1)
     xplot = get.cell.meta.data(&quot;xplot&quot;, sector.index = sector, track.index = 1)
