@@ -6,7 +6,18 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Visualize CPAN modules with Hilbert curve</title>
+      <link>/2023/01/09/visualize-cpan-modules-with-hilbert-curve/</link>
+      <pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/01/09/visualize-cpan-modules-with-hilbert-curve/</guid>
+      <description>There is a nice visualization of CPAN (Perl) modules with the Hilbert curve on http://mapofcpan.org/. In this post, I will demonstrate how to make the plot with the HilbertCurve package.
+We first read the list of CPAN modules. The information is in the 02packages.details.txt file which can be directly accessed with the following link:
+df = read.table(url(&amp;quot;https://www.cpan.org/modules/02packages.details.txt&amp;quot;), skip = 9) head(df) ## V1 V2 V3 ## 1 A1z::Html 0.04 C/CE/CEEJAY/A1z-Html-0.</description>
+    </item>
+    
     <item>
       <title>Draw links on the two different sides of a track</title>
       <link>/2022/12/09/draw-links-on-the-two-different-sides-of-a-track/</link>
