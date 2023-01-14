@@ -596,7 +596,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       
       <guid>/publication/</guid>
       <description>Updated on 2023-01-14.
- Total Google Scholar citations: 8532.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites1212.    2022 Zuguang Gu, Daniel Hübschmann, Pkgndep: a tool for analyzing dependency heaviness of R packages. Bioinformatics (Oxford, England) 2022. PubMed citescites11.  Zuguang Gu, Daniel Hübschmann, Simplify enrichment: A bioconductor package for clustering and visualizing functional enrichment results.</description>
+ Total Google Scholar citations: 8617.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites1212.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023. PubMed.    2022 Zuguang Gu, Daniel Hübschmann, Pkgndep: a tool for analyzing dependency heaviness of R packages.</description>
     </item>
     
     <item>
