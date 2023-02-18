@@ -6,7 +6,17 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Generate citation map</title>
+      <link>/2023/02/18/generate-citation-map/</link>
+      <pubDate>Sat, 18 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/02/18/generate-citation-map/</guid>
+      <description>In Web of Science, you can generate a nice citation map to show how your papers are cited world wide. In this blog post, I will demonstrate how to fetch the citation data and how to make such citation map in R.
+The citation data is not straightforward to find. Since the citation map is presented on a web page, the data is actually downloaded by the browser. Thus, we just need to find the corresponding file there.</description>
+    </item>
+    
     <item>
       <title>Visualize CPAN modules with Hilbert curve</title>
       <link>/2023/01/09/visualize-cpan-modules-with-hilbert-curve/</link>
