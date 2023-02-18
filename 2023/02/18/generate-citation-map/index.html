@@ -144,7 +144,7 @@ ggplot(data = world) + geom_sf(color = &quot;grey&quot;, fill = NA) +
     scale_size(range = c(0.2, 3)) +
     geom_text_repel(data = tb[order(-tb$publicationCount)[1:20], ], 
         mapping = aes(x = lon, y = lat, label = gsub(&quot;, .*$&quot;, &quot;&quot;, address)), 
-        box.padding = 0.5, max.overlaps = Inf, size = 3)</code></pre>
+        box.padding = 0.5, max.overlaps = Inf, min.segment.length = 0, size = 3)</code></pre>
 <p><img src="/post/2023-02-18-generate-citation-map_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
 
     </div>
