@@ -6,7 +6,18 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Use simplifyEnrichment for non-model organisms</title>
+      <link>/2023/03/30/use-simplifyenrichment-for-non-model-organisms/</link>
+      <pubDate>Thu, 30 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/03/30/use-simplifyenrichment-for-non-model-organisms/</guid>
+      <description>library(simplifyEnrichment) To perform GO clustering with the simplifyEnrichment package, the first step is to calculate GO similarities with the function GO_similarity(). The semantic similarity depends on the genes annotated to GO terms, thus, an OrgDb package is needed for the use of GO_similarity(). For example, for mouse:
+GO_similarity(go_id, db = &amp;quot;org.Mm.eg.db&amp;quot;) On Bioconductor, there are the following OrgDb packages that can be used with GO_similarity().
+  Package Organism    org.</description>
+    </item>
+    
     <item>
       <title>Generate citation map</title>
       <link>/2023/02/18/generate-citation-map/</link>
