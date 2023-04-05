@@ -6,7 +6,17 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Speed up over-representation enrichment analysis</title>
+      <link>/2023/04/05/speed-up-over-representation-enrichment-analysis/</link>
+      <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/04/05/speed-up-over-representation-enrichment-analysis/</guid>
+      <description>Over-representation analysis (ORA) evaluates whether a list of genes (e.g. differentially expressed genes, DE genes) are enriched in a gene set, normally with the hypergeometric distribution to calculate p-values. With the function phyper(), there are the following parameters:
+phyper(k, m, n, k, lower.tail = FALSE) where k is the number of DE genes in the gene set, m is the total number of genes in the gene set, n is the total number of genes not in the gene set, and k is the total number of DE genes.</description>
+    </item>
+    
     <item>
       <title>Align heatmaps</title>
       <link>/2023/04/03/align-heatmaps/</link>
