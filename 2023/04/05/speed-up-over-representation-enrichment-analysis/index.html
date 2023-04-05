@@ -79,15 +79,15 @@ A Bioinformagician
 (e.g. differentially expressed genes, DE genes) are enriched in a gene set,
 normally with the hypergeometric distribution to calculate p-values. With the
 function <code>phyper()</code>, there are the following parameters:</p>
-<pre class="r"><code>phyper(k, m, n, k, lower.tail = FALSE)</code></pre>
-<p>where <code>k</code> is the number of DE genes in the gene set, <code>m</code> is the total number
+<pre class="r"><code>phyper(x, m, n, k, lower.tail = FALSE)</code></pre>
+<p>where <code>x</code> is the number of DE genes in the gene set, <code>m</code> is the total number
 of genes in the gene set, <code>n</code> is the total number of genes not in the gene
 set, and <code>k</code> is the total number of DE genes.</p>
-<p><code>phyper(..., lower.tail = FALSE)</code> calculates <span class="math inline">\(\mathrm{Pr}(X &gt; k)\)</span>. Normally we
-also include the case of <span class="math inline">\(X = k\)</span> which gives the final p-value as
-<span class="math inline">\(\mathrm{Pr}(X \ge k)\)</span>. Then we need to slightly change the <code>phyper()</code> call by
-switching <code>k</code> to <code>k-1</code>:</p>
-<pre class="r"><code>phyper(k - 1, m, n, k, lower.tail = FALSE)</code></pre>
+<p><code>phyper(..., lower.tail = FALSE)</code> calculates <span class="math inline">\(\mathrm{Pr}(X &gt; x)\)</span>. Normally we
+also include the case of <span class="math inline">\(X = x\)</span> which gives the final p-value as
+<span class="math inline">\(\mathrm{Pr}(X \ge x)\)</span>. Then we need to slightly change the <code>phyper()</code> call by
+switching <code>x</code> to <code>x-1</code>:</p>
+<pre class="r"><code>phyper(x - 1, m, n, k, lower.tail = FALSE)</code></pre>
 <p>For a DE gene list and a gene set, it is easy to obtain values for these
 parameters. First I implement a function <code>ora_single()</code> that calculates
 p-value for a single gene set. As demonstrated as follows, <code>ora_single()</code> has
@@ -137,7 +137,7 @@ Here <code>pc_genes</code> does not completely cover genes in <code>gs</code>.</
 <p>Run <code>ora_v1()</code>:</p>
 <pre class="r"><code>system.time(p1 &lt;- ora_v1(genes, gs, pc_genes))</code></pre>
 <pre><code>##    user  system elapsed 
-##  12.149   3.551  15.710</code></pre>
+##  12.761   3.869  16.680</code></pre>
 <p>It takes more than 10 seconds.</p>
 <p>In version 1, we analyzed gene sets in <code>sapply()</code>, in a looping manner. In R,
 vectorization is always a good thing. Note <code>phyper()</code> also accepts vectors as
@@ -163,7 +163,7 @@ ora_v2 = function(genes, gene_sets, universe) {
 <p>With the same <code>genes</code>, <code>gs</code> and <code>pc_genes</code> variables, run <code>ora_v2()</code>.</p>
 <pre class="r"><code>system.time(p2 &lt;- ora_v2(genes, gs, pc_genes))</code></pre>
 <pre><code>##    user  system elapsed 
-##   5.258   1.057   6.317</code></pre>
+##   5.604   1.419   7.049</code></pre>
 <p>It speeds up more than 2 folds compared to <code>ora_v1()</code>, but still takes several
 seconds. Next we can perform code profiling on <code>ora_v2()</code>:</p>
 <pre class="r"><code>Rprof()
@@ -171,14 +171,13 @@ p2 = ora_v2(genes, gs, pc_genes)
 Rprof(NULL)
 summaryRprof()$by.self</code></pre>
 <pre><code>##                      self.time self.pct total.time total.pct
-## &quot;base::intersect&quot;         5.52    93.88       5.74     97.62
-## &quot;intersect&quot;               0.10     1.70       5.84     99.32
-## &quot;duplicated.default&quot;      0.10     1.70       0.10      1.70
-## &quot;duplicated&quot;              0.06     1.02       0.16      2.72
-## &quot;c&quot;                       0.04     0.68       0.04      0.68
-## &quot;lapply&quot;                  0.02     0.34       5.88    100.00
-## &quot;FUN&quot;                     0.02     0.34       5.86     99.66
-## &quot;as.vector&quot;               0.02     0.34       0.02      0.34</code></pre>
+## &quot;base::intersect&quot;         5.76    95.05       5.90     97.36
+## &quot;intersect&quot;               0.12     1.98       6.02     99.34
+## &quot;duplicated.default&quot;      0.08     1.32       0.08      1.32
+## &quot;duplicated&quot;              0.04     0.66       0.12      1.98
+## &quot;FUN&quot;                     0.02     0.33       6.04     99.67
+## &quot;c&quot;                       0.02     0.33       0.02      0.33
+## &quot;unique.default&quot;          0.02     0.33       0.02      0.33</code></pre>
 <p>The Profiling result shows <code>intersect()</code> call is the most time-consuming part in the code,
 which uses more than 95% of all runtime. Not difficult to see, especially in this line (the second
 line in <code>ora_v2()</code>):</p>
@@ -261,7 +260,7 @@ of <code>ora_v3()</code>, I manually add the gene set names to the returned obje
 <p>Now with the same <code>genes</code>, <code>gs</code> and <code>pc_genes</code> variables, I run <code>ora_v3()</code>.</p>
 <pre class="r"><code>system.time(p3 &lt;- ora_v3(genes, gs, pc_genes))</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.765   0.012   0.779</code></pre>
+##   1.197   0.038   1.243</code></pre>
 <p>It finishes in less than one second!</p>
 <p>The three p-values vectors (<code>p1</code>, <code>p2</code> and <code>p3</code>) are identical:</p>
 <pre class="r"><code>identical(p1, p2)</code></pre>
@@ -278,10 +277,10 @@ microbenchmark(
     times = 10
 )</code></pre>
 <pre><code>## Unit: milliseconds
-##            expr        min         lq       mean     median         uq        max neval
-##        loop(v1) 14931.4735 15869.0461 16951.4684 16722.9765 17616.1699 19944.3256    10
-##  vectorized(v2)  6254.3157  6438.0520  6946.7896  6920.0622  7206.3136  8227.8934    10
-##         cpp(v3)   662.4454   679.9044   729.3631   712.0467   780.8184   830.0039    10</code></pre>
+##            expr        min         lq      mean    median        uq       max neval
+##        loop(v1) 15617.2358 16410.6044 16618.184 16661.457 16874.560 17395.685    10
+##  vectorized(v2)  6164.6777  6553.8836  6763.836  6778.687  6939.869  7521.584    10
+##         cpp(v3)   896.1565   997.6576  1036.141  1016.948  1036.481  1252.406    10</code></pre>
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>## R version 4.2.0 (2022-04-22)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
