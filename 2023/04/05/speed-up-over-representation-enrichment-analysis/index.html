@@ -137,7 +137,7 @@ Here <code>pc_genes</code> does not completely cover genes in <code>gs</code>.</
 <p>Run <code>ora_v1()</code>:</p>
 <pre class="r"><code>system.time(p1 &lt;- ora_v1(genes, gs, pc_genes))</code></pre>
 <pre><code>##    user  system elapsed 
-##  12.761   3.869  16.680</code></pre>
+##  11.054   2.011  13.070</code></pre>
 <p>It takes more than 10 seconds.</p>
 <p>In version 1, we analyzed gene sets in <code>sapply()</code>, in a looping manner. In R,
 vectorization is always a good thing. Note <code>phyper()</code> also accepts vectors as
@@ -163,7 +163,7 @@ ora_v2 = function(genes, gene_sets, universe) {
 <p>With the same <code>genes</code>, <code>gs</code> and <code>pc_genes</code> variables, run <code>ora_v2()</code>.</p>
 <pre class="r"><code>system.time(p2 &lt;- ora_v2(genes, gs, pc_genes))</code></pre>
 <pre><code>##    user  system elapsed 
-##   5.604   1.419   7.049</code></pre>
+##   4.814   0.589   5.404</code></pre>
 <p>It speeds up more than 2 folds compared to <code>ora_v1()</code>, but still takes several
 seconds. Next we can perform code profiling on <code>ora_v2()</code>:</p>
 <pre class="r"><code>Rprof()
@@ -171,13 +171,12 @@ p2 = ora_v2(genes, gs, pc_genes)
 Rprof(NULL)
 summaryRprof()$by.self</code></pre>
 <pre><code>##                      self.time self.pct total.time total.pct
-## &quot;base::intersect&quot;         5.76    95.05       5.90     97.36
-## &quot;intersect&quot;               0.12     1.98       6.02     99.34
-## &quot;duplicated.default&quot;      0.08     1.32       0.08      1.32
-## &quot;duplicated&quot;              0.04     0.66       0.12      1.98
-## &quot;FUN&quot;                     0.02     0.33       6.04     99.67
-## &quot;c&quot;                       0.02     0.33       0.02      0.33
-## &quot;unique.default&quot;          0.02     0.33       0.02      0.33</code></pre>
+## &quot;base::intersect&quot;         4.84    93.08       5.06     97.31
+## &quot;duplicated.default&quot;      0.14     2.69       0.14      2.69
+## &quot;intersect&quot;               0.12     2.31       5.18     99.62
+## &quot;duplicated&quot;              0.04     0.77       0.18      3.46
+## &quot;c&quot;                       0.04     0.77       0.04      0.77
+## &quot;phyper&quot;                  0.02     0.38       0.02      0.38</code></pre>
 <p>The Profiling result shows <code>intersect()</code> call is the most time-consuming part in the code,
 which uses more than 95% of all runtime. Not difficult to see, especially in this line (the second
 line in <code>ora_v2()</code>):</p>
@@ -260,7 +259,7 @@ of <code>ora_v3()</code>, I manually add the gene set names to the returned obje
 <p>Now with the same <code>genes</code>, <code>gs</code> and <code>pc_genes</code> variables, I run <code>ora_v3()</code>.</p>
 <pre class="r"><code>system.time(p3 &lt;- ora_v3(genes, gs, pc_genes))</code></pre>
 <pre><code>##    user  system elapsed 
-##   1.197   0.038   1.243</code></pre>
+##   0.685   0.014   0.698</code></pre>
 <p>It finishes in less than one second!</p>
 <p>The three p-values vectors (<code>p1</code>, <code>p2</code> and <code>p3</code>) are identical:</p>
 <pre class="r"><code>identical(p1, p2)</code></pre>
@@ -277,10 +276,10 @@ microbenchmark(
     times = 10
 )</code></pre>
 <pre><code>## Unit: milliseconds
-##            expr        min         lq      mean    median        uq       max neval
-##        loop(v1) 15617.2358 16410.6044 16618.184 16661.457 16874.560 17395.685    10
-##  vectorized(v2)  6164.6777  6553.8836  6763.836  6778.687  6939.869  7521.584    10
-##         cpp(v3)   896.1565   997.6576  1036.141  1016.948  1036.481  1252.406    10</code></pre>
+##            expr        min        lq       mean     median         uq       max neval
+##        loop(v1) 12357.7165 12830.180 13181.9825 13127.5096 13233.0650 15122.301    10
+##  vectorized(v2)  5356.1756  5395.429  5540.5684  5500.2627  5605.6915  5900.981    10
+##         cpp(v3)   637.5977   681.095   952.9262   686.9258   688.6171  3402.574    10</code></pre>
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>## R version 4.2.0 (2022-04-22)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
