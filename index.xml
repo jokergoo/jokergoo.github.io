@@ -6,7 +6,19 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 05 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What is a hclust object</title>
+      <link>/2023/07/07/what-is-a-hclust-object/</link>
+      <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/07/07/what-is-a-hclust-object/</guid>
+      <description>Hierarchical clustering is a widely used approach for data analysis. In this post, I will demonstrate the internal structure of a hclust object.
+I first generate a random matrix and apply hclust().
+set.seed(123456) m = matrix(rnorm(25), 5) rownames(m) = letters[1:5] hc = hclust(dist(m)) Typing the hc object simply prints the basic information of the object.
+hc ## ## Call: ## hclust(d = dist(m)) ## ## Cluster method : complete ## Distance : euclidean ## Number of objects: 5 And plot() function draws the clustering results:</description>
+    </item>
+    
     <item>
       <title>Speed up over-representation enrichment analysis</title>
       <link>/2023/04/05/speed-up-over-representation-enrichment-analysis/</link>
@@ -635,8 +647,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2023-06-13.
- Total Google Scholar citations: 9893.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites2222.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023. PubMed.    2022 Zuguang Gu, Daniel Hübschmann, Pkgndep: a tool for analyzing dependency heaviness of R packages.</description>
+      <description>Updated on 2023-07-07.
+ Total Google Scholar citations: 10114.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites2626.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023. PubMed.    2022 Zuguang Gu, Daniel Hübschmann, Pkgndep: a tool for analyzing dependency heaviness of R packages.</description>
     </item>
     
     <item>
@@ -645,7 +657,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2023-06-13.  Total downloads: 4.9M. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.</description>
+      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2023-07-07.  Total downloads: 5M. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.</description>
     </item>
     
   </channel>

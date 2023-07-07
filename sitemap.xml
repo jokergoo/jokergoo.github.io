@@ -3,10 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/</loc>
-    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/</loc>
-    <lastmod>2023-04-05T00:00:00+00:00</lastmod>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/2023/07/07/what-is-a-hclust-object/</loc>
+    <lastmod>2023-07-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/2023/04/05/speed-up-over-representation-enrichment-analysis/</loc>
     <lastmod>2023-04-05T00:00:00+00:00</lastmod>
