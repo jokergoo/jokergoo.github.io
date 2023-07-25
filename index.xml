@@ -6,7 +6,17 @@
     <description>Recent content on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Top10 first-authors on Bioinformatics</title>
+      <link>/2023/07/25/top10-first-authors-on-bioinformatics/</link>
+      <pubDate>Tue, 25 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/07/25/top10-first-authors-on-bioinformatics/</guid>
+      <description>Following code obtains numbers of papers for first-authors on Bioinformatics.
+library(pubmedR) api_key = NULL # pubmed only allows downloading less than 10k records at a time, # so I split them into two parts query = &amp;#39;(&amp;quot;Bioinformatics (Oxford, England)&amp;quot;[Journal]) AND ((&amp;quot;1998&amp;quot;[Date - Publication] : &amp;quot;2014&amp;quot;[Date - Publication]))&amp;#39; res &amp;lt;- pmQueryTotalCount(query = query, api_key = api_key) D1 &amp;lt;- pmApiRequest(query = query, limit = res$total_count, api_key = NULL) query = &amp;#39;(&amp;quot;Bioinformatics (Oxford, England)&amp;quot;[Journal]) AND ((&amp;quot;2015&amp;quot;[Date - Publication] : &amp;quot;2023&amp;quot;[Date - Publication]))&amp;#39; res &amp;lt;- pmQueryTotalCount(query = query, api_key = api_key) D2 &amp;lt;- pmApiRequest(query = query, limit = res$total_count, api_key = NULL) m1 = pmApi2df(D1) m2 = pmApi2df(D2) m = rbind(m1, m2) df = df[df$DT == &amp;quot;JOURNAL ARTICLE&amp;quot;, ] The top 10 first-authors are:</description>
+    </item>
+    
     <item>
       <title>What is a hclust object</title>
       <link>/2023/07/07/what-is-a-hclust-object/</link>
@@ -647,8 +657,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2023-07-07.
- Total Google Scholar citations: 10114.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites2626.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023. PubMed.    2022 Zuguang Gu, Daniel Hübschmann, Pkgndep: a tool for analyzing dependency heaviness of R packages.</description>
+      <description>Updated on 2023-07-24.
+ Total Google Scholar citations: 10244.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites2626.  Zuguang Gu, Daniel Hübschmann, simplifyEnrichment: A Bioconductor Package for Clustering and Visualizing Functional Enrichment Results. Genomics, proteomics &amp;amp; bioinformatics 2023. PubMed citescites4545.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023.</description>
     </item>
     
     <item>
@@ -658,6 +668,15 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       
       <guid>/software/</guid>
       <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2023-07-07.  Total downloads: 5M. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.</description>
+    </item>
+    
+    <item>
+      <title>Talks</title>
+      <link>/talks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/talks/</guid>
+      <description>Make intearctive complex heatmaps, poster presentation on Bioconductor conference 2021. Poster. spiralize: an R package for visualizing data on spirals, contributed talk on Bioconductor Asia 2021. YouTube, Slides. On the heaviness of package dependencies, contributed talk on useR! 2022. Slides. cola: a general framework for consensus partitioning, package demo on Bioconductor conference 2022. YouTube. Slides. simplifyEnrichment: A Bioconductor Package for Clustering and Visualizing Functional Enrichment Results, package demo on EuroBioc 2022, Heidelberg Germany.</description>
     </item>
     
   </channel>

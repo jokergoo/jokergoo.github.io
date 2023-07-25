@@ -6,7 +6,17 @@
     <description>Recent content in Posts on A Bioinformagician</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Top10 first-authors on Bioinformatics</title>
+      <link>/2023/07/25/top10-first-authors-on-bioinformatics/</link>
+      <pubDate>Tue, 25 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/07/25/top10-first-authors-on-bioinformatics/</guid>
+      <description>Following code obtains numbers of papers for first-authors on Bioinformatics.
+library(pubmedR) api_key = NULL # pubmed only allows downloading less than 10k records at a time, # so I split them into two parts query = &amp;#39;(&amp;quot;Bioinformatics (Oxford, England)&amp;quot;[Journal]) AND ((&amp;quot;1998&amp;quot;[Date - Publication] : &amp;quot;2014&amp;quot;[Date - Publication]))&amp;#39; res &amp;lt;- pmQueryTotalCount(query = query, api_key = api_key) D1 &amp;lt;- pmApiRequest(query = query, limit = res$total_count, api_key = NULL) query = &amp;#39;(&amp;quot;Bioinformatics (Oxford, England)&amp;quot;[Journal]) AND ((&amp;quot;2015&amp;quot;[Date - Publication] : &amp;quot;2023&amp;quot;[Date - Publication]))&amp;#39; res &amp;lt;- pmQueryTotalCount(query = query, api_key = api_key) D2 &amp;lt;- pmApiRequest(query = query, limit = res$total_count, api_key = NULL) m1 = pmApi2df(D1) m2 = pmApi2df(D2) m = rbind(m1, m2) df = df[df$DT == &amp;quot;JOURNAL ARTICLE&amp;quot;, ] The top 10 first-authors are:</description>
+    </item>
+    
     <item>
       <title>What is a hclust object</title>
       <link>/2023/07/07/what-is-a-hclust-object/</link>
