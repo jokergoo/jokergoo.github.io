@@ -161,8 +161,14 @@ Extending TSS needs the chromosome lengths.
 ```{r, message = TRUE}
 library(TxDb.Hsapiens.UCSC.hg19.knownGene)
 gene = genes(TxDb.Hsapiens.UCSC.hg19.knownGene)
-# let's remove seqlength informatio
-seqlengths(gene) = NA
+gene = gene[seqnames(gene) %in% paste0("chr", c(1:22, "X", "Y"))]
+gene = sort(gene)
+# remove seqlength informatio
+gene = GRanges(seqnames = as.vector(seqnames(gene)), ranges = ranges(gene),
+    strand = strand(gene), gene_id = gene$gene_id)
+```
+
+```{r, message = TRUE}
 great(gr, gs, gene)
 ```
 
@@ -171,25 +177,15 @@ In this case, the end position of the last gene on each chromosome is treated as
 2. with `gene` where `seqlengths()` is already set:
 
 ```{r}
-gene = genes(TxDb.Hsapiens.UCSC.hg19.knownGene)
-seqlengths(gene)
+seqlengths(gene) = c(chr1 = 249250621, chr2 = 243199373, chr3 = 198022430, chr4 = 191154276,
+    chr5 = 180915260, chr6 = 171115067, chr7 = 159138663, chr8 = 146364022,
+    chr9 = 141213431, chr10 = 135534747, chr11 = 135006516, chr12 = 133851895,
+    chr13 = 115169878, chr14 = 107349540, chr15 = 102531392, chr16 = 90354753,
+    chr17 = 81195210, chr18 = 78077248, chr19 = 59128983, chr20 = 63025520,
+    chr21 = 48129895, chr22 = 51304566, chrX = 155270560, chrY = 59373566)
 great(gr, gs, gene)
 ```
 
-3. Contruct extended TSS by hand
-
-
-```r
-et = extendTSS(gene)
-et = extendTSS(gene, gl = c("chr1" = 10, "chr2" = 20, ...))
-et = extendTSS(gene, genome = "hg19")
-```
-
-Then `et` must be specified with the `extended_tss` argument.
-
-```r
-great(gr, gene_sets = gs, extended_tss = et)
-```
 
 ## Set background regions
 
@@ -203,7 +199,7 @@ gap = getGapFromUCSC("hg19", paste0("chr", c(1:22, "X", "Y")))
 great(gr, "MSigDB:H", "hg19", exclude = gap)
 ```
 
-Or only in a set of pre-defined background regions:
+Or only in a set of pre-defined background regions, e.g. regionts with similar CpG densities as input regions.
 
 ```r
 background_regions = ... # from upstream analysis, a GRanges object
