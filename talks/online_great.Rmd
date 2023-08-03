@@ -102,10 +102,13 @@ shinyReport(job)
 
 Bonus: If you use the GO category, you can use the **simplifyEnrichment** to summarize the results. 
 
+
 ```{r, message = FALSE, fig.width = 9, fig.height = 5.5}
 library(simplifyEnrichment)
 tb = tbl[["GO Biological Process"]]
-simplifyGO(tb$ID[tb$Binom_Adjp_BH < 0.01])
+sig_go = tb$ID[tb$Binom_Adjp_BH < 0.01]
+length(sig_go)
+simplifyGO(sig_go)
 ```
 
 
