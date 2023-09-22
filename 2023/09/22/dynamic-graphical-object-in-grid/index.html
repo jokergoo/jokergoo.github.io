@@ -64,7 +64,7 @@ A Bioinformagician
 
   <article class="article">
     
-    <span class="article-duration">3 min read</span>
+    <span class="article-duration">5 min read</span>
     
 
     <h1 class="article-title">Dynamic graphical object in grid</h1>
@@ -103,32 +103,71 @@ grid.lines(x1, y1, default.units = &quot;native&quot;)
 grid.lines(x2, y2, default.units = &quot;native&quot;)</code></pre>
 <p><img src="/post/2023-09-22-dynamic-graphical-object-in-grid_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>But when the height of the image is larger than width/2 but smaller than
-width, circles will exceed the image area.</p>
+1width, circles will exceed the image area.</p>
 <p><img src="/post/2023-09-22-dynamic-graphical-object-in-grid_files/figure-html/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>You may set <code>width = unit(1, "snpc"), height = unit(0.5, "snpc")</code>, but it has the same problem.</p>
-<p>Here the core problem is the viewport is dynamically changed. We want the size of the two circles is automatically
-adjusted to maximally fill the image.</p>
-<p>In this post, I will introduce how to construct a dynamic graphical object.</p>
-<p>First I create a new grob object <code>double_circle</code> which contains two circles
-(in form of two <code>linesGrob()</code>s). I also create a viewport to include the two
+<p>Here the core problem is the viewport is dynamically changed. We want the size
+of the two circles to be automatically adjusted to maximally fill the image.
+In this post, I will introduce how to construct a dynamic graphical object.</p>
+<p>First I create a new grob object in the class <code>double_circle</code> which contains two circles
+(in form of two <code>linesGrob()</code> calls). I also create a viewport to include the two
 line grobs.</p>
-<p>As you can see, creating a new grob is quite simply. You just integrate a list
-of simple grobs (e.g. points, lines) in the <code>grobTree()</code> function. The class
-is defined by a character string assigned to the <code>cl</code> argument.</p>
 <pre class="r"><code>vp = viewport(xscale = c(-2, 2), yscale = c(-1, 1))
 grob = grobTree(linesGrob(x1, y1, default.units = &quot;native&quot;), 
                 linesGrob(x2, y2, default.units = &quot;native&quot;),
                 vp = vp, cl = &quot;double_circle&quot;)</code></pre>
-<p>In <code>grob</code>, the viewport is the <code>vp</code> slot which we will dynamically updated later.</p>
-<pre class="r"><code>grob$vp</code></pre>
-<pre><code>## viewport[GRID.VP.4]</code></pre>
+<p>As you may see, creating a new grob is quite simple. You just integrate a list
+of simple grobs (e.g. points, lines) in the <code>grobTree()</code> function. The class
+is defined by a character string assigned to the <code>cl</code> argument.</p>
+<p>In <code>grob</code>, the viewport is in the <code>vp</code> slot which we will dynamically update later.</p>
+<pre class="r"><code>str(grob$vp)</code></pre>
+<pre><code>## List of 33
+##  $ x             : &#39;simpleUnit&#39; num 0.5npc
+##   ..- attr(*, &quot;unit&quot;)= int 0
+##  $ y             : &#39;simpleUnit&#39; num 0.5npc
+##   ..- attr(*, &quot;unit&quot;)= int 0
+##  $ width         : &#39;simpleUnit&#39; num 1npc
+##   ..- attr(*, &quot;unit&quot;)= int 0
+##  $ height        : &#39;simpleUnit&#39; num 1npc
+##   ..- attr(*, &quot;unit&quot;)= int 0
+##  $ justification : num [1:2] 0.5 0.5
+##  $ gp            : list()
+##   ..- attr(*, &quot;class&quot;)= chr &quot;gpar&quot;
+##  $ clip          : logi FALSE
+##  $ xscale        : num [1:2] -2 2
+##  $ yscale        : num [1:2] -1 1
+##  $ angle         : num 0
+##  $ layout        : NULL
+##  $ layout.pos.row: NULL
+##  $ layout.pos.col: NULL
+##  $ valid.just    : num [1:2] 0.5 0.5
+##  $ valid.pos.row : NULL
+##  $ valid.pos.col : NULL
+##  $ name          : chr &quot;GRID.VP.4&quot;
+##  $ parentgpar    : NULL
+##  $ gpar          : NULL
+##  $ trans         : NULL
+##  $ widths        : NULL
+##  $ heights       : NULL
+##  $ width.cm      : NULL
+##  $ height.cm     : NULL
+##  $ rotation      : NULL
+##  $ cliprect      : NULL
+##  $ parent        : NULL
+##  $ children      : NULL
+##  $ devwidth      : NULL
+##  $ devheight     : NULL
+##  $ clippath      : NULL
+##  $ mask          : logi TRUE
+##  $ resolvedmask  : NULL
+##  - attr(*, &quot;class&quot;)= chr &quot;viewport&quot;</code></pre>
 <p>In <strong>grid</strong>, when a grob is drawn, a list of functions will be executed in
 serial. Here I introduce the generic function <code>makeContext()</code> which will be
 executed before drawing the graphics. To use <code>makeContext()</code>, you need to
 define a S3 method for the grob class. The input is the grob and the output is
-an edited grob. <code>makeContext()</code> is mainly for adjusting the viewport of the graphics.</p>
+an edited grob. <code>makeContext()</code> is mainly for adjusting the viewport of the graphics in the grob.</p>
 <p>In the following example, for the <code>double_circle</code> grob, the width and the
-height of the current viewport is checked. If the width is larger than two
+height of the current viewport are checked. If the width is larger than two
 times of the height, the width is adjusted to two times of the height, or else
 the height is adjusted to half of the width of the viewport.</p>
 <pre class="r"><code>makeContext.double_circle = function(x) {
@@ -147,10 +186,30 @@ the height is adjusted to half of the width of the viewport.</p>
 <p>Now we can use <code>grid.draw()</code> to draw the grob without worring the size of the image device.</p>
 <pre class="r"><code>grid.newpage()
 grid.draw(grob)</code></pre>
-<div class="figure">
-<img src="https://github.com/jokergoo/BioCartaImage/assets/449218/673ca493-b372-4a18-a711-c017af4fbdf4" alt="" />
-<p class="caption">grob</p>
-</div>
+<p><img src="https://github.com/jokergoo/BioCartaImage/assets/449218/673ca493-b372-4a18-a711-c017af4fbdf4" /></p>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>## R version 4.2.0 (2022-04-22)
+## Platform: x86_64-apple-darwin17.0 (64-bit)
+## Running under: macOS Big Sur/Monterey 10.16
+## 
+## Matrix products: default
+## BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] C/UTF-8/C/C/C/C
+## 
+## attached base packages:
+## [1] grid      stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] knitr_1.43
+## 
+## loaded via a namespace (and not attached):
+##  [1] bookdown_0.34   digest_0.6.33   R6_2.5.1        jsonlite_1.8.7  evaluate_0.21   highr_0.10     
+##  [7] blogdown_1.18   cachem_1.0.8    rlang_1.1.1     cli_3.6.1       jquerylib_0.1.4 bslib_0.5.0    
+## [13] rmarkdown_2.23  tools_4.2.0     xfun_0.39       yaml_2.3.7      fastmap_1.1.1   compiler_4.2.0 
+## [19] htmltools_0.5.5 sass_0.4.7</code></pre>
 
     </div>
   </article>
