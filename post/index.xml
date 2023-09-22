@@ -6,7 +6,18 @@
     <description>Recent content in Posts on Zuguang Gu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dynamic graphical object in grid</title>
+      <link>/2023/09/22/dynamic-graphical-object-in-grid/</link>
+      <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/09/22/dynamic-graphical-object-in-grid/</guid>
+      <description>Consider the following task: drawing two circles at (1, 0) and (-1, 0) with both radius of 1.
+theta = seq(0, 2*pi, length = 50) x1 = cos(theta) + 1 y1 = sin(theta) x2 = cos(theta) - 1 y2 = sin(theta) We might think of the following way:
+library(grid) grid.newpage() pushViewport(viewport(xscale = c(-2, 2), yscale = c(-1, 1))) grid.lines(x1, y1, default.units = &amp;quot;native&amp;quot;) grid.lines(x2, y2, default.units = &amp;quot;native&amp;quot;) Unfortunately it only works when the width of the image is twice of the height.</description>
+    </item>
+    
     <item>
       <title>Top10 first-authors on Bioinformatics</title>
       <link>/2023/07/25/top10-first-authors-on-bioinformatics/</link>
