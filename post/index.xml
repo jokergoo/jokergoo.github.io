@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Zuguang Gu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 25 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dynamic graphical object in grid, part 2</title>
+      <link>/2023/09/25/dynamic-graphical-object-in-grid-part-2/</link>
+      <pubDate>Mon, 25 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/09/25/dynamic-graphical-object-in-grid-part-2/</guid>
+      <description>I have introduced how to define a dynamic grob by setting its makeContext() method. In this post, I will demonstrate two other ways, which are either identical to the previous method, or very similar to it.
+Again, the plotting task: drawing two circles at (1, 0) and (-1, 0) with both radius of 1, and we want the two circles fill the plotting region as much as possible no matter how the graphical device is resized.</description>
+    </item>
+    
     <item>
       <title>Dynamic graphical object in grid</title>
       <link>/2023/09/22/dynamic-graphical-object-in-grid/</link>
