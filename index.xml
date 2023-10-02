@@ -6,7 +6,17 @@
     <description>Recent content on Zuguang Gu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 25 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Simplified simplifyEnrichment plot</title>
+      <link>/2023/10/02/simplified-simplifyenrichment-plot/</link>
+      <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/10/02/simplified-simplifyenrichment-plot/</guid>
+      <description>The lt object contains a list of GO enrichment tables.
+names(lt) ## [1] &amp;quot;BP_km1&amp;quot; &amp;quot;BP_km2&amp;quot; &amp;quot;BP_km3&amp;quot; &amp;quot;BP_km4&amp;quot; head(lt[[1]][, 1:7]) ## ID Description GeneRatio BgRatio pvalue ## GO:0006974 GO:0006974 cellular response to DNA damage stimulus 77/471 871/18614 3.252635e-22 ## GO:0006281 GO:0006281 DNA repair 61/471 587/18614 3.683205e-21 ## GO:0000278 GO:0000278 mitotic cell cycle 78/471 933/18614 5.191864e-21 ## GO:1903047 GO:1903047 mitotic cell cycle process 70/471 777/18614 1.148628e-20 ## GO:0051276 GO:0051276 chromosome organization 58/471 626/18614 8.</description>
+    </item>
+    
     <item>
       <title>Dynamic graphical object in grid, part 2</title>
       <link>/2023/09/25/dynamic-graphical-object-in-grid-part-2/</link>
@@ -678,8 +688,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2023-09-25.
- Total Google Scholar citations: 10805.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites3333.  Zuguang Gu, Daniel Hübschmann, simplifyEnrichment: A Bioconductor Package for Clustering and Visualizing Functional Enrichment Results. Genomics, proteomics &amp;amp; bioinformatics 2023. PubMed citescites5252.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023.</description>
+      <description>Updated on 2023-10-02.
+ Total Google Scholar citations: 10871.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites3333.  Zuguang Gu, Daniel Hübschmann, simplifyEnrichment: A Bioconductor Package for Clustering and Visualizing Functional Enrichment Results. Genomics, proteomics &amp;amp; bioinformatics 2023. PubMed citescites5353.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023.</description>
     </item>
     
     <item>
