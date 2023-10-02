@@ -70,9 +70,10 @@ names(v) = df$ID
 summarizeGO(value = v[l], axis_label = "average -log10(p.adjust)")
 ```
 
+
 Beside `-log10(p.adjust)`, we also suggest to use log2 fold enrichment as the enrichment measure. It is calculated as
 
-$$ \frac{k/m_1}{m_2/n} $$
+$$ \log_2 \left( \frac{k/m_1}{m_2/n} \right) $$
 
 where $k$ is the number of DE genes (if the genes of interest are DE genes) in
 a gene set, $m_1$ is the size of DE genes, $m_2$ is the size of the gene set,

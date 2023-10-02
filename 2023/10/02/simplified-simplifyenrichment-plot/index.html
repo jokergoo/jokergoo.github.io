@@ -118,7 +118,7 @@ should be explicitely specified when calling <code>summarizeGO()</code>.</p>
 names(v) = df$ID
 summarizeGO(value = v[l], axis_label = &quot;average -log10(p.adjust)&quot;)</code></pre>
 <p>Beside <code>-log10(p.adjust)</code>, we also suggest to use log2 fold enrichment as the enrichment measure. It is calculated as</p>
-<p><span class="math display">\[ \frac{k/m_1}{m_2/n} \]</span></p>
+<p><span class="math display">\[ \log_2 \left( \frac{k/m_1}{m_2/n} \right) \]</span></p>
 <p>where <span class="math inline">\(k\)</span> is the number of DE genes (if the genes of interest are DE genes) in
 a gene set, <span class="math inline">\(m_1\)</span> is the size of DE genes, <span class="math inline">\(m_2\)</span> is the size of the gene set,
 <span class="math inline">\(n\)</span> is the total number of genes in the universal set. Of course, the definition
