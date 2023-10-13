@@ -688,8 +688,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2023-10-02.
- Total Google Scholar citations: 10871.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites3333.  Zuguang Gu, Daniel Hübschmann, simplifyEnrichment: A Bioconductor Package for Clustering and Visualizing Functional Enrichment Results. Genomics, proteomics &amp;amp; bioinformatics 2023. PubMed citescites5353.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023.</description>
+      <description>Updated on 2023-10-13.
+ Total Google Scholar citations: 10995.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites3636.  Zuguang Gu, Daniel Hübschmann, simplifyEnrichment: A Bioconductor Package for Clustering and Visualizing Functional Enrichment Results. Genomics, proteomics &amp;amp; bioinformatics 2023. PubMed citescites5757.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023.</description>
     </item>
     
     <item>
@@ -698,7 +698,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2023-09-25.  Total downloads: 5.3M. Visualization  spiralize: Visualize data on spirals.    circlize: circular visualization in R. [#circlize on stackoverflow]    ComplexHeatmap: Flexibly arranging multiple heatmaps and self define annotation graphics.    InteractiveComplexHeatmap: Makes interactive ComplexHeatmap.    EnrichedHeatmap: Visualizes the enrichment of genomic signals on specific target region.    HilbertCurve: Making 2D Hilbert Curve.</description>
+      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2023-10-13.  Total downloads: 5.4M.  table tr td { white-space: nowrap; } table tr td:first-child { padding-left: 0px; } table tr th:first-child { padding-left: 0px; } table tr.header { display: none; } table, td, th { border: 1px solid white; vertical-align: top; }  Visualization     Package Downloads GitHub Stars Publication    spiralize: Visualize data on spirals.</description>
     </item>
     
     <item>
