@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Zuguang Gu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Package dependencies in your session</title>
+      <link>/2023/11/16/package-dependencies-in-your-session/</link>
+      <pubDate>Thu, 16 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/11/16/package-dependencies-in-your-session/</guid>
+      <description>It has almost been a standard to put sessionInfo() to the end of the R markdown document to keep track of the environment where the analysis is done. sessionInfo() prints a list of packages that are loaded to the R session directly or indirectly. But how about the dependency relations among those packages? In this blog post, let’s check it out.
+Let’s open a new R session and only load the ggplot2 package:</description>
+    </item>
+    
     <item>
       <title>Simplified simplifyEnrichment plot</title>
       <link>/2023/10/02/simplified-simplifyenrichment-plot/</link>
