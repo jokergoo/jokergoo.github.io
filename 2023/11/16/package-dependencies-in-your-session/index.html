@@ -265,7 +265,9 @@ or its upstream packages.</p>
 <p>We wrap the code as a function which we will use repeatedly. Internally, we call <code>library(pkg)</code> in a
 fresh R session by using the <strong>callr</strong> package.</p>
 <pre class="r"><code>loaded_pkgs = function(pkg) {
-    library(pkg, character.only=TRUE)
+    for(i in seq_along(pkg)) {
+        library(pkg[i], character.only=TRUE)
+    }
     session_info = sessionInfo()
 
     base_pkgs = session_info$basePkgs
