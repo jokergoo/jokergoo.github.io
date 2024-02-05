@@ -6,7 +6,17 @@
     <description>Recent content on Zuguang Gu</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Get gene-region associations for a group of GO terms</title>
+      <link>/2024/02/05/get-gene-region-associations-for-a-group-of-go-terms/</link>
+      <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/2024/02/05/get-gene-region-associations-for-a-group-of-go-terms/</guid>
+      <description>Let’s first do a combination analysis with rGREAT and simplifyEnrichment. Let’s say, you have a list of genomic regions of interest (in the following example, we use a list of transcription factor binding sites). You do a GO enrichment analysis with rGREAT and visualize the enrichment results with simplifyEnrichment.
+library(rGREAT) df = read.table(url(&amp;quot;https://raw.githubusercontent.com/jokergoo/rGREAT_suppl/master/data/tb_encTfChipPkENCFF708LCH_A549_JUN_hg19.bed&amp;quot;)) # convert to a GRanges object gr = GRanges(seqnames = df[, 1], ranges = IRanges(df[, 2], df[, 3])) res = great(gr, &amp;quot;BP&amp;quot;, &amp;quot;hg19&amp;quot;) tb = getEnrichmentTable(res) head(tb) ## id description genome_fraction observed_region_hits ## 1 GO:0097190 apoptotic signaling pathway 0.</description>
+    </item>
+    
     <item>
       <title>Package dependencies in your session</title>
       <link>/2023/11/16/package-dependencies-in-your-session/</link>
@@ -698,8 +708,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2024-02-01.
- Total Google Scholar citations: 12200.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites5252.  Zuguang Gu, Daniel Hübschmann, simplifyEnrichment: A Bioconductor Package for Clustering and Visualizing Functional Enrichment Results. Genomics, proteomics &amp;amp; bioinformatics 2023. PubMed citescites8888.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023.</description>
+      <description>Updated on 2024-02-05.
+ Total Google Scholar citations: 12217.   By year   By citation   2023 Zuguang Gu, Daniel Hübschmann, rGREAT: an R/bioconductor package for functional enrichment on genomic regions. Bioinformatics (Oxford, England) 2023. PubMed citescites5252.  Zuguang Gu, Daniel Hübschmann, simplifyEnrichment: A Bioconductor Package for Clustering and Visualizing Functional Enrichment Results. Genomics, proteomics &amp;amp; bioinformatics 2023. PubMed citescites8989.  Zuguang Gu, On the dependency heaviness of CRAN/Bioconductor ecosystem Journal of Systems and Software 2023.</description>
     </item>
     
     <item>

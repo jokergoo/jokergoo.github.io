@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/2023/11/16/package-dependencies-in-your-session/</loc>
-    <lastmod>2023-11-16T00:00:00+00:00</lastmod>
+    <loc>/2024/02/05/get-gene-region-associations-for-a-group-of-go-terms/</loc>
+    <lastmod>2024-02-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/post/</loc>
-    <lastmod>2023-11-16T00:00:00+00:00</lastmod>
+    <lastmod>2024-02-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/</loc>
+    <lastmod>2024-02-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>/2023/11/16/package-dependencies-in-your-session/</loc>
     <lastmod>2023-11-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>/2023/10/02/simplified-simplifyenrichment-plot/</loc>
