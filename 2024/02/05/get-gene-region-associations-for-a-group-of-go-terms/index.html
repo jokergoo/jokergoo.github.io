@@ -128,8 +128,8 @@ cl = simplifyGO(sig_go_ids)</code></pre>
 ##  26  27  28  29  30 
 ##   1   3   1   2   1</code></pre>
 <p>The plot looks not bad. Next you may want to get the gene-region associations for significant GO terms.
-For example, the association for the first GO terms in the first cluster:</p>
-<pre class="r"><code>getRegionGeneAssociations(res, sig_go_ids[cl$cluster == 1][1])</code></pre>
+For example, the association for the first GO term:</p>
+<pre class="r"><code>getRegionGeneAssociations(res, cl$id[1])</code></pre>
 <pre><code>## GRanges object with 175 ranges and 2 metadata columns:
 ##         seqnames            ranges strand | annotated_genes    dist_to_TSS
 ##            &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;CharacterList&gt;  &lt;IntegerList&gt;
@@ -150,7 +150,7 @@ For example, the association for the first GO terms in the first cluster:</p>
 for every one of them.</p>
 <p>As <strong>simplifyEnrichment</strong> already clusters significant GO terms into a smaller number of groups, you may switch your
 need of obtaining the associations from single GO terms to a group of GO terms where they show similar biological concept. In the new version of <strong>rGREAT</strong> (only available on GitHub currently), the second argument can be set as a vector of GO IDs. So, for example, to get the gene-region association for GO terms in the first cluster:</p>
-<pre class="r"><code>getRegionGeneAssociations(res, sig_go_ids[cl$cluster == 1])</code></pre>
+<pre class="r"><code>getRegionGeneAssociations(res, cl$id[cl$cluster == 1])</code></pre>
 <pre><code>## GRanges object with 1245 ranges and 2 metadata columns:
 ##          seqnames            ranges strand | annotated_genes    dist_to_TSS
 ##             &lt;Rle&gt;         &lt;IRanges&gt;  &lt;Rle&gt; | &lt;CharacterList&gt;  &lt;IntegerList&gt;
