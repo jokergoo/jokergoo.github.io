@@ -715,15 +715,6 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
     </item>
     
     <item>
-      <title>CV</title>
-      <link>/cv/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/cv/</guid>
-      <description>My CV</description>
-    </item>
-    
-    <item>
       <title>Publication</title>
       <link>/publication/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
