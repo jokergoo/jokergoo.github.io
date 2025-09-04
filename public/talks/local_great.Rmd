@@ -1,0 +1,434 @@
+---
+title: "Local GREAT analysis"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: true
+    toc_depth: 2
+---
+
+
+```{r, echo = FALSE, message = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    error = FALSE,
+    tidy  = FALSE,
+    message = FALSE,
+    warning = FALSE,
+    fig.align = "center")
+```
+
+```{r, message = FALSE}
+library(rGREAT)
+```
+
+Repo: https://github.com/jokergoo/jokergoo.github.io/tree/master/talks
+
+We first read the regions (peaks of the transcription factor JUN) as a data frame.
+
+```{r}
+bed = read.table("Encode3_JUN_hg19.bed")
+```
+
+We use standard Bioconductor data structure in local GREAT analysis, so we change `bed` to
+a `GRanges` object. 
+
+```{r}
+gr = GRanges(seqnames = bed[, 1], ranges = IRanges(bed[, 2], bed[, 3]))
+gr
+```
+
+
+The function `great()` is the core function to perform local GREAT analysis. You can either use built-in annotations or use self-provided annotations.
+
+## Using integrated gene sets
+
+### The GO gene sets
+
+`great()` supports GO gene sets for many organisms. The usage is:
+
+```{r}
+res_bp = great(gr, "GO:BP", "hg19")
+res_bp
+```
+
+
+The GO gene sets are from the organism **org.\*.db** packages. TSS
+definitions are mainly from **TxDb** packages. All supported organisms are:
+
+```{r}
+rGREAT:::BIOC_ANNO_PKGS
+```
+
+### MSigDB gene sets
+
+The second category of gene sets are from
+[MSigDB](https://www.gsea-msigdb.org/gsea/msigdb/). Note this is only for
+human. 
+
+```{r}
+res_h = great(gr, "msigdb:h", "hg19")
+res_h
+```
+
+All supported MSigDB gene sets are:
+
+- `"msigdb:H"` Hallmark gene sets.
+- `"msigdb:C1"` Positional gene sets.
+- `"msigdb:C2"` Curated gene sets.
+- `"msigdb:C2:CGP"` C2 subcategory: chemical and genetic perturbations gene sets. 
+- `"msigdb:C2:CP"` C2 subcategory: canonical pathways gene sets. 
+- `"msigdb:C2:CP:KEGG"` C2 subcategory: KEGG subset of CP.
+- `"msigdb:C2:CP:PID"` C2 subcategory: PID subset of CP.
+- `"msigdb:C2:CP:REACTOME"` C2 subcategory: REACTOME subset of CP.
+- `"msigdb:C2:CP:WIKIPATHWAYS"` C2 subcategory: WIKIPATHWAYS subset of CP.
+- `"msigdb:C3"` Regulatory target gene sets.
+- `"msigdb:C3:MIR:MIRDB"` miRDB of microRNA targets gene sets.
+- `"msigdb:C3:MIR:MIR_LEGACY"` MIR_Legacy of MIRDB.
+- `"msigdb:C3:TFT:GTRD"` GTRD transcription factor targets gene sets.
+- `"msigdb:C3:TFT:TFT_LEGACY"` TFT_Legacy.
+- `"msigdb:C4"` Computational gene sets.
+- `"msigdb:C4:CGN"` C4 subcategory: cancer gene neighborhoods gene sets.
+- `"msigdb:C4:CM"` C4 subcategory: cancer modules gene sets.
+- `"msigdb:C5"` Ontology gene sets.
+- `"msigdb:C5:GO:BP"` C5 subcategory: BP subset.
+- `"msigdb:C5:GO:CC"` C5 subcategory: CC subset.
+- `"msigdb:C5:GO:MF"` C5 subcategory: MF subset.
+- `"msigdb:C5:HPO"` C5 subcategory: human phenotype ontology gene sets.
+- `"msigdb:C6"` Oncogenic signature gene sets.
+- `"msigdb:C7"` Immunologic signature gene sets.
+- `"msigdb:C7:IMMUNESIGDB"` ImmuneSigDB subset of C7.
+- `"msigdb:C7:VAX"` C7 subcategory: vaccine response gene sets.
+- `"msigdb:C8"` Cell type signature gene sets.
+
+The prefix `msigdb:` can be omitted when specified in `great()` and the name of a MSigDB can be used as case insensitive.
+
+
+```r
+great(gr, "h", "hg19")
+great(gr, "c2:cp", "hg19")
+```
+
+## Manually set gene sets
+
+More gene sets can be set as a list of gene vectors. Note genes in the gene
+sets **must be mostly in Entrez ID type**. In the following example, we use a
+gene set collection from
+[DSigDB](http://dsigdb.tanlab.org/DSigDBv1.0/collection.html). This collection
+(FDA approved kinase inhibitors) only contains 28 gene sets.
+
+
+Here `read_gmt()` is a simple function that reads a gmt file as a list of
+vectors, also performs gene ID conversion.
+
+
+```{r}
+gs = read_gmt(url("http://dsigdb.tanlab.org/Downloads/D2_LINCS.gmt"), 
+    from = "SYMBOL", to = "ENTREZ", orgdb = "org.Hs.eg.db")
+gs[1:2]
+great(gr, gs, "hg19")
+```
+
+Or using KEGG gene sets:
+
+```{r}
+kegg = KEGGREST::keggLink("hsa", "pathway")
+kegg_gs = split(kegg, names(kegg))
+kegg_gs = lapply(kegg_gs, function(x) unname(gsub("hsa:", "", x)))
+names(kegg_gs) = gsub("path:", "", names(kegg_gs))
+kegg_gs[1:2]
+```
+
+```{r}
+great(gr, kegg_gs, "hg19")
+```
+
+### Manually set gene sets and TSS
+
+Mainly for non-model/less well studied organisms.
+
+Two inputs:
+
+- Gene sets: A list of gene vectors.
+- TSS/gene: A `GRanges` object with a `gene_id` column. Gene IDs in `gene_id` column must match to genes in the
+gene sets.
+
+Extending TSS needs the chromosome lengths.
+
+1. with `gene` as input without additional chromosome length information
+
+```{r, message = TRUE}
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+gene = genes(TxDb.Hsapiens.UCSC.hg19.knownGene)
+gene = gene[seqnames(gene) %in% paste0("chr", c(1:22, "X", "Y"))]
+gene = sort(gene)
+# remove seqlength informatio
+gene = GRanges(seqnames = as.vector(seqnames(gene)), ranges = ranges(gene),
+    strand = strand(gene), gene_id = gene$gene_id)
+```
+
+```{r, message = TRUE}
+great(gr, gs, gene)
+```
+
+In this case, the end position of the last gene on each chromosome is treated as the end of the chromosome.
+
+2. with `gene` where `seqlengths()` is already set:
+
+```{r}
+seqlengths(gene) = c(chr1 = 249250621, chr2 = 243199373, chr3 = 198022430, chr4 = 191154276,
+    chr5 = 180915260, chr6 = 171115067, chr7 = 159138663, chr8 = 146364022,
+    chr9 = 141213431, chr10 = 135534747, chr11 = 135006516, chr12 = 133851895,
+    chr13 = 115169878, chr14 = 107349540, chr15 = 102531392, chr16 = 90354753,
+    chr17 = 81195210, chr18 = 78077248, chr19 = 59128983, chr20 = 63025520,
+    chr21 = 48129895, chr22 = 51304566, chrX = 155270560, chrY = 59373566)
+great(gr, gs, gene)
+```
+
+
+## Set background regions
+
+There are two ways to set "background/mask" regions: `exclude` and `background`.
+
+It is very common that gap regions in the genome are removed from the analysis.
+In the following example, `getGapFromUCSC()` can be used to retrieve gap regions from UCSC table browser.
+
+```{r, eval = FALSE}
+gap = getGapFromUCSC("hg19", paste0("chr", c(1:22, "X", "Y")))
+great(gr, "MSigDB:H", "hg19", exclude = gap)
+```
+
+Or only in a set of pre-defined background regions, e.g. regionts with similar CpG densities as input regions.
+
+```r
+background_regions = ... # from upstream analysis, a GRanges object
+great(gr, "MSigDB:H", "hg19", background = background_regions)
+```
+
+**Note as the same as online GREAT, rGREAT by default excludes gap regions from the analysis.**
+
+Alternatively, `background` and `exclude` can also be set to a vector of chromosome names, then
+the whole selected chromosomes will be included/excluded from the analysis.
+
+```r
+great(gr, "GO:BP", "hg19", background = paste0("chr", 1:22))
+great(gr, "GO:BP", "hg19", exclude = c("chrX", "chrY"))
+```
+
+## Get enrichment table
+
+
+Simply use `getEnrichmentTable()` function. 
+
+```{r}
+tb = getEnrichmentTable(res_bp)
+head(tb)
+```
+
+There are also columns for hypergeometric test on the numbers of genes, the same
+as in the original GREAT method.
+
+<p style='color:red'>There is a new column "mean_tss_dist" in the result table which is the mean absolute distance
+of input regions to TSS of genes in a gene set. Please note with larger
+distance to TSS, the more we need to be careful with the reliability of the
+associations between input regions to genes.</p>
+
+## Make volcano plot
+
+In differential gene expression analysis, volcano plot is used to visualize relations between log2 fold change and (adjusted) p-values.
+Similarly, we can also use volcano plot to visualize relations between fold enrichment and (adjusted) p-values for the enrichment analysis. 
+The plot is made by the function `plotVolcano()`:
+
+```{r, fig.width = 6, fig.height = 6}
+plotVolcano(res_bp)
+```
+
+As the enrichment analysis basically only looks for over-representations, it is actually half volcano.
+
+
+## Get region-gene associations
+
+`plotRegionGeneAssociations()` generates three plots similar as those by
+online GREAT. `getRegionGeneAssociations()` returns a `GRanges` object containing
+associations between regions and genes.
+
+```{r, fig.width = 10, fig.height = 10/3, fig.align = 'center'}
+plotRegionGeneAssociations(res_bp)
+getRegionGeneAssociations(res_bp)
+```
+
+Being different from the online GREAT, `getRegionGeneAssociations()` on the local GREAT object calculates
+the distance to TSS based on the borders of the input regions. The argument `by_middle_points` can 
+be set to `TRUE` to let the distance be based on the middle points of input regions.
+
+Please note the two meta columns are in formats of `CharacterList`
+and `IntegerList` because a region may associate to multiple genes.
+
+
+Of course you can set a specific geneset term by argument `term_id`.
+
+```{r, fig.width = 10, fig.height = 10/3, fig.align = 'center'}
+plotRegionGeneAssociations(res_bp, term_id = "GO:0006915")
+getRegionGeneAssociations(res_bp, term_id = "GO:0006915")
+```
+
+With local GREAT, it is possible to obtain associations between genes and all regions.
+
+```{r}
+getRegionGeneAssociations(res_bp)
+```
+
+## The Shiny application
+
+`shinyReport()` creates a Shiny application to view the complete results:
+
+```{r, eval = FALSE}
+shinyReport(res_bp)
+```
+
+## Work with other organisms
+
+### Use BioMart genes and gene sets
+
+**rGREAT** also supports GO gene sets for a huge number of organisms retrieved from [Ensembl BioMart](https://www.ensembl.org/info/data/biomart/index.html).
+A specific organism can be set with the `biomart_dataset` argument:
+
+
+```{r, echo = FALSE}
+if(!requireNamespace("BioMartGOGeneSets", quietly = TRUE)) {
+    suppressMessages(BiocManager::install("jokergoo/BioMartGOGeneSets", update = FALSE))
+}
+```
+
+```{r}
+# Giant panda
+gr_panda = randomRegionsFromBioMartGenome("amelanoleuca_gene_ensembl")
+gr_panda
+great(gr_panda, "GO:BP", biomart_dataset = "amelanoleuca_gene_ensembl")
+```
+
+Note both TSS and gene sets are from BioMart. The value for gene sets (the
+second argument) can only be one of `"GO:BP"`, `"GO:CC"` and `"GO:MF"`.
+
+**rGREAT** now supports more than 600 organisms. The complete list can be
+found with `BioMartGOGeneSets::supportedOrganisms()`. Be careful with the genome
+version and format of chromsome names.
+
+For non-model organisms, the default chromosomes may include many small
+contigs. You can set the `background` argument to a vector of chromosomes that
+you want to include.
+
+
+
+### Use MSigDB gene sets
+
+MSigDB contains gene sets only for human, but it can be extended to other organisms
+by mapping to the homologues genes. The package [**msigdbr**](https://cran.r-project.org/web/packages/msigdbr/index.html) has
+already mapped genes to many other organisms. A full list of supported organisms in **msigdbr** can be obtained by：
+
+```{r}
+library(msigdbr)
+msigdbr_species()
+```
+
+To obtain gene sets for non-human organisms, e.g.:
+
+```{r}
+h_gene_sets = msigdbr(species = "chimpanzee", category = "H")
+head(h_gene_sets)
+```
+
+If the organism you selected has a corresponding TxDb package available which provides TSS information, 
+you need to make sure the gene sets use Entrez gene ID as the identifier (Most TxDb packages use Entrez ID
+as primary ID, you can check the variable `rGREAT:::BIOC_ANNO_PKGS`).
+
+```{r}
+# convert to a list of gene sets
+h_gene_sets = split(h_gene_sets$entrez_gene, h_gene_sets$gs_name)
+h_gene_sets = lapply(h_gene_sets, as.character)  # just to make sure gene IDs are all in character.
+h_gene_sets[1:2]
+```
+
+Now we can perform the local GREAT analysis.
+
+```{r}
+gr = randomRegions(genome = "panTro6")
+great(gr, h_gene_sets, "panTro6")
+```
+
+### Use NCBI genomes
+
+NCBI provides genome data for a huge number of organisms. It is quite easy to
+obtain the GO gene sets for a specific organism with the **AnnotationHub**
+package where NCBI is also the data source. 
+
+Taking dolphin (Tursiops truncatus) as an example.
+
+```{r}
+library(AnnotationHub)
+ah = AnnotationHub()
+```
+
+```r
+display(ah)
+```
+
+```{r}
+# id for the AnnotationHub dataset
+org_db = ah[["AH108106"]]
+org_db
+```
+
+```{r}
+all_bp_ids = mapIds(org_db, keytype = "ONTOLOGY", keys = "BP", 
+    column = "GO", multiVals = "list")[[1]]
+head(all_bp_ids)
+```
+
+We select `"GOALL"` so that gene set for each GO term includes genes from all its offspring terms.
+
+```{r}
+bp_genesets = mapIds(org_db, keytype = "GOALL", keys = all_bp_ids, 
+    column = "ENTREZID", multiVals = "list")
+bp_genesets[1:2]
+```
+
+Unfortunately, there is no processed data of genome and genes for many other
+organisms, but these data is available from NCBI. The function
+`getGenomeDataFromNCBI()` accepts a RefSeq accession number for a given genome
+assembly and returns information of the genome as well as the genes.
+
+The RefSeq accession number can be obtained from
+https://www.ncbi.nlm.nih.gov/data-hub/genome/. The accession number for
+dolphin is "GCF_011762595.1" and its genome page is at
+https://www.ncbi.nlm.nih.gov/data-hub/genome/GCF_011762595.1/ (always be
+careful with the genome/assembly version). We can get its genes with the
+command:
+
+```{r, eval = .Platform$OS.type == "unix"}
+genes = getGenomeDataFromNCBI("GCF_011762595.1", return_granges = TRUE)
+genes
+```
+
+The good thing is dolphin genome is already assembled on the chromosome level, so
+the chromosome length information is already included in `genes`:
+
+```{r, eval = .Platform$OS.type == "unix"}
+seqlengths(genes)
+```
+
+And we can directly use `genes` in `great()`.
+
+```{r}
+gr = randomRegions(seqlengths = seqlengths(genes))
+gr
+great(gr, bp_genesets, genes)
+```
+
+## Session info
+
+```{r}
+sessionInfo()
+```
+

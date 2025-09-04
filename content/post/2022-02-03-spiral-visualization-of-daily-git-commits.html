@@ -1,0 +1,86 @@
+---
+title: "Spiral visualization of daily git commits"
+date: 2022-02-03
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>In this blog, I will apply spiral visualization on git daily commits. The following three plots
+are for R package <strong>circlize</strong> (which is developed by me), the R package <strong>ggplot2</strong> and the JavaScript library <strong>jQuery</strong>.
+Each loop is a complete year. The point size corresponds to the number of commits on that day.</p>
+<p><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-3-2.png" width="576" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-3-3.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Next we visualize the git commits for the five programming languages: R, Perl, Python, PHP and Julia.</p>
+<p><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-4-2.png" width="576" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-4-3.png" width="576" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-4-4.png" width="576" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-4-5.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Since the git repos for the five programming languages contain many daily commits, which makes the plots quite crowded.
+Next we use two other graphics for visualization: heatmap and horizon chart.</p>
+<p><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-5-2.png" width="1152" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-5-3.png" width="1152" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-5-4.png" width="1152" style="display: block; margin: auto;" /><img src="/post/2022-02-03-spiral-visualization-of-daily-git-commits_files/figure-html/unnamed-chunk-5-5.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>It seems the dot charts are the easist to read. What’s your opinion?</p>
+<p>The source code for generating the plots is as follows. Note the value of <code>repo</code> should be a git repo path.
+If you want to try other repos on GitHub, you need to first clone them to your local computer.</p>
+<pre class="r"><code>library(lubridate)
+library(spiralize)
+library(ComplexHeatmap)
+library(circlize)
+library(RColorBrewer)
+
+calc_pt_size = function(x, x_max = 30, x_min = 2, pt_max = 20, pt_min = 1) {
+    size = (pt_max - pt_min)/(x_max - x_min)*(x - x_min) + pt_min   
+    size[size &lt; pt_min] = pt_min
+    size[size &gt; pt_max] = pt_max
+    size
+}
+
+generate_color_fun = function(x, x_max = 30, x_min = 2) {
+    colorRamp2(seq(x_min, x_max, length = 11), rev(brewer.pal(11, &quot;Spectral&quot;)))
+}
+
+git_commits_spiral = function(repo, graph = c(&quot;points&quot;, &quot;heatmap&quot;, &quot;horizon&quot;)) {
+    owd = getwd()
+    setwd(repo)
+    on.exit(setwd(owd))
+
+    if(!file.exists(&quot;.git&quot;)) {
+        stop(&quot;`repo` should be a git repo folder.&quot;)
+    }
+
+    df = read.table(pipe(&quot;git log --date=short --pretty=format:%ad | sort | uniq -c&quot;))
+    colnames(df) = c(&quot;commits&quot;, &quot;date&quot;)
+
+    df$date = as.Date(df$date)
+
+    max_commit = max(30, max(df$commits)*0.9)
+
+    graph = match.arg(graph)
+
+    spiral_initialize_by_time(range(df$date), verbose = FALSE, normalize_year = TRUE)
+    spiral_track()
+    if(graph == &quot;points&quot;) {
+        spiral_points(df$date, 0.5, pch = 16, size = unit(calc_pt_size(df$commits, x_max = max_commit), &quot;pt&quot;))
+        
+        breaks = grid.pretty(range(df$commits))
+        lgd = Legend(title = paste0(basename(repo), &quot; commits\n(in total &quot;, sum(df$commits), &quot;)&quot;), at = breaks, type = &quot;points&quot;, 
+            size = unit(calc_pt_size(breaks, x_max = max_commit), &quot;pt&quot;))
+        draw(lgd, x = unit(0.5, &quot;mm&quot;), y = unit(1, &quot;npc&quot;) - unit(1, &quot;mm&quot;), just = c(&quot;left&quot;, &quot;top&quot;))
+    } else if(graph == &quot;heatmap&quot;) {
+
+        col_fun = generate_color_fun(df$commits, x_max = max_commit)
+        spiral_rect(df$date, TRACK_META$ylim[1], df$date, TRACK_META$ylim[2], gp = gpar(fill = col_fun(df$commits), col = NA))
+
+        lgd = Legend(title = paste0(basename(repo), &quot; commits\n(in total &quot;, sum(df$commits), &quot;)&quot;), col_fun = col_fun)
+        draw(lgd, x = unit(0.5, &quot;mm&quot;), y = unit(1, &quot;npc&quot;) - unit(1, &quot;mm&quot;), just = c(&quot;left&quot;, &quot;top&quot;))
+    } else if(graph == &quot;horizon&quot;) {
+        y = df$commits
+        y[y &gt; max_commit] = max_commit
+        lt = spiral_horizon(df$date, df$commits, use_bars = TRUE)
+
+        lgd = horizon_legend(lt, title = paste0(basename(repo), &quot; commits\n(in total &quot;, sum(df$commits), &quot;)&quot;), format = &quot;%.0f&quot;)
+        draw(lgd, x = unit(0.5, &quot;mm&quot;), y = unit(1, &quot;npc&quot;) - unit(1, &quot;mm&quot;), just = c(&quot;left&quot;, &quot;top&quot;))
+    }
+
+    y = unique(year(df$date))
+    spiral_text(paste0(y, &quot;-01-01&quot;), 0.5, y, gp = gpar(fontsize = 6, col = &quot;black&quot;), facing = &quot;inside&quot;)
+}
+
+# For example:
+git_commits_spiral(&quot;~/project/development/circlize&quot;)</code></pre>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.84.4" />
+
+
+<title>Interactivate indirect use of pheatmap(), heatmap.2() and heatmap() - Zuguang Gu</title>
+<meta property="og:title" content="Interactivate indirect use of pheatmap(), heatmap.2() and heatmap() - Zuguang Gu">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="/talks/">Talks</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+    <li><a href="/cv/">CV</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">5 min read</span>
+    
+
+    <h1 class="article-title">Interactivate indirect use of pheatmap(), heatmap.2() and heatmap()</h1>
+
+    
+    <span class="article-date">2021-01-22</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p>With <strong>InteractiveComplexHeatmap</strong>, the following heatmaps can be exported as an interactive Shiny app:</p>
+<ol style="list-style-type: decimal">
+<li>heatmaps directly produced from <strong>ComplexHeatmap</strong>,</li>
+<li>heatmaps from other functions or packages which are implement with <strong>ComplexHeatmap</strong>,</li>
+<li>heatmaps originally produced by <code>stats::heatmap()</code>, <code>gplots::heatmap.2()</code>
+and <code>pheatmap::pheatmap()</code>, but can be reproduced by the “translation
+functions”: <code>ComplexHeatmap:::heatmap()</code>, <code>ComplexHeatmap:::heatmap.2()</code>
+and <code>ComplexHeatmap::pheatmap()</code>.</li>
+</ol>
+<p>All these types of heatmaps can be turned into interactive just by calling
+<code>htShiny()</code> after the heatmaps are drawn. E.g.:</p>
+<pre class="r"><code>ComplexHeatmap::pheatmap(...)
+htShiny()</code></pre>
+<p>which means you don’t need to touch your heatmap code. After you see the heatmap in your R terminal,
+directly calling <code>htShiny()</code> with no argument will produce an interactive heatmap, like magic. :P</p>
+<p>Now there is a fourth scenario where the heatmap is produced by third-party
+functions which uses <code>stats::heatmap()</code>, <code>gplots::heatmap.2()</code> or
+<code>pheatmap::pheatmap()</code>. Since now we cannot directly interact with
+<code>heatmap()</code>, <code>heatmap.2()</code> or <code>pheatmap()</code>, how can we turn these heatmaps into
+interactive? The solution is fairly simple. We just need to go to <em>e.g.</em> <strong>pheatmap</strong>
+namespace and replace <code>pheatmap</code> with <code>ComplexHeatmap::pheatmap</code>.</p>
+<p>The following example is from the <strong>SC3</strong> package where
+function <code>sc3_plot_expression()</code> internally uses <code>pheatmap()</code>.</p>
+<pre class="r"><code>library(SingleCellExperiment)
+library(SC3)
+library(scater)
+
+sce &lt;- SingleCellExperiment(
+    assays = list(
+        counts = as.matrix(yan),
+        logcounts = log2(as.matrix(yan) + 1)
+    ), 
+    colData = ann
+)
+
+rowData(sce)$feature_symbol &lt;- rownames(sce)
+sce &lt;- sce[!duplicated(rowData(sce)$feature_symbol), ]
+sce &lt;- runPCA(sce)
+sce &lt;- sc3(sce, ks = 2:4, biology = TRUE)
+
+sc3_plot_expression(sce, k = 3)</code></pre>
+<p><img src="/post/2021-01-22-interactivate-indirect-use-of-pheatmap-heatmap2-and-heatmap_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>To replace the internally use of <code>pheatmap::pheatmap</code> with
+<code>ComplexHeatmap::pheatmap</code>, we can use <code>assignInNamespace()</code> to directly
+change the value of <code>pheatmap</code> in <strong>pheatmap</strong> namespace. After that,
+recalling <code>sc3_plot_expression()</code> will directly use
+<code>ComplexHeatmap::pheatmap()</code> and now you can use <code>htShiny()</code> to export it as
+an interactive app. Of course, you need to regenerate the heatmap with the
+same code.</p>
+<pre class="r"><code>assignInNamespace(&quot;pheatmap&quot;, ComplexHeatmap::pheatmap, ns = &quot;pheatmap&quot;)
+library(InteractiveComplexHeatmap)
+sc3_plot_expression(sce, k = 3)
+htShiny()</code></pre>
+<p><img width="100%" alt="pheatmap" src="https://user-images.githubusercontent.com/449218/105490976-e40faa80-5cb5-11eb-85f5-df2c80939aef.png"></p>
+<p>If you check the source code of <code>sc3_plot_expression()</code>, <code>pheatmap()</code> is used
+by explicitely adding its namespace (check the last few lines of the function definition):</p>
+<pre class="r"><code>selectMethod(&quot;sc3_plot_expression&quot;, signature = &quot;SingleCellExperiment&quot;)</code></pre>
+<pre><code>## Method Definition:
+## 
+## function (object, k, show_pdata = NULL) 
+## {
+##     if (is.null(metadata(object)$sc3$consensus)) {
+##         warning(paste0(&quot;Please run sc3_consensus() first!&quot;))
+##         return(object)
+##     }
+##     hc &lt;- metadata(object)$sc3$consensus[[as.character(k)]]$hc
+##     dataset &lt;- get_processed_dataset(object)
+##     if (!is.null(metadata(object)$sc3$svm_train_inds)) {
+##         dataset &lt;- dataset[, metadata(object)$sc3$svm_train_inds]
+##     }
+##     add_ann_col &lt;- FALSE
+##     ann &lt;- NULL
+##     if (!is.null(show_pdata)) {
+##         ann &lt;- make_col_ann_for_heatmaps(object, show_pdata)
+##         if (!is.null(ann)) {
+##             add_ann_col &lt;- TRUE
+##             rownames(ann) &lt;- colnames(dataset)
+##         }
+##     }
+##     if (nrow(dataset) &gt; 100) {
+##         do.call(pheatmap::pheatmap, c(list(dataset, cluster_cols = hc, 
+##             kmeans_k = 100, cutree_cols = k, show_rownames = FALSE, 
+##             show_colnames = FALSE), list(annotation_col = ann)[add_ann_col]))
+##     }
+##     else {
+##         do.call(pheatmap::pheatmap, c(list(dataset, cluster_cols = hc, 
+##             cutree_cols = k, show_rownames = FALSE, show_colnames = FALSE), 
+##             list(annotation_col = ann)[add_ann_col]))
+##     }
+## }
+## &lt;bytecode: 0x7fa0fd0305f8&gt;
+## &lt;environment: namespace:SC3&gt;
+## 
+## Signatures:
+##         object                
+## target  &quot;SingleCellExperiment&quot;
+## defined &quot;SingleCellExperiment&quot;</code></pre>
+<p>In this case, changing <code>pheatmap</code> in <strong>pheatmap</strong> namespace directly affects <code>sc3_plot_expression()</code>.</p>
+<p>However, if the heatmap function is called without adding the namespace, you
+need to first unload the package, modify the heatmap function in the heatmap
+namespace and later load the package back.</p>
+<p>Let’s look at the next example from <strong>GOexpress</strong> package where the function <code>heatmap_GO()</code> internally use <code>heatmap.2()</code>.</p>
+<pre class="r"><code>library(GOexpress)
+data(AlvMac)
+set.seed(4543)
+AlvMac_results &lt;- GO_analyse(
+    eSet = AlvMac, f = &quot;Treatment&quot;,
+    GO_genes=AlvMac_GOgenes, all_GO=AlvMac_allGO, all_genes=AlvMac_allgenes)
+BP.5 &lt;- subset_scores(
+    result = AlvMac_results.pVal,
+    namespace = &quot;biological_process&quot;,
+    total = 5,
+    p.val=0.05)
+heatmap_GO(
+    go_id = &quot;GO:0034142&quot;, result = BP.5, eSet=AlvMac, cexRow=0.4,
+    cexCol=1, cex.main=1, main.Lsplit=30)</code></pre>
+<p><img src="/post/2021-01-22-interactivate-indirect-use-of-pheatmap-heatmap2-and-heatmap_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Now note in <code>heatmap_GO()</code> function, <code>heatmap.2()</code> is used without <strong>gplots</strong> namespace (go to
+the end of the function definition listed below).</p>
+<pre class="r"><code>heatmap_GO</code></pre>
+<pre><code>## function (go_id, result, eSet, f = result$factor, subset = NULL, 
+##     gene_names = TRUE, NA.names = FALSE, margins = c(7, 5), scale = &quot;none&quot;, 
+##     cexCol = 1.2, cexRow = 0.5, labRow = NULL, cex.main = 1, 
+##     trace = &quot;none&quot;, expr.col = bluered(75), row.col.palette = &quot;Accent&quot;, 
+##     row.col = c(), main = paste(go_id, result$GO[result$GO$go_id == 
+##         go_id, &quot;name_1006&quot;]), main.Lsplit = NULL, ...) 
+## {
+##     if (!all(c(&quot;factor&quot;, &quot;GO&quot;, &quot;genes&quot;) %in% names(result))) {
+##         stop(&quot;&#39;result=&#39; argument misses required slots.\n    Is it a GO_analyse() output?&quot;)
+##     }
+##     if (!go_id %in% result$GO$go_id) {
+##         stop(&quot;go_id: &quot;, go_id, &quot; was not found in result$mapping$go_id.&quot;)
+##     }
+##     if (!is.null(subset)) {
+##         eSet &lt;- subEset(eSet = eSet, subset = subset)
+##     }
+##     if (length(row.col) != ncol(eSet)) {
+##         row.col &lt;- brewer.pal(n = length(unique(pData(eSet)[, 
+##             f])), name = row.col.palette)
+##     }
+##     gene_ids &lt;- list_genes(go_id = go_id, result = result, data.only = TRUE)
+##     genes_expr &lt;- t(exprs(eSet)[gene_ids, ])
+##     if (is.null(labRow)) {
+##         labRow &lt;- pData(eSet)[, f]
+##     }
+##     else {
+##         if (length(labRow) == 1) {
+##             labRow = pData(eSet)[, labRow]
+##         }
+##         else if (length(labRow) != ncol(eSet)) {
+##             stop(&quot;The number of custom row labels provided (&quot;, 
+##                 length(labRow), &quot;) does not match the number of samples (&quot;, 
+##                 ncol(eSet), &quot;.&quot;)
+##         }
+##     }
+##     if (gene_names) {
+##         gene_labels &lt;- result$genes[gene_ids, &quot;external_gene_name&quot;]
+##         if (any(gene_labels == &quot;&quot;) &amp; !NA.names) {
+##             gene_labels[gene_labels == &quot;&quot;] &lt;- gene_ids[gene_labels == 
+##                 &quot;&quot;]
+##         }
+##     }
+##     else {
+##         gene_labels &lt;- gene_ids
+##     }
+##     if (!is.null(main.Lsplit)) {
+##         if (is.numeric(main.Lsplit)) {
+##             main &lt;- string_Lsplit(string = main, line.length = main.Lsplit)
+##         }
+##         else {
+##             stop(&quot;main.Lsplit should be a numeric value or NULL.&quot;)
+##         }
+##     }
+##     samples.col &lt;- row.col[as.factor(pData(eSet)[, f])]
+##     op &lt;- par(no.readonly = TRUE)
+##     on.exit(par(op))
+##     par(cex.main = cex.main)
+##     heatmap.2(genes_expr, labRow = labRow, labCol = gene_labels, 
+##         scale = scale, cexCol = cexCol, cexRow = cexRow, main = main, 
+##         trace = trace, RowSideColors = samples.col, col = expr.col, 
+##         margins = margins, ...)
+## }
+## &lt;bytecode: 0x7fa0e29035b8&gt;
+## &lt;environment: namespace:GOexpress&gt;</code></pre>
+<p>In this case, the <strong>GOexpression</strong> namespace should firstly be removed by
+<code>detach()</code>, or else <code>heatmap_GO()</code> will still use <code>gplots::heatmap.2()</code>.</p>
+<pre class="r"><code>detach(&quot;package:GOexpress&quot;, unload = TRUE)
+assignInNamespace(&quot;heatmap.2&quot;, ComplexHeatmap:::heatmap.2, ns = &quot;gplots&quot;)
+library(GOexpress)
+
+library(InteractiveComplexHeatmap)
+heatmap_GO(
+    go_id = &quot;GO:0034142&quot;, result = BP.5, eSet=AlvMac, cexRow=0.4,
+    cexCol=1, cex.main=1, main.Lsplit=30)
+htShiny()</code></pre>
+<p><img width="100%" alt="heatmap 2" src="https://user-images.githubusercontent.com/449218/105490966-e114ba00-5cb5-11eb-8839-3ba1f25b5fa5.png"></p>
+<p>In the end, to safely change all <code>stats::heatmap()</code>, <code>gplots::heatmap.2()</code> and
+<code>pheatmap::pheatmap()</code> to <code>ComplexHeatmap:::heatmap()</code>,
+<code>ComplexHeatmap:::heatmap.2()</code> and <code>ComplexHeatmap::pheatmap()</code>, you can add following lines
+at the start of your R script:</p>
+<pre class="r"><code>library(pheatmap)
+library(gplots)
+assignInNamespace(&quot;heatmap&quot;, ComplexHeatmap:::heatmap, ns = &quot;stats&quot;)
+assignInNamespace(&quot;heatmap.2&quot;, ComplexHeatmap:::heatmap.2, ns = &quot;gplots&quot;)
+assignInNamespace(&quot;pheatmap&quot;, ComplexHeatmap::pheatmap, ns = &quot;pheatmap&quot;)</code></pre>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

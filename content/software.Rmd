@@ -1,0 +1,206 @@
+---
+title: "Software"
+---
+
+
+```{r, echo = FALSE, message = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    error = FALSE,
+    tidy  = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+```{r, echo = FALSE}
+library(rvest)
+library(jsonlite)
+downloads_from_conda = function(pkg) {
+	x = read_html(paste0("https://anaconda.org/search?q=r-", pkg))
+	tb = html_nodes(x, "table") %>% html_table()
+	if(length(tb) > 0) {
+		tb = tb[[1]]
+		sum(tb[, 2])
+	} else {
+		0
+	}
+}
+downloads_from_cran = function(pkg) {
+	x = read_json(paste0("https://cranlogs.r-pkg.org/downloads/total/2001-01-01:2114-01-01/", pkg))
+	x[[1]]$downloads
+}
+downloads_from_bioc = function(pkg) {
+	df = read.table(paste0("http://bioconductor.org/packages/stats/bioc/", pkg, "/", pkg, "_stats.tab"), header = TRUE)
+	sum(df[df[, "Month"] != "all", "Nb_of_downloads"])
+}
+
+format_dn = function(s) {
+	if(s > 1000000) {
+		s = paste0(round(s/1000000, 1), "M")
+	} else if(s > 1000) {
+		s = paste0(round(s/1000, 1), "K")
+	} else {
+		s = as.character(s)
+	}
+	s
+}
+dn = function(pkg) {
+	s = 0
+	if(pkg %in% c("spiralize", "circlize", "pkgndep", "bsub", "GetoptLong", "GlobalOptions", "CePa", "sfcurve")) {
+		s = downloads_from_cran(pkg)
+	} else if(pkg %in% c("ComplexHeatmap", "InteractiveComplexHeatmap", "EnrichedHeatmap", "HilbertCurve", "gtrellis", "simplifyEnrichment", "cola", "rGREAT", "simona")) {
+		s = downloads_from_bioc(pkg)
+	}
+	s = s + downloads_from_conda(pkg)
+	format_dn(s)
+}
+```
+
+
+## R
+
+<p>Downloads are from CRAN/Bioconductor/[anaconda](https://anaconda.org/), updated on `r Sys.Date()`.</p>
+
+```{r, echo = FALSE}
+total_downloads = downloads_from_cran("spiralize") + downloads_from_conda("spiralize") +
+                  downloads_from_cran("circlize") + downloads_from_conda("circlize") +
+                  downloads_from_cran("CePa") + downloads_from_conda("CePa") +
+                  downloads_from_cran("pkgndep") + downloads_from_conda("pkgndep") +
+                  downloads_from_cran("bsub") + downloads_from_conda("bsub") +
+                  downloads_from_cran("GetoptLong") + downloads_from_conda("GetoptLong") +
+                  downloads_from_cran("GlobalOptions") + downloads_from_conda("GlobalOptions") +
+                  downloads_from_bioc("ComplexHeatmap") + downloads_from_conda("ComplexHeatmap") +
+                  downloads_from_bioc("InteractiveComplexHeatmap") + downloads_from_conda("InteractiveComplexHeatmap") +
+                  downloads_from_bioc("EnrichedHeatmap") + downloads_from_conda("EnrichedHeatmap") +
+                  downloads_from_bioc("HilbertCurve") + downloads_from_conda("HilbertCurve") +
+                  downloads_from_bioc("gtrellis") + downloads_from_conda("gtrellis") +
+                  downloads_from_bioc("simplifyEnrichment") + downloads_from_conda("simplifyEnrichment") +
+                  downloads_from_bioc("cola") + downloads_from_conda("cola") +
+                  downloads_from_bioc("rGREAT") + downloads_from_conda("rGREAT")
+
+```
+
+<p>Total downloads: `r format_dn(total_downloads)`.</p>
+
+<style>
+table tr td {
+	white-space: nowrap;
+}
+
+table tr td:first-child {
+	padding-left: 10 px;
+	border-left: 5px solid #CBF8DF;
+}
+
+table tr th:first-child {
+	padding-left: 0px;
+}
+table tr.header {
+	display: none;
+}
+table, td, th {
+    border: 1px solid white;
+    vertical-align: top;
+}
+</style>
+
+### Visualization
+
+Package | Downloads | GitHub Stars | Publication
+:------ | :-------- | :----------- | :--------- 
+[**spiralize**](https://cran.r-project.org/web/packages/spiralize/index.html):  Visualize data on spirals. | [![CRAN](https://img.shields.io/badge/downloads-`r dn('spiralize')`-blue)](https://cran.r-project.org/web/packages/spiralize/index.html) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/spiralize.svg?style=social&label=Star)](https://github.com/jokergoo/spiralize) | [![](https://img.shields.io/badge/published%20on-Bioinformatics-9cf)](https://doi.org/10.1093/bioinformatics/btab778)
+[**circlize**](https://cran.r-project.org/web/packages/circlize/index.html): circular visualization in R. [[_#circlize on stackoverflow_]](http://stackoverflow.com/questions/tagged/circlize) | [![CRAN](https://img.shields.io/badge/downloads-`r dn('circlize')`-blue)](https://cran.r-project.org/web/packages/circlize/index.html) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/circlize.svg?style=social&label=Star)](https://github.com/jokergoo/circlize) | [![](https://img.shields.io/badge/published%20on-Bioinformatics-9cf)](https://doi.org/10.1093/bioinformatics/btu393)
+[**ComplexHeatmap**](http://bioconductor.org/packages/devel/bioc/html/ComplexHeatmap.html): Flexibly arranging multiple heatmaps <br>&nbsp;&nbsp;&nbsp;&nbsp;and self define annotation graphics. | [![Bioc](https://img.shields.io/badge/downloads-`r dn('ComplexHeatmap')`-blue)](http://bioconductor.org/packages/stats/bioc/ComplexHeatmap/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/ComplexHeatmap.svg?style=social&label=Star)](https://github.com/jokergoo/ComplexHeatmap) | [![](https://img.shields.io/badge/published%20on-Bioinformatics-9cf)](https://doi.org/10.1093/bioinformatics/btw313) [![](https://img.shields.io/badge/published%20on-iMeta-9cf)](https://doi.org/10.1002/imt2.43)
+[**InteractiveComplexHeatmap**](https://github.com/jokergoo/InteractiveComplexHeatmap): Makes interactive ComplexHeatmap. | [![Bioc](https://img.shields.io/badge/downloads-`r dn('InteractiveComplexHeatmap')`-blue)](http://bioconductor.org/packages/stats/bioc/InteractiveComplexHeatmap/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/InteractiveComplexHeatmap.svg?style=social&label=Star)](https://github.com/jokergoo/InteractiveComplexHeatmap) | [![](https://img.shields.io/badge/published%20on-Bioinformatics-9cf)](https://doi.org/10.1093/bioinformatics/btab806)
+[**EnrichedHeatmap**](http://bioconductor.org/packages/devel/bioc/html/EnrichedHeatmap.html): Visualizes the enrichment of genomic signals <br>&nbsp;&nbsp;&nbsp;&nbsp;on specific target region. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("EnrichedHeatmap")`-blue)](http://bioconductor.org/packages/stats/bioc/EnrichedHeatmap/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/EnrichedHeatmap.svg?style=social&label=Star)](https://github.com/jokergoo/EnrichedHeatmap) | [![](https://img.shields.io/badge/published%20on-BMC%20Genomics-9cf)](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-018-4625-x)
+[**HilbertCurve**](http://bioconductor.org/packages/devel/bioc/html/HilbertCurve.html): Making 2D Hilbert Curve. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("HilbertCurve")`-blue)](http://bioconductor.org/packages/stats/bioc/HilbertCurve/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/HilbertCurve.svg?style=social&label=Star)](https://github.com/jokergoo/HilbertCurve) | [![](https://img.shields.io/badge/published%20on-Bioinformatics-9cf)](https://doi.org/10.1093/bioinformatics/btw161)
+[**gtrellis**](http://bioconductor.org/packages/devel/bioc/html/gtrellis.html): genome-level trellis layout. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("gtrellis")`-blue)](http://bioconductor.org/packages/stats/bioc/gtrellis/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/gtrellis.svg?style=social&label=Star)](https://github.com/jokergoo/gtrellis) | [![](https://img.shields.io/badge/published%20on-BMC%20Bioinformatics-9cf)](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1051-4)
+[**BioCartaImage**](https://bioconductor.org/packages/BioCartaImage): BioCarta pathway images.| [![Bioc](https://img.shields.io/badge/downloads-`r dn('BioCartaImage')`-blue)](http://bioconductor.org/packages/stats/bioc/BioCartaImage/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/BioCartaImage.svg?style=social&label=Star)](https://github.com/jokergoo/BioCartaImage) | -
+
+
+### Data analysis
+
+Package | Downloads | GitHub Stars | Publication
+:------ | :-------- | :----------- | :--------- 
+[**sfcurve**](https://github.com/jokergoo/sfcurve): 2x2, 3x3 and nxn Space-Filling Curves. | | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/sfcurve.svg?style=social&label=Star)](https://github.com/jokergoo/sfcurve) | -
+[**simona**](http://bioconductor.org/packages/devel/bioc/html/simona.html): Semantic Similarity in Bio-Ontologies. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("simona")`-blue)](http://bioconductor.org/packages/stats/bioc/simona/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/simona.svg?style=social&label=Star)](https://github.com/jokergoo/simona) | [![](https://img.shields.io/badge/published%20on-BMC%20Genomics-9cf)](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-024-10759-4)
+[**simplifyEnrichment**](http://bioconductor.org/packages/devel/bioc/html/simplifyEnrichment.html): Simplify functional enrichment results. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("simplifyEnrichment")`-blue)](http://bioconductor.org/packages/stats/bioc/simplifyEnrichment/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/simplifyGO.svg?style=social&label=Star)](https://github.com/jokergoo/simplifyEnrichment) | [![](https://img.shields.io/badge/published%20on-GPB-9cf)](https://doi.org/10.1016/j.gpb.2022.04.008)
+[**cola**](http://bioconductor.org/packages/devel/bioc/html/cola.html): A Framework for Consensus Partitioning. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("cola")`-blue)](http://bioconductor.org/packages/stats/bioc/cola/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/cola.svg?style=social&label=Star)](https://github.com/jokergoo/cola) | [![](https://img.shields.io/badge/published%20on-NAR-9cf)](https://doi.org/10.1093/nar/gkaa1146) [![](https://img.shields.io/badge/published%20on-BIB-9cf)](https://doi.org/10.1093/bib/bbac048)
+[**rGREAT**](http://bioconductor.org/packages/devel/bioc/html/rGREAT.html): Client of GREAT analysis. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("rGREAT")`-blue)](http://bioconductor.org/packages/stats/bioc/rGREAT/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/rGREAT.svg?style=social&label=Star)](https://github.com/jokergoo/rGREAT) | [![](https://img.shields.io/badge/published%20on-Bioinformatics-9cf)](https://doi.org/10.1093/bioinformatics/btac745)
+[**CePa**](https://cran.r-project.org/web/packages/CePa/index.html): centrality-based pathway enrichment. | [![CRAN](https://img.shields.io/badge/downloads-`r dn("CePa")`-blue)](https://cran.r-project.org/web/packages/CePa/index.html) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/CePa.svg?style=social&label=Star)](https://github.com/jokergoo/CePa) | [![](https://img.shields.io/badge/published%20on-Bioinformatics-9cf)](https://doi.org/10.1093/bioinformatics/btt008)
+[**YAPSA**](https://www.bioconductor.org/packages/YAPSA/): Yet Another Package for Signature Analysis. (current maintainer) | [![Bioc](https://img.shields.io/badge/downloads-`r dn("YAPSA")`-blue)](http://bioconductor.org/packages/stats/bioc/YAPSA/) | - | [![](https://img.shields.io/badge/published%20on-GCC-9cf)](https://doi.org/10.1002/gcc.22918)
+
+
+### Data packages
+
+Package | Downloads | GitHub Stars | Publication
+:------ | :-------- | :----------- | :--------- 
+[**GeneSummary**](https://bioconductor.org/packages/GeneSummary/): RefSeq Gene Summaries. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("GeneSummary")`-blue)](http://bioconductor.org/packages/stats/bioc/GeneSummary/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/GeneSummary.svg?style=social&label=Star)](https://github.com/jokergoo/GeneSummary) | -
+[**UniProtKeywords**](https://bioconductor.org/packages/UniProtKeywords/): Keywords from the UniProt database. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("UniProtKeywords")`-blue)](http://bioconductor.org/packages/stats/bioc/UniProtKeywords/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/UniProtKeywords.svg?style=social&label=Star)](https://github.com/jokergoo/UniProtKeywords) | -
+[**BioMartGOGeneSets**](https://bioconductor.org/packages/BioMartGOGeneSets): Gene Ontology Gene Sets from BioMart. | [![Bioc](https://img.shields.io/badge/downloads-`r dn("BioMartGOGeneSets")`-blue)](http://bioconductor.org/packages/stats/bioc/BioMartGOGeneSets/) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/BioMartGOGeneSets.svg?style=social&label=Star)](https://github.com/jokergoo/BioMartGOGeneSets) | -
+
+### Teaching
+
+Package | Downloads | GitHub Stars | Publication
+:------ | :-------- | :----------- | :--------- 
+[**GSEAtraining**](https://github.com/jokergoo/GSEAtraining): Learning gene set enrichment analysis. |  | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/GSEAtraining.svg?style=social&label=Star)](https://github.com/jokergoo/GSEAtraining) | -
+
+
+### Other tools
+
+Package | Downloads | GitHub Stars | Publication
+:------ | :-------- | :----------- | :--------- 
+[**pkgndep**](https://cran.r-project.org/web/packages/pkgndep/index.html): Check the Heaviness of Package Dependencies. | [![CRAN](https://img.shields.io/badge/downloads-`r dn('pkgndep')`-blue)](https://cran.r-project.org/web/packages/pkgndep/index.html) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/pkgndep.svg?style=social&label=Star)](https://github.com/jokergoo/pkgndep) | [![](https://img.shields.io/badge/published%20on-Bioinformatics-9cf)](https://doi.org/10.1093/bioinformatics/btac449) [![](https://img.shields.io/badge/published%20on-JSS-9cf)](https://doi.org/10.1016/j.jss.2023.111610)
+[**bsub**](https://cran.r-project.org/web/packages/bsub/index.html): Submitter and monitor of LSF cluster. | [![CRAN](https://img.shields.io/badge/downloads-`r dn("bsub")`-blue)](https://cran.r-project.org/web/packages/bsub/index.html) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/bsub.svg?style=social&label=Star)](https://github.com/jokergoo/bsub) | -
+[**GetoptLong**](https://cran.r-project.org/web/packages/GetoptLong/index.html): wrapper of the Perl module Getopt::Long, <br>&nbsp;&nbsp;&nbsp;&nbsp;also provides a simple variable interpolation in R. | [![CRAN](https://img.shields.io/badge/downloads-`r dn("GetoptLong")`-blue)](https://cran.r-project.org/web/packages/GetoptLong/index.html) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/GetoptLong.svg?style=social&label=Star)](https://github.com/jokergoo/GetoptLong) | -
+[**GlobalOptions**](https://cran.r-project.org/web/packages/GlobalOptions/index.html): setting global options in R. | [![CRAN](https://img.shields.io/badge/downloads-`r dn("GlobalOptions")`-blue)](https://cran.r-project.org/web/packages/GlobalOptions/index.html) | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/GlobalOptions.svg?style=social&label=Star)](https://github.com/jokergoo/GlobalOptions) | -
+
+
+## Perl
+
+Package | Downloads | GitHub Stars | Publication
+:------ | :-------- | :----------- | :--------- 
+[**rhydrogen**](https://github.com/jokergoo/rhydrogen): translate comments to documentations in R. | - | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/rhydrogen.svg?style=social&label=Star)](https://github.com/jokergoo/rhydrogen) | -
+[**Microarray::GEO::SOFT**](https://metacpan.org/pod/Microarray::GEO::SOFT): Reading microarray data in SOFT format from GEO database. | - | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/Microarray-GEO-SOFT.svg?style=social&label=Star)](https://github.com/jokergoo/Microarray-GEO-SOFT) | -
+[**Statistics::Multtest**](https://metacpan.org/pod/Statistics::Multtest): Control false discovery rate in multiple test problem. | - | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/Statistics-Multtest.svg?style=social&label=Star)](https://github.com/jokergoo/Statistics-Multtest) | -
+[**List::Vectorize**](https://metacpan.org/pod/List::Vectorize): functions to make vectorized calculation easy. | - | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/List-Vectorize.svg?style=social&label=Star)](https://github.com/jokergoo/List-Vectorize) | -
+[**ngspipeline**](https://github.com/jokergoo/ngspipeline): NGS pipeline maker. | - | [![GitHub stars](https://img.shields.io/github/stars/jokergoo/ngspipeline.svg?style=social&label=Star)](https://github.com/jokergoo/ngspipeline) | -
+
+
+## Books
+
+<a href="https://jokergoo.github.io/circlize_book/book/"><img src="https://camo.githubusercontent.com/73dcce96d7f1efac8c644bfe56e7b1987d12d3fd/68747470733a2f2f6a6f6b6572676f6f2e6769746875622e696f2f636972636c697a655f626f6f6b2f626f6f6b2f696d616765732f636972636c697a655f636f7665722e6a7067" style="border:1px solid black; width:300px"/></a>
+<a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/"><img src="https://camo.githubusercontent.com/be2e172a000f3c8e661c1efaa85ed43f6e70c3b1/68747470733a2f2f6a6f6b6572676f6f2e6769746875622e696f2f436f6d706c6578486561746d61702d7265666572656e63652f626f6f6b2f636f6d706c6578686561746d61702d636f7665722e6a7067" style="border:1px solid black; width:300px"/></a>
+
+<style>
+#package-status table tr.header {
+	display:contents;
+}
+</style>
+
+## Package status
+
+Package | GitHub Actions | CRAN check | bioc-devel | bioc-release | GitHub issues (opened) | GitHub issues (closed)
+:------ | :-------- | :--------- | :--------- | :----------- | :------------- | :----------
+circlize | [![R-CMD-check](https://github.com/jokergoo/circlize/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/circlize/actions) | [![](https://cranchecks.info/badges/worst/circlize)](https://cran.r-project.org/web/checks/check_results_circlize.html) | - | - | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/circlize.svg)](https://GitHub.com/jokergoo/circlize/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/circlize.svg)
+spiralize | [![R-CMD-check](https://github.com/jokergoo/spiral/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/spiral/actions) | [![](https://cranchecks.info/badges/worst/spiralize)](https://cran.r-project.org/web/checks/check_results_spiralize.html) | - | - | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/spiralize.svg)](https://GitHub.com/jokergoo/spiralize/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/spiralize.svg)
+GetoptLong | [![R-CMD-check](https://github.com/jokergoo/GetoptLong/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/GetoptLong/actions) | [![](https://cranchecks.info/badges/worst/GetoptLong)](https://cran.r-project.org/web/checks/check_results_GetoptLong.html) | - | - | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/GetoptLong.svg)](https://GitHub.com/jokergoo/GetoptLong/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/GetoptLong.svg)
+GlobalOptions | [![R-CMD-check](https://github.com/jokergoo/GlobalOptions/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/GlobalOptions/actions) | [![](https://cranchecks.info/badges/worst/GlobalOptions)](https://cran.r-project.org/web/checks/check_results_GlobalOptions.html) | - | - | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/GlobalOptions.svg)](https://GitHub.com/jokergoo/GlobalOptions/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/GlobalOptions.svg)
+bsub | [![R-CMD-check](https://github.com/jokergoo/bsub/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/bsub/actions) | [![](https://cranchecks.info/badges/worst/bsub)](https://cran.r-project.org/web/checks/check_results_bsub.html) | - | - | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/bsub.svg)](https://GitHub.com/jokergoo/bsub/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/bsub.svg)
+pkgndep | [![R-CMD-check](https://github.com/jokergoo/pkgndep/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/pkgndep/actions) | [![](https://cranchecks.info/badges/worst/pkgndep)](https://cran.r-project.org/web/checks/check_results_pkgndep.html) | - | - | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/pkgndep.svg)](https://GitHub.com/jokergoo/pkgndep/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/pkgndep.svg)
+YAPSA | -|-| [![](http://bioconductor.org/shields/build/devel/bioc/YAPSA.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/YAPSA/) | [![](http://bioconductor.org/shields/build/release/bioc/YAPSA.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/YAPSA/) |  - | -
+simona | [![R-CMD-check](https://github.com/jokergoo/simona/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/simona/actions) |-| [![](http://bioconductor.org/shields/build/devel/bioc/simona.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/simona/) | [![](http://bioconductor.org/shields/build/release/bioc/simona.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/simona/) | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/simona.svg)](https://GitHub.com/jokergoo/simona/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/simona.svg)
+simplifyEnrichment | [![R-CMD-check](https://github.com/jokergoo/simplifyEnrichment/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/simplifyEnrichment/actions) |-| [![](http://bioconductor.org/shields/build/devel/bioc/simplifyEnrichment.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/simplifyEnrichment/) | [![](http://bioconductor.org/shields/build/release/bioc/simplifyEnrichment.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/simplifyEnrichment/) | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/simplifyEnrichment.svg)](https://GitHub.com/jokergoo/simplifyEnrichment/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/simplifyEnrichment.svg)
+ComplexHeatmap | [![R-CMD-check](https://github.com/jokergoo/ComplexHeatmap/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/ComplexHeatmap/actions) | | [![](http://bioconductor.org/shields/build/devel/bioc/ComplexHeatmap.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/ComplexHeatmap/) | [![](http://bioconductor.org/shields/build/release/bioc/ComplexHeatmap.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/ComplexHeatmap/) | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/ComplexHeatmap.svg)](https://GitHub.com/jokergoo/ComplexHeatmap/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/ComplexHeatmap.svg)
+InteractiveComplexHeatmap | [![R-CMD-check](https://github.com/jokergoo/InteractiveComplexHeatmap/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/InteractiveComplexHeatmap/actions) |-| [![](http://bioconductor.org/shields/build/devel/bioc/InteractiveComplexHeatmap.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/InteractiveComplexHeatmap/) | [![](http://bioconductor.org/shields/build/release/bioc/InteractiveComplexHeatmap.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/InteractiveComplexHeatmap/) | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/InteractiveComplexHeatmap.svg)](https://GitHub.com/jokergoo/InteractiveComplexHeatmap/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/InteractiveComplexHeatmap.svg)
+EnrichedHeatmap | [![R-CMD-check](https://github.com/jokergoo/EnrichedHeatmap/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/EnrichedHeatmap/actions) |-| [![](http://bioconductor.org/shields/build/devel/bioc/EnrichedHeatmap.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/EnrichedHeatmap/) | [![](http://bioconductor.org/shields/build/release/bioc/EnrichedHeatmap.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/EnrichedHeatmap/) | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/EnrichedHeatmap.svg)](https://GitHub.com/jokergoo/EnrichedHeatmap/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/EnrichedHeatmap.svg)
+HilbertCurve | [![R-CMD-check](https://github.com/jokergoo/HilbertCurve/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/HilbertCurve/actions) |-| [![](http://bioconductor.org/shields/build/devel/bioc/HilbertCurve.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/HilbertCurve/) | [![](http://bioconductor.org/shields/build/release/bioc/HilbertCurve.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/HilbertCurve/) | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/HilbertCurve.svg)](https://GitHub.com/jokergoo/HilbertCurve/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/HilbertCurve.svg)
+gtrellis | [![R-CMD-check](https://github.com/jokergoo/gtrellis/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/gtrellis/actions) |-| [![](http://bioconductor.org/shields/build/devel/bioc/gtrellis.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/gtrellis/) | [![](http://bioconductor.org/shields/build/release/bioc/gtrellis.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/gtrellis/) | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/gtrellis.svg)](https://GitHub.com/jokergoo/gtrellis/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/gtrellis.svg)
+rGREAT | [![R-CMD-check](https://github.com/jokergoo/rGREAT/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/rGREAT/actions) |-| [![](http://bioconductor.org/shields/build/devel/bioc/rGREAT.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/rGREAT/) | [![](http://bioconductor.org/shields/build/release/bioc/rGREAT.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/rGREAT/) | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/rGREAT.svg)](https://GitHub.com/jokergoo/rGREAT/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/rGREAT.svg)
+cola | [![R-CMD-check](https://github.com/jokergoo/cola/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/cola/actions) |-| [![](http://bioconductor.org/shields/build/devel/bioc/cola.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/cola/) | [![](http://bioconductor.org/shields/build/release/bioc/cola.svg)](http://bioconductor.org/checkResults/release/bioc-LATEST/cola/) | [![GitHub issues](https://img.shields.io/github/issues/jokergoo/cola.svg)](https://GitHub.com/jokergoo/cola/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/cola.svg)
+GeneSummary | [![R-CMD-check](https://github.com/jokergoo/GeneSummary/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/GeneSummary/actions) |-| -| -| [![GitHub issues](https://img.shields.io/github/issues/jokergoo/GeneSummary.svg)](https://GitHub.com/jokergoo/GeneSummary/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/GeneSummary.svg)
+UniProtKeywords | [![R-CMD-check](https://github.com/jokergoo/UniProtKeywords/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/UniProtKeywords/actions) |-| -| -| [![GitHub issues](https://img.shields.io/github/issues/jokergoo/UniProtKeywords.svg)](https://GitHub.com/jokergoo/UniProtKeywords/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/UniProtKeywords.svg)
+BioMartGOGeneSets | [![R-CMD-check](https://github.com/jokergoo/BioMartGOGeneSets/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/BioMartGOGeneSets/actions) |-| -| -| [![GitHub issues](https://img.shields.io/github/issues/jokergoo/BioMartGOGeneSets.svg)](https://GitHub.com/jokergoo/BioMartGOGeneSets/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/BioMartGOGeneSets.svg)
+BioCartaImage | [![R-CMD-check](https://github.com/jokergoo/BioCartaImage/workflows/R-CMD-check/badge.svg)](https://github.com/jokergoo/BioCartaImage/actions) |-| -| -| [![GitHub issues](https://img.shields.io/github/issues/jokergoo/BioCartaImage.svg)](https://GitHub.com/jokergoo/BioCartaImage/issues/) | ![GitHub issues](https://img.shields.io/github/issues-closed/jokergoo/BioCartaImage.svg)
+

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.84.4" />
+
+
+<title>Reverse x-axis in the circular layout - Zuguang Gu</title>
+<meta property="og:title" content="Reverse x-axis in the circular layout - Zuguang Gu">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="/talks/">Talks</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+    <li><a href="/cv/">CV</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Reverse x-axis in the circular layout</h1>
+
+    
+    <span class="article-date">2016-11-21</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>In <strong>circlize</strong> package, x-axis in always clockwise in each sector, no matter it
+is on the top of the circle or at the bottom. However, you can manually reverse
+the original positions on x-axis to pretend you have a reversed x-axis. Take following example:</p>
+<pre class="r"><code>library(circlize)</code></pre>
+<pre><code>## ========================================
+## circlize version 0.4.9
+## CRAN page: https://cran.r-project.org/package=circlize
+## Github page: https://github.com/jokergoo/circlize
+## Documentation: https://jokergoo.github.io/circlize_book/book/
+## 
+## If you use it in published research, please cite:
+## Gu, Z. circlize implements and enhances circular visualization
+##   in R. Bioinformatics 2014.
+## 
+## This message can be suppressed by:
+##   suppressPackageStartupMessages(library(circlize))
+## ========================================</code></pre>
+<pre class="r"><code>circos.par(gap.degree = c(10, 10), start.degree = -5)
+circos.initialize(factors = c(&quot;a&quot;, &quot;b&quot;), xlim = c(0, 1))
+circos.trackPlotRegion(ylim = c(0, 1), panel.fun = function(x, y) {
+    circos.axis(major.at = seq(0, 1, by = 0.1))
+})
+circos.rect(0.2, 0.2, 0.4, 0.4, col = &quot;red&quot;, sector.index = &quot;a&quot;)
+circos.link(&quot;a&quot;, 0.3, &quot;b&quot;, 0.7)</code></pre>
+<p><img src="/post/2016-11-21-reverse-xaxis-in-the-circular-layout_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>circos.clear()</code></pre>
+<p>In the bottom sector, the order of x-axis seems not very convinient to read.
+Actually we can make some transformation on the original coordinates on x-axis.
+In following we defined <code>reverse_xaxis()</code> which flips the x-axis.</p>
+<pre class="r"><code>reverse_xaxis = function(x, xlim = get.cell.meta.data(&quot;xlim&quot;)) {
+    (xlim[2] - xlim[1]) - (x - xlim[1]) + xlim[1]
+}
+reverse_xaxis(seq(0, 1, by = 0.1), xlim = c(0, 1))</code></pre>
+<pre><code>##  [1] 1.0 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1 0.0</code></pre>
+<p>In the arguments of <code>reverse_xaxis()</code>, the default value for <code>xlim</code> is <code>get.cell.meta.data("xlim")</code>
+so that it can automatically get the ranges on x-axis if <code>reverse_xaxis()</code> is called inside <code>panel.fun()</code>.
+If it is called somewhere else, <code>xlim</code> should be defined explicitly.</p>
+<p>Now we apply <code>reverse_xaxis()</code> to all the coordinates in the sectors we want to
+flip.</p>
+<pre class="r"><code>circos.par(gap.degree = c(10, 10), start.degree = -5)
+circos.initialize(factors = c(&quot;a&quot;, &quot;b&quot;), xlim = c(0, 1))
+circos.trackPlotRegion(ylim = c(0, 1), panel.fun = function(x, y) {
+    sector.index = get.cell.meta.data(&quot;sector.index&quot;)
+    at = seq(0, 1, by = 0.1)
+    if(sector.index == &quot;a&quot;) {
+        circos.axis(major.at = at, labels = reverse_xaxis(at))
+        circos.rect(reverse_xaxis(0.2), 0.2, reverse_xaxis(0.4), 0.4, 
+            col = &quot;red&quot;, sector.index = &quot;a&quot;)
+    } else {
+        circos.axis(major.at = at)
+    }
+})
+xlim = get.cell.meta.data(&quot;xlim&quot;, sector.index = &quot;a&quot;)
+circos.link(&quot;a&quot;, reverse_xaxis(0.3, xlim), &quot;b&quot;, 0.7)</code></pre>
+<p><img src="/post/2016-11-21-reverse-xaxis-in-the-circular-layout_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>circos.clear()</code></pre>
+<p>In the end, I want to say that users should be very careful with reversing the x-axes. The default
+design that all x-axes are clockwise actually makes it easy and straightforward to compare between sectors,
+especially when you have many sectors in the circle.</p>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

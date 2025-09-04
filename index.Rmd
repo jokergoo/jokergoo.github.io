@@ -1,0 +1,25 @@
+---
+site: blogdown:::blogdown_site
+---
+
+
+```{r, echo = FALSE}
+clean_empty_dir = function(dir) {
+  if (is.null(dir) || !bookdown:::dir_exists(dir)) return()
+  files = list.files(dir, all.files = TRUE, recursive = TRUE)
+  if (length(files) == 0) unlink(dir, recursive = TRUE)
+}
+
+hugo_build = function (local = FALSE) {
+    config = blogdown:::load_config()
+    on.exit(clean_empty_dir("resources"), add = TRUE)
+    if (local)
+        blogdown:::tweak_hugo_env()
+    blogdown:::hugo_cmd(c(if (local) c("-b", blogdown:::site_base_dir(), "-D", "-F"),
+        getOption("blogdown.hugo.args"), "-d", shQuote(blogdown:::publish_dir(config)),
+        blogdown:::theme_flag(config)))
+}
+assignInNamespace("hugo_build", hugo_build, ns = "blogdown")
+
+# hugo -d ./public
+```

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.84.4" />
+
+
+<title>Changes in ComplexHeatmap 2.6.0 - Zuguang Gu</title>
+<meta property="og:title" content="Changes in ComplexHeatmap 2.6.0 - Zuguang Gu">
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="/talks/">Talks</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+    <li><a href="/cv/">CV</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Changes in ComplexHeatmap 2.6.0</h1>
+
+    
+    <span class="article-date">2020-10-28</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>The <strong>ComplexHeatmap</strong> package is still growing. Till now, there are 62
+CRAN/Bioconductor packages that depend on ComplexHeatmap where 7 packages are also mine
+:). It has approxiamtely <a href="http://bioconductor.org/packages/stats/bioc/ComplexHeatmap/">10k downloads per
+month</a>, <a href="https://github.com/jokergoo/ComplexHeatmap/issues">600
+issues</a> on GitHub and
+nearly 600 GitHub stars. <a href="https://academic.oup.com/bioinformatics/article/32/18/2847/1743594">The ComplexHeatmap
+paper</a> has
+more than 1100 citations. Thank you for liking ComplexHeatmap!</p>
+<p>In version 2.6.0 which corresponds to the new Bioconductor release, there are
+following major changes that are user-visible:</p>
+<ol style="list-style-type: decimal">
+<li><p>Add a <code>ComplexHeatmap::pheatmap()</code> function which is almost compatible to
+<code>pheatmap::pheatmap()</code>. It helps users to seamlessly (I hope!) move from
+<strong>pheatmap</strong> to <strong>ComplexHeatmap</strong> to use more unique features in
+<strong>ComplexHeatmap</strong>, e.g. concatenating multiple heatmaps. See the blog post
+<a href="https://jokergoo.github.io/2020/05/06/translate-from-pheatmap-to-complexheatmap/">“Translate from pheatmap to
+ComplexHeatmap”</a>
+for more details.</p></li>
+<li><p>Support interactive heatmaps. Users can either do it under the interactive
+graphics device or through a shiny app. See the blog post <a href="https://jokergoo.github.io/2020/05/15/interactive-complexheatmap/">“Interactive
+ComplexHeatmap”</a>
+for more details.</p></li>
+<li><p>Points can be added to the dendrogram nodes. <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/a-single-heatmap.html#render-dendrograms">See examples here</a>.</p></li>
+<li><p>Rasterization has been improved and multiple methods for rasterization are
+implemented. Now it supports <strong>magick</strong> package for better rasterization
+and also <strong>ragg</strong> package for writting temporary png image files. See the
+blog post <a href="https://jokergoo.github.io/2020/06/30/rasterization-in-complexheatmap/">“Rasterization in
+ComplexHeatmap”</a>
+for more details.</p></li>
+<li><p>Positions of column titles has been adjusted, so that it can be perfectly aligned with ggplot2 figures.
+<a href="https://twitter.com/jokergoo_gu/status/1318824850748735489">See examples here</a>.</p></li>
+<li><p>Users can rotate annotation names/labels. <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/heatmap-annotations.html#annotation-labels">Check examples
+here</a>.</p></li>
+<li><p>Users can choose how to group legends, which means legends for row annotations
+can be grouped with column annotation legends. <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/legends.html#heatmap-and-annotation-legends">See examples
+here</a>
+(check the use of <code>legend_grouping</code> argument).</p></li>
+<li><p><code>oncoPrint()</code> now draws legends the same as the graphics defined in <code>alter_fun</code>, which means
+users do not need to manually construct legends for complex alteration types. <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/oncoprint.html">Check all the
+legends in the oncoPrint chapter</a>.</p></li>
+</ol>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+
+    
+  </body>
+</html>
+

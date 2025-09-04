@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.84.4" />
+
+
+<title>How to change font family globally in ComplexHeatmap - Zuguang Gu</title>
+<meta property="og:title" content="How to change font family globally in ComplexHeatmap - Zuguang Gu">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="/talks/">Talks</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+    <li><a href="/cv/">CV</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">How to change font family globally in ComplexHeatmap</h1>
+
+    
+    <span class="article-date">2022-05-31</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>In <strong>grid</strong>, every viewport is associated with its own graphics parameters and it by default inherits graphics parameters from
+its parent viewport. So, to globally change the font family in a ComplexHeatmap plot, we can simply put the heatmap into
+a “global viewport” where we can set a specific font family (also other graphics parameters) there:</p>
+<pre class="r"><code>library(ComplexHeatmap)
+m = matrix(rnorm(100), 10)
+
+pushViewport(viewport(gp = gpar(fontfamily = &quot;HersheyScript&quot;)))
+ht = Heatmap(m, top_annotation = HeatmapAnnotation(foo = 1:10),
+    right_annotation = rowAnnotation(bar = anno_text(month.name[1:10])),
+    column_title = &quot;A small matrix&quot;)
+draw(ht, newpage = FALSE)
+popViewport()</code></pre>
+<p><img src="/post/2022-05-31-how-to-change-font-family-globally_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Note in <code>draw()</code>, setting <code>newpage = FALSE</code> is important.</p>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

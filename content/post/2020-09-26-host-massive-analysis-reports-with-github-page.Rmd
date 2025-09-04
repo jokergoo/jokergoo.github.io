@@ -1,0 +1,118 @@
+---
+title: "Host massive analysis reports with GitHub Page"
+date: 2020-09-26
+---
+
+```{r, echo = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    error = FALSE,
+    tidy  = FALSE,
+    message = FALSE,
+    warning = FALSE,
+    fig.align = "center"
+)
+library(GetoptLong)
+options(digits = 4)
+```
+
+https://github.com/pricing
+
+https://docs.github.com/en/free-pro-team@latest/github/managing-large-files/what-is-my-disk-quota
+
+https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token
+
+```{r, eval = FALSE}
+username = ...
+token = ...
+```
+
+```{r}
+library(GetoptLong)
+library(gh)
+
+delete_repo = function(repo, dir, where = c("remote", "local")) {
+	qqcat("delete repo @{repo}\n")
+	if("remote" %in% where) {
+		gh("DELETE /repos/:owner/:repo", owner = username, repo = repo, .token = token)
+	}
+
+	if("local" %in% where) {
+		owd = getwd()
+		on.exit(setwd(owd))
+		setwd(dir)
+		if(file.exists(".git")) {
+			unlink(".git", recursive = TRUE, force = TRUE)
+		}
+	}
+}
+
+create_repo = function(repo, dir, ignore = "^.*", where = c("remote", "local")) {
+	
+	all_repos = gh(qq("GET /users/@{username}/repos"))
+	all_repos = vapply(all_repos, "[[", "", "name")
+	if(repo %in% all_repos) {
+		delete_repo(repo, dir)
+	} else {
+		delete_repo(repo, dir, where = "local")
+	}
+
+	qqcat("creating repo for @{repo}\n")
+	if("remote" %in% where) {
+		new_repo = gh("POST /user/repos", name = repo, owner = username, .token = token)
+	}
+
+	if("local" %in% where) {
+		owd = getwd()
+		on.exit(setwd(owd))
+		setwd(dir)
+
+		system("git init")
+		cat(ignore, sep = "\n", file = ".gitignore")
+		system("git add .gitignore")
+		system("git commit -m 'add .gitignore'")
+
+		if(!file.exists("readme.md")) {
+			qqcat("files for @{repo}", file = "readme.md")
+			system("git add readme.md")
+			system("git commit -m 'add readme.md'")
+		}
+
+		branch = system("git branch", intern = TRUE)
+		if(!any(grepl("gh-pages", branch))) {
+			system("git branch gh-pages")
+		}
+	}
+}
+
+update_repo = function(repo, dir) {
+	qqcat("------------ upload for @{repo} -------------\n")
+
+	owd = getwd()
+	on.exit(setwd(owd))
+	setwd(dir)
+
+	system("git add --all")
+	system(qq("git commit -m 'add files for @{repo}'"))
+	system(qq("git push https://@{username}:@{token}@github.com/@{username}/@{repo}.git master"))
+	system("git checkout gh-pages")
+	system("git merge master")
+	system(qq("git push https://@{username}:@{token}@github.com/@{username}/@{repo}.git gh-pages"))
+	system("git checkout master")
+}
+```
+
+dir = sub_dirs("repo_dir/...")
+
+for(repo in dir) {
+	create_repo(repo, qq("repo_dir/@{repo}"))
+	update_repo(repo, qq("repo_dir/@{repo}"))
+}
+```
+
+https://cola-gds.github.io/
+https://github.com/cola-GDS?tab=repositories
+
+https://cola-recount2.github.io/
+https://github.com/cola-recount2?tab=repositories
+

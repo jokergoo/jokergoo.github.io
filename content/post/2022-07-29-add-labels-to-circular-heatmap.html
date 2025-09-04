@@ -1,0 +1,48 @@
+---
+title: "Add labels to circular heatmap"
+date: 2022-07-29
+---
+
+
+
+<p>Assume we have a huge matrix with 1000 rows. First the circular heatmap:</p>
+<pre class="r"><code>set.seed(123)
+m = matrix(rnorm(1000*10), nrow = 1000)
+
+library(circlize)
+circos.heatmap(m, col = colorRamp2(c(-2, 0, 2), c(&quot;blue&quot;, &quot;white&quot;, &quot;red&quot;)))</code></pre>
+<p><img src="/post/2022-07-29-add-labels-to-circular-heatmap_files/figure-html/unnamed-chunk-2-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>It is basically impossible to add labels for all 1000 rows. Normally what we do is to
+only add labels for a small amount of rows. E.g., in the following example, we randomly select 50 rows.</p>
+<pre class="r"><code>row_ind = sample(1000, 50)</code></pre>
+<p>To correctly add these 50 labels to the circular heatmap, the key thing is to find the positions of these rows on
+heatmap. Since clustering and splitting can be applied there, from <strong>circlize</strong> version 0.4.16, I
+added a new function <code>circos.heatmap.get.x()</code> which automatically calculates the x-position of matrix rows.</p>
+<pre class="r"><code>pos = circos.heatmap.get.x(row_ind)
+head(pos)</code></pre>
+<pre><code>##   sector     x row_ind
+## 1  group   6.5     443
+## 2  group  40.5     351
+## 3  group  41.5     779
+## 4  group  86.5     280
+## 5  group 105.5     690
+## 6  group 113.5     326</code></pre>
+<p>With <code>pos</code>, we can now use <code>circos.labels()</code> to associate labels to the heatmap.</p>
+<p>Before adding the labels track, we additionally add a second one-row heatmap track which shows the rows that are selected,
+just for making sure the positions calculated by <code>circos.heatmap.get.x()</code> are correct.</p>
+<pre class="r"><code>anno = rep(&quot;no&quot;, 1000)
+anno[row_ind] = &quot;yes&quot;
+circos.heatmap(anno, col = c(&quot;no&quot; = &quot;white&quot;, &quot;yes&quot; = &quot;purple&quot;), track.height = 0.01)
+
+circos.labels(pos$sector, pos$x, labels = paste0(&quot;label_&quot;, 1:50))
+circos.clear()</code></pre>
+<p><img src="/post/2022-07-29-add-labels-to-circular-heatmap_files/figure-html/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>It also works fine when splitting is applied:</p>
+<pre class="r"><code>split = sample(letters[1:4], 1000, replace = TRUE)
+circos.heatmap(m, col = colorRamp2(c(-2, 0, 2), c(&quot;blue&quot;, &quot;white&quot;, &quot;red&quot;)),
+    split = split)
+pos = circos.heatmap.get.x(row_ind)
+circos.heatmap(anno, col = c(&quot;no&quot; = &quot;white&quot;, &quot;yes&quot; = &quot;purple&quot;), track.height = 0.01)
+circos.labels(pos$sector, pos$x, labels = paste0(&quot;label_&quot;, 1:50))</code></pre>
+<p><img src="/post/2022-07-29-add-labels-to-circular-heatmap_files/figure-html/unnamed-chunk-7-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>circos.clear()</code></pre>

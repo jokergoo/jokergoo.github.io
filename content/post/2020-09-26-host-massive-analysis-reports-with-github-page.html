@@ -1,0 +1,95 @@
+---
+title: "Host massive analysis reports with GitHub Page"
+date: 2020-09-26
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p><a href="https://github.com/pricing" class="uri">https://github.com/pricing</a></p>
+<p><a href="https://docs.github.com/en/free-pro-team@latest/github/managing-large-files/what-is-my-disk-quota" class="uri">https://docs.github.com/en/free-pro-team@latest/github/managing-large-files/what-is-my-disk-quota</a></p>
+<p><a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token" class="uri">https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token</a></p>
+<pre class="r"><code>username = ...
+token = ...</code></pre>
+<pre class="r"><code>library(GetoptLong)
+library(gh)
+
+delete_repo = function(repo, dir, where = c(&quot;remote&quot;, &quot;local&quot;)) {
+    qqcat(&quot;delete repo @{repo}\n&quot;)
+    if(&quot;remote&quot; %in% where) {
+        gh(&quot;DELETE /repos/:owner/:repo&quot;, owner = username, repo = repo, .token = token)
+    }
+
+    if(&quot;local&quot; %in% where) {
+        owd = getwd()
+        on.exit(setwd(owd))
+        setwd(dir)
+        if(file.exists(&quot;.git&quot;)) {
+            unlink(&quot;.git&quot;, recursive = TRUE, force = TRUE)
+        }
+    }
+}
+
+create_repo = function(repo, dir, ignore = &quot;^.*&quot;, where = c(&quot;remote&quot;, &quot;local&quot;)) {
+    
+    all_repos = gh(qq(&quot;GET /users/@{username}/repos&quot;))
+    all_repos = vapply(all_repos, &quot;[[&quot;, &quot;&quot;, &quot;name&quot;)
+    if(repo %in% all_repos) {
+        delete_repo(repo, dir)
+    } else {
+        delete_repo(repo, dir, where = &quot;local&quot;)
+    }
+
+    qqcat(&quot;creating repo for @{repo}\n&quot;)
+    if(&quot;remote&quot; %in% where) {
+        new_repo = gh(&quot;POST /user/repos&quot;, name = repo, owner = username, .token = token)
+    }
+
+    if(&quot;local&quot; %in% where) {
+        owd = getwd()
+        on.exit(setwd(owd))
+        setwd(dir)
+
+        system(&quot;git init&quot;)
+        cat(ignore, sep = &quot;\n&quot;, file = &quot;.gitignore&quot;)
+        system(&quot;git add .gitignore&quot;)
+        system(&quot;git commit -m &#39;add .gitignore&#39;&quot;)
+
+        if(!file.exists(&quot;readme.md&quot;)) {
+            qqcat(&quot;files for @{repo}&quot;, file = &quot;readme.md&quot;)
+            system(&quot;git add readme.md&quot;)
+            system(&quot;git commit -m &#39;add readme.md&#39;&quot;)
+        }
+
+        branch = system(&quot;git branch&quot;, intern = TRUE)
+        if(!any(grepl(&quot;gh-pages&quot;, branch))) {
+            system(&quot;git branch gh-pages&quot;)
+        }
+    }
+}
+
+update_repo = function(repo, dir) {
+    qqcat(&quot;------------ upload for @{repo} -------------\n&quot;)
+
+    owd = getwd()
+    on.exit(setwd(owd))
+    setwd(dir)
+
+    system(&quot;git add --all&quot;)
+    system(qq(&quot;git commit -m &#39;add files for @{repo}&#39;&quot;))
+    system(qq(&quot;git push https://@{username}:@{token}@github.com/@{username}/@{repo}.git master&quot;))
+    system(&quot;git checkout gh-pages&quot;)
+    system(&quot;git merge master&quot;)
+    system(qq(&quot;git push https://@{username}:@{token}@github.com/@{username}/@{repo}.git gh-pages&quot;))
+    system(&quot;git checkout master&quot;)
+}</code></pre>
+<p>dir = sub_dirs(“repo_dir/…”)</p>
+<p>for(repo in dir) {
+create_repo(repo, qq(“<a href="mailto:repo_dir/@%7Brepo" class="email">repo_dir/@{repo</a>}”))
+update_repo(repo, qq(“<a href="mailto:repo_dir/@%7Brepo" class="email">repo_dir/@{repo</a>}”))
+}
+```</p>
+<p><a href="https://cola-gds.github.io/" class="uri">https://cola-gds.github.io/</a>
+<a href="https://github.com/cola-GDS?tab=repositories" class="uri">https://github.com/cola-GDS?tab=repositories</a></p>
+<p><a href="https://cola-recount2.github.io/" class="uri">https://cola-recount2.github.io/</a>
+<a href="https://github.com/cola-recount2?tab=repositories" class="uri">https://github.com/cola-recount2?tab=repositories</a></p>

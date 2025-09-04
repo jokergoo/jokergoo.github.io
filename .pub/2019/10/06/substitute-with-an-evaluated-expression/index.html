@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.84.4" />
+
+
+<title>Substitute with an evaluated expression - Zuguang Gu</title>
+<meta property="og:title" content="Substitute with an evaluated expression - Zuguang Gu">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="/talks/">Talks</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+    <li><a href="/cv/">CV</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Substitute with an evaluated expression</h1>
+
+    
+    <span class="article-date">2019-10-06</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>In Perl, if we want to substitute with an evaluated expression with regular
+expression, we can do as follows.</p>
+<pre class="perl"><code>%map = (
+    &quot;a&quot; =&gt; &quot;one&quot;,
+    &quot;b&quot; =&gt; &quot;two&quot;,
+    &quot;c&quot; =&gt; &quot;three&quot;,
+);
+$txt = &quot;a, b, c&quot;;
+$txt =~s/([a|b|c])/$map{$1}/g;</code></pre>
+<p>Here <code>$map{$1}</code> is evaluated and <code>$txt</code> will be <code>one, two, three</code>.</p>
+<p>To be formal, the matched text <em>s</em> is replaced by <em>f(s)</em> where <em>f()</em> is a
+transformation to the text <em>s</em>.</p>
+<p>In R, we use <code>gsub()</code> to perform substitution, however, the second argument
+<code>replacement</code> can only be a normal string that the matched text cannot be
+changed. In following example, <code>\\1</code> can be not changed.</p>
+<pre class="r"><code>map = c(&quot;a&quot; = &quot;one&quot;, &quot;b&quot; = &quot;two&quot;, &quot;c&quot; = &quot;three&quot;)
+txt = &quot;a, b, c&quot;;
+gsub(&quot;([a|b|c])&quot;, &quot;_\\1_&quot;, txt)  # &quot;a&quot; is still &quot;a&quot;</code></pre>
+<pre><code>## [1] &quot;_a_, _b_, _c_&quot;</code></pre>
+<p>But how can we also apply <em>f(s)</em> in R?</p>
+<p>If we go back to Perl, we can use the form <code>this is a $thing</code> to mix code
+(<code>$thing</code>) and normal text that <code>$thing</code> will be evaluated later and the value
+will be intepolated back to the text.</p>
+<p>This scenario is similar as in the text substitution. Actually we can modify
+the previous example a little bit:</p>
+<pre class="perl"><code>$txt =~s/([a|b|c])/_$map{$1}_/g;</code></pre>
+<p>where in the replacement part <code>_$map{$1}_</code>, <code>$map{$1}</code> is the code and will be
+evaluated. The value of <code>$map{$1}</code> will be sent back to <code>_$map{$1}_</code> to
+perform the normal substitution.</p>
+<p>In R, there are also similar functions that do variable or code intepolation,
+such as <code>glue::glue()</code> or <code>GetoptLong::qq()</code>. Then we can do similar as in
+Perl to substitute with the evaluated expression.</p>
+<p>For the text <code>"a, b, c"</code>, to convert to <code>"one, two, three"</code>, we can first use <code>gsub()</code>
+to replace <code>a/b/c</code> to a template:</p>
+<pre class="r"><code>library(GetoptLong)
+txt2 = gsub(&quot;([a|b|c])&quot;, &quot;@{map[&#39;\\1&#39;]}&quot;, txt)
+txt2</code></pre>
+<pre><code>## [1] &quot;@{map[&#39;a&#39;]}, @{map[&#39;b&#39;]}, @{map[&#39;c&#39;]}&quot;</code></pre>
+<p>then evaluate the template by e.g. <code>GetoptLong:qq()</code>:</p>
+<pre class="r"><code>qq(txt2)</code></pre>
+<pre><code>## [1] &quot;one, two, three&quot;</code></pre>
+<p>In following, we defined a simple function <code>gsub_eval()</code> according to this thought:</p>
+<pre class="r"><code>gsub_eval = function(pattern, replacement, x, ignore.case = FALSE, perl = FALSE,
+    fixed = FALSE, useBytes = FALSE, envir = parent.frame()) {
+    txt = gsub(
+        pattern = pattern, 
+        replacement = replacement, 
+        x = x, 
+        ignore.case = ignore.case, 
+        perl = perl,
+        fixed = fixed, 
+        useBytes = useBytes
+    )
+    unname(sapply(txt, function(x) GetoptLong::qq(x, envir = envir)))
+}</code></pre>
+<pre class="r"><code>gsub_eval(&quot;([a|b|c])&quot;, &quot;@{map[&#39;\\1&#39;]}&quot;, txt)</code></pre>
+<pre><code>## [1] &quot;one, two, three&quot;</code></pre>
+<p>You can use any type of code in the template. Following is another example
+using <code>gsub_eval()</code>:</p>
+<pre class="r"><code>gsub_eval(&quot;(\\d),(\\d)&quot;, &quot;sum=@{\\1 + \\2}&quot;, c(&quot;number 1,2&quot;, &quot;number 3,4&quot;))</code></pre>
+<pre><code>## [1] &quot;number sum=3&quot; &quot;number sum=7&quot;</code></pre>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

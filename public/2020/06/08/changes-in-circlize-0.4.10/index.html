@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.60.1" />
+
+
+<title>Changes in circlize 0.4.10 - A Bioinformagician</title>
+<meta property="og:title" content="Changes in circlize 0.4.10 - A Bioinformagician">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Changes in circlize 0.4.10</h1>
+
+    
+    <span class="article-date">2020-06-08</span>
+    
+
+    <div class="article-content">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<pre class="r"><code>library(circlize)</code></pre>
+<div id="add-circos.-grahpic-functions" class="section level2">
+<h2>add circos.* grahpic functions</h2>
+<div id="barplots" class="section level3">
+<h3>barplots</h3>
+<pre class="r"><code>par(mfrow = c(1, 2))
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = runif(10)
+    circos.barplot(value, 1:10 - 0.5, col = 1:10)
+})
+circos.track(ylim = c(-1, 1), panel.fun = function(x, y) {
+    value = runif(10, min = -1, max = 1)
+    circos.barplot(value, 1:10 - 0.5, col = ifelse(value &gt; 0, 2, 3))
+})
+circos.clear()
+
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 4), panel.fun = function(x, y) {
+    value = matrix(runif(10*4), ncol = 4)
+    circos.barplot(value, 1:10 - 0.5, col = 2:5)
+})</code></pre>
+<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>circos.clear()</code></pre>
+<pre class="r"><code>par(mfrow = c(1, 2))
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    for(pos in seq(0.5, 9.5, by = 1)) {
+        value = runif(10)
+        circos.boxplot(value, pos)
+    }
+})
+circos.clear()
+
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = replicate(runif(10), n = 10, simplify = FALSE)
+    circos.boxplot(value, 1:10 - 0.5, col = 1:10)
+})</code></pre>
+<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>circos.clear()</code></pre>
+<pre class="r"><code>par(mfrow = c(1, 2))
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    for(pos in seq(0.5, 9.5, by = 1)) {
+        value = runif(10)
+        circos.violin(value, pos)
+    }
+})
+circos.clear()
+
+circos.initialize(fa = letters[1:4], xlim = c(0, 10))
+circos.track(ylim = c(0, 1), panel.fun = function(x, y) {
+    value = replicate(runif(10), n = 10, simplify = FALSE)
+    circos.violin(value, 1:10 - 0.5, col = 1:10)
+})</code></pre>
+<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>circos.clear()</code></pre>
+</div>
+</div>
+<div id="units" class="section level2">
+<h2>units</h2>
+<pre class="r"><code>fa = letters[1:10]
+circos.par(cell.padding = c(0, 0, 0, 0), track.margin = c(0, 0))
+circos.initialize(fa, xlim = cbind(rep(0, 10), runif(10, 0.5, 1.5)))
+circos.track(ylim = c(0, 1), track.height = mm_h(5),
+    panel.fun = function(x, y) {
+        circos.lines(c(0, 0 + mm_x(5)), c(0.5, 0.5), col = &quot;blue&quot;)
+    })
+circos.par(track.margin = c(0, mm_h(2)))
+circos.track(ylim = c(0, 1), track.height = convert_height(1, &quot;cm&quot;),
+    panel.fun = function(x, y) {
+        xcenter = get.cell.meta.data(&quot;xcenter&quot;)
+        circos.lines(c(xcenter, xcenter), c(0, cm_y(1)), col = &quot;red&quot;)
+    })
+circos.par(track.margin = c(0, mm_h(5)))
+circos.track(ylim = c(0, 1), track.height = inch_h(1),
+    panel.fun = function(x, y) {
+        line_length_on_x = cm_x(1*sqrt(2)/2)
+        line_length_on_y = cm_y(1*sqrt(2)/2)
+        circos.lines(c(0, line_length_on_x), c(0, line_length_on_y), col = &quot;orange&quot;)
+    })</code></pre>
+<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>circos.clear()</code></pre>
+</div>
+<div id="set-gaps-between-tracks" class="section level2">
+<h2>set gaps between tracks</h2>
+<pre class="r"><code>circos.initialize(fa = letters[1:10], xlim = c(0, 1))
+circos.track(ylim = c(0, 1))
+set_track_gap(mm_h(2))
+circos.track(ylim = c(0, 1))</code></pre>
+<p><img src="/post/2020-06-14-changes-in-circlize-0-4-10_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>circos.clear()</code></pre>
+</div>
+<div id="gap.degree-with-names" class="section level2">
+<h2>gap.degree with names</h2>
+</div>
+<div id="grouped-chord-diagram" class="section level2">
+<h2>grouped chord diagram</h2>
+</div>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

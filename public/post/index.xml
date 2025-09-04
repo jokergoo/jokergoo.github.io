@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Zuguang Gu</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on Zuguang Gu</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 01 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Add backgroud grid lines to heatmap annotations</title>
+      <link>/2025/04/01/add-backgroud-grid-lines-to-heatmap-annotations/</link>
+      <pubDate>Tue, 01 Apr 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/2025/04/01/add-backgroud-grid-lines-to-heatmap-annotations/</guid>
+      <description>The question: for the following heatmap with a top barplot annotation, how to make it to a ggplot2-style plot, i.e., with background grid lines?
+library(ComplexHeatmap) set.seed(666) m = matrix(rnorm(100), 10) x = abs(rnorm(10)) Heatmap(m, top_annotation = HeatmapAnnotation(foo = anno_barplot(x), height = unit(8, &amp;quot;cm&amp;quot;))) One natural solution is to use the decorate_annotation() function to add such additional graphics to the “foo” annotation. Just note decorate_annotation() is a post-processing function where the grey background will overwrite the bars in the annotation.</description>
+    </item>
+    
+    <item>
+      <title>Edit grobs in ggplot2 plots</title>
+      <link>/2024/05/16/edit-grobs-in-ggplot2-plots/</link>
+      <pubDate>Thu, 16 May 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/2024/05/16/edit-grobs-in-ggplot2-plots/</guid>
+      <description>Load the packages and generate test dataset.
+library(ggplot2) library(grid) df = data.frame( x = rep(c(2, 5, 7, 9, 12), 2), y = rep(c(1, 2), each = 5), z = factor(rep(1:5, each = 2)), w = rep(diff(c(0, 4, 6, 8, 10, 14)), 2) ) We make a “heatmap” with the ggplot2 package.
+ggplot(df, aes(x, y)) + geom_tile(aes(fill = z), color = NA) Depends on the “graphics device” you use, you might see white vertical and horizontal lines between cells in the plot.</description>
+    </item>
+    
+    <item>
+      <title>Get gene-region associations for a group of GO terms</title>
+      <link>/2024/02/05/get-gene-region-associations-for-a-group-of-go-terms/</link>
+      <pubDate>Mon, 05 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>/2024/02/05/get-gene-region-associations-for-a-group-of-go-terms/</guid>
+      <description>Let’s first do a combination analysis with rGREAT and simplifyEnrichment. Let’s say, you have a list of genomic regions of interest (in the following example, we use a list of transcription factor binding sites). You do a GO enrichment analysis with rGREAT and visualize the enrichment results with simplifyEnrichment.
+library(rGREAT) df = read.table(url(&amp;quot;https://raw.githubusercontent.com/jokergoo/rGREAT_suppl/master/data/tb_encTfChipPkENCFF708LCH_A549_JUN_hg19.bed&amp;quot;)) # convert to a GRanges object gr = GRanges(seqnames = df[, 1], ranges = IRanges(df[, 2], df[, 3])) res = great(gr, &amp;quot;BP&amp;quot;, &amp;quot;hg19&amp;quot;) tb = getEnrichmentTable(res) head(tb) ## id description genome_fraction observed_region_hits ## 1 GO:0097190 apoptotic signaling pathway 0.</description>
+    </item>
+    
+    <item>
+      <title>Package dependencies in your session</title>
+      <link>/2023/11/16/package-dependencies-in-your-session/</link>
+      <pubDate>Thu, 16 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/11/16/package-dependencies-in-your-session/</guid>
+      <description>It has almost been a standard to put sessionInfo() to the end of the R markdown document to keep track of the environment where the analysis is done. sessionInfo() prints a list of packages that are loaded to the R session directly or indirectly. But how about the dependency relations among those packages? In this blog post, let’s check it out.
+Let’s open a new R session and only load the ggplot2 package:</description>
+    </item>
+    
+    <item>
+      <title>Simplified simplifyEnrichment plot</title>
+      <link>/2023/10/02/simplified-simplifyenrichment-plot/</link>
+      <pubDate>Mon, 02 Oct 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/10/02/simplified-simplifyenrichment-plot/</guid>
+      <description>The lt object contains a list of GO enrichment tables.
+names(lt) ## [1] &amp;quot;BP_km1&amp;quot; &amp;quot;BP_km2&amp;quot; &amp;quot;BP_km3&amp;quot; &amp;quot;BP_km4&amp;quot; head(lt[[1]][, 1:7]) ## ID Description GeneRatio BgRatio pvalue ## GO:0006974 GO:0006974 cellular response to DNA damage stimulus 77/471 871/18614 3.252635e-22 ## GO:0006281 GO:0006281 DNA repair 61/471 587/18614 3.683205e-21 ## GO:0000278 GO:0000278 mitotic cell cycle 78/471 933/18614 5.191864e-21 ## GO:1903047 GO:1903047 mitotic cell cycle process 70/471 777/18614 1.148628e-20 ## GO:0051276 GO:0051276 chromosome organization 58/471 626/18614 8.</description>
+    </item>
+    
+    <item>
+      <title>Dynamic graphical object in grid, part 2</title>
+      <link>/2023/09/25/dynamic-graphical-object-in-grid-part-2/</link>
+      <pubDate>Mon, 25 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/09/25/dynamic-graphical-object-in-grid-part-2/</guid>
+      <description>I have introduced how to define a dynamic grob by setting its makeContext() method. In this post, I will demonstrate two other ways, which are either identical to the previous method, or very similar to it.
+Again, the plotting task: drawing two circles at (1, 0) and (-1, 0) with both radius of 1, and we want the two circles fill the plotting region as much as possible no matter how the graphical device is resized.</description>
+    </item>
+    
+    <item>
+      <title>Dynamic graphical object in grid</title>
+      <link>/2023/09/22/dynamic-graphical-object-in-grid/</link>
+      <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/09/22/dynamic-graphical-object-in-grid/</guid>
+      <description>Consider the following task: drawing two circles at (1, 0) and (-1, 0) with both radius of 1.
+theta = seq(0, 2*pi, length = 50) x1 = cos(theta) + 1 y1 = sin(theta) x2 = cos(theta) - 1 y2 = sin(theta) We might think of the following way:
+library(grid) grid.newpage() pushViewport(viewport(xscale = c(-2, 2), yscale = c(-1, 1))) grid.lines(x1, y1, default.units = &amp;quot;native&amp;quot;) grid.lines(x2, y2, default.units = &amp;quot;native&amp;quot;) Unfortunately it only works when the width of the image is twice of the height.</description>
+    </item>
+    
+    <item>
+      <title>Top10 first-authors on Bioinformatics</title>
+      <link>/2023/07/25/top10-first-authors-on-bioinformatics/</link>
+      <pubDate>Tue, 25 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/07/25/top10-first-authors-on-bioinformatics/</guid>
+      <description>Following code obtains numbers of papers for first-authors on Bioinformatics.
+library(pubmedR) api_key = NULL # pubmed only allows downloading less than 10k records at a time, # so I split them into two parts query = &amp;#39;(&amp;quot;Bioinformatics (Oxford, England)&amp;quot;[Journal]) AND ((&amp;quot;1998&amp;quot;[Date - Publication] : &amp;quot;2014&amp;quot;[Date - Publication]))&amp;#39; res &amp;lt;- pmQueryTotalCount(query = query, api_key = api_key) D1 &amp;lt;- pmApiRequest(query = query, limit = res$total_count, api_key = NULL) query = &amp;#39;(&amp;quot;Bioinformatics (Oxford, England)&amp;quot;[Journal]) AND ((&amp;quot;2015&amp;quot;[Date - Publication] : &amp;quot;2023&amp;quot;[Date - Publication]))&amp;#39; res &amp;lt;- pmQueryTotalCount(query = query, api_key = api_key) D2 &amp;lt;- pmApiRequest(query = query, limit = res$total_count, api_key = NULL) m1 = pmApi2df(D1) m2 = pmApi2df(D2) m = rbind(m1, m2) df = df[df$DT == &amp;quot;JOURNAL ARTICLE&amp;quot;, ] The top 10 first-authors are:</description>
+    </item>
+    
+    <item>
+      <title>What is a hclust object</title>
+      <link>/2023/07/07/what-is-a-hclust-object/</link>
+      <pubDate>Fri, 07 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/07/07/what-is-a-hclust-object/</guid>
+      <description>Hierarchical clustering is a widely used approach for data analysis. In this post, I will demonstrate the internal structure of a hclust object.
+I first generate a random matrix and apply hclust().
+set.seed(123456) m = matrix(rnorm(25), 5) rownames(m) = letters[1:5] hc = hclust(dist(m)) Typing the hc object simply prints the basic information of the object.
+hc ## ## Call: ## hclust(d = dist(m)) ## ## Cluster method : complete ## Distance : euclidean ## Number of objects: 5 And plot() function draws the clustering results:</description>
+    </item>
+    
+    <item>
+      <title>Speed up over-representation enrichment analysis</title>
+      <link>/2023/04/05/speed-up-over-representation-enrichment-analysis/</link>
+      <pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/04/05/speed-up-over-representation-enrichment-analysis/</guid>
+      <description>Over-representation analysis (ORA) evaluates whether a list of genes (e.g. differentially expressed genes, DE genes) are enriched in a gene set, normally with the hypergeometric distribution to calculate p-values. With the function phyper(), there are the following parameters:
+phyper(x, m, n, k, lower.tail = FALSE) where x is the number of DE genes in the gene set, m is the total number of genes in the gene set, n is the total number of genes not in the gene set, and k is the total number of DE genes.</description>
+    </item>
+    
+    <item>
+      <title>Align heatmaps</title>
+      <link>/2023/04/03/align-heatmaps/</link>
+      <pubDate>Mon, 03 Apr 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/04/03/align-heatmaps/</guid>
+      <description>ComplexHeatmap can make a list of heatmap where rows or columns in different heatmaps can be easily corresponded. However, in some scenarios, users may only want to combine multiple plots into one single and large plot, where each plot is like a figure panel. Normally we use cowplot or patchwork package, or even manually with pushViewport()/viewport() functions to combine multiple figure panels, but for heatmaps, users may additionally want all heatmaps are aligned by the heatmap bodies, while not by the whole heatmap plot.</description>
+    </item>
+    
+    <item>
+      <title>Use simplifyEnrichment for non-model organisms</title>
+      <link>/2023/03/30/use-simplifyenrichment-for-non-model-organisms/</link>
+      <pubDate>Thu, 30 Mar 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/03/30/use-simplifyenrichment-for-non-model-organisms/</guid>
+      <description>library(simplifyEnrichment) To perform GO clustering with the simplifyEnrichment package, the first step is to calculate GO similarities with the function GO_similarity(). The semantic similarity depends on the genes annotated to GO terms, thus, an OrgDb package is needed for the use of GO_similarity(). For example, for mouse:
+GO_similarity(go_id, db = &amp;quot;org.Mm.eg.db&amp;quot;) On Bioconductor, there are the following OrgDb packages that can be used with GO_similarity().
+  Package Organism    org.</description>
+    </item>
+    
+    <item>
+      <title>Generate citation map</title>
+      <link>/2023/02/18/generate-citation-map/</link>
+      <pubDate>Sat, 18 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/02/18/generate-citation-map/</guid>
+      <description>In Web of Science, you can generate a nice citation map to show how your papers are cited world wide. In this blog post, I will demonstrate how to fetch the citation data and how to make such citation map in R.
+The citation data is not straightforward to find. Since the citation map is presented on a web page, the data is actually downloaded by the browser. Thus, we just need to find the corresponding file there.</description>
+    </item>
+    
+    <item>
+      <title>Visualize CPAN modules with Hilbert curve</title>
+      <link>/2023/01/09/visualize-cpan-modules-with-hilbert-curve/</link>
+      <pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>/2023/01/09/visualize-cpan-modules-with-hilbert-curve/</guid>
+      <description>There is a nice visualization of CPAN (Perl) modules with the Hilbert curve on http://mapofcpan.org/. In this post, I will demonstrate how to make the plot with the HilbertCurve package.
+We first read the list of CPAN modules. The information is in the 02packages.details.txt file which can be directly accessed with the following link:
+df = read.table(url(&amp;quot;https://www.cpan.org/modules/02packages.details.txt&amp;quot;), skip = 9) head(df) ## V1 V2 V3 ## 1 A1z::Html 0.04 C/CE/CEEJAY/A1z-Html-0.</description>
+    </item>
+    
+    <item>
+      <title>Draw links on the two different sides of a track</title>
+      <link>/2022/12/09/draw-links-on-the-two-different-sides-of-a-track/</link>
+      <pubDate>Fri, 09 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/12/09/draw-links-on-the-two-different-sides-of-a-track/</guid>
+      <description>Links in circos plot can show relations between elements. In most cases, links are drawn in the most inside of the circle. However, separating links into two categories of those having short distances and those having large distances, and distinguishing them by putting them onto different sides of a track can sometimes improve the visualization. One typical example is to separate intergenic translocations and intragenic translocations of genes.
+In the next example, I first generate positions for three genes (A, B, and C).</description>
+    </item>
+    
+    <item>
+      <title>Partially change default values of arguments</title>
+      <link>/2022/10/22/partially-change-default-values-of-arguments/</link>
+      <pubDate>Sat, 22 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/10/22/partially-change-default-values-of-arguments/</guid>
+      <description>This is the problem I have. For example, in the Heatmap() function in the ComplexHeatmap package, one of its argument row_title_gp has a default value gpar(fontsize = 13.2):
+Heatmap = function(..., row_title_gp = gpar(fontsize = 13.2), ...) { ... } Here row_title_gp controls the graphics parameters for the row title and it accepts a list of other parameters, such as col and fontfamily. Now the problem is when users set row_title_gp with other parameters, e.</description>
+    </item>
+    
+    <item>
+      <title>Visualize lift over between two assemblies</title>
+      <link>/2022/09/13/visualize-lift-over-between-two-assemblies/</link>
+      <pubDate>Tue, 13 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/09/13/visualize-lift-over-between-two-assemblies/</guid>
+      <description>In this post, I will simply demonstrate how to visualize lift overs between two assemblies. In the package rtracklayer, there is a function liftOver() that can convert genomic regions according to the mapping encoded in a “chain” file.
+In the following code, I will demonstrate the lift overs from hg19 to hg38. I first download the chain file from UCSC database. Note the .gz file needs to be uncompressed.</description>
+    </item>
+    
+    <item>
+      <title>Add labels to circular heatmap</title>
+      <link>/2022/07/29/add-labels-to-circular-heatmap/</link>
+      <pubDate>Fri, 29 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/07/29/add-labels-to-circular-heatmap/</guid>
+      <description>Assume we have a huge matrix with 1000 rows. First the circular heatmap:
+set.seed(123) m = matrix(rnorm(1000*10), nrow = 1000) library(circlize) circos.heatmap(m, col = colorRamp2(c(-2, 0, 2), c(&amp;quot;blue&amp;quot;, &amp;quot;white&amp;quot;, &amp;quot;red&amp;quot;))) It is basically impossible to add labels for all 1000 rows. Normally what we do is to only add labels for a small amount of rows. E.g., in the following example, we randomly select 50 rows.
+row_ind = sample(1000, 50) To correctly add these 50 labels to the circular heatmap, the key thing is to find the positions of these rows on heatmap.</description>
+    </item>
+    
+    <item>
+      <title>Textbox annotation</title>
+      <link>/2022/06/15/textbox-annotation/</link>
+      <pubDate>Wed, 15 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/06/15/textbox-annotation/</guid>
+      <description>In a previous post “Word cloud as heatmap annotation”, I introduced how to make word clouds and attach them to heatmaps as annotations. Here I will introduce a more general solution for making textboxes.
+The following new functions are implemented in ComplexHeatmap from version 2.13.1. Now you need to update ComplexHeatmap from GitHub.
+First I will demonstrate a low-level grid.* family function grid.textbox(). The function simply accepts a vector of texts.</description>
+    </item>
+    
+    <item>
+      <title>How to change font family globally in ComplexHeatmap</title>
+      <link>/2022/05/31/how-to-change-font-family-globally-in-complexheatmap/</link>
+      <pubDate>Tue, 31 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/05/31/how-to-change-font-family-globally-in-complexheatmap/</guid>
+      <description>In grid, every viewport is associated with its own graphics parameters and it by default inherits graphics parameters from its parent viewport. So, to globally change the font family in a ComplexHeatmap plot, we can simply put the heatmap into a “global viewport” where we can set a specific font family (also other graphics parameters) there:
+library(ComplexHeatmap) m = matrix(rnorm(100), 10) pushViewport(viewport(gp = gpar(fontfamily = &amp;quot;HersheyScript&amp;quot;))) ht = Heatmap(m, top_annotation = HeatmapAnnotation(foo = 1:10), right_annotation = rowAnnotation(bar = anno_text(month.</description>
+    </item>
+    
+    <item>
+      <title>Set cell_fun/layer_fun in InteractiveComplexHeatmap</title>
+      <link>/2022/04/01/set-cell_fun/layer_fun-in-interactivecomplexheatmap/</link>
+      <pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/04/01/set-cell_fun/layer_fun-in-interactivecomplexheatmap/</guid>
+      <description>In the interactive heatmap produced by InteractiveComplexHeatmap package, the sub-heatmap is just a zooming of the main heatmap, which means, if cell_fun or layer_fun is set in Heatmap(), both main heatmap and sub-heatmap will execute it. cell_fun and layer_fun provides a way to customize the heatmap cells, but when the main heatmap is huge, adding more graphics via cell_fun/layer_fun apparently is not a good idea. Users may want to suppress cell_fun/layer_fun (or just draw very simple graphics which will not disturb the reading of the heatmap) in the main heatmap, while only to execute them in the sub-heatmap.</description>
+    </item>
+    
+    <item>
+      <title>Support HCL colormaps in ComplexHeatmap</title>
+      <link>/2022/03/08/support-hcl-colormaps-in-complexheatmap/</link>
+      <pubDate>Tue, 08 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/03/08/support-hcl-colormaps-in-complexheatmap/</guid>
+      <description>To demonstrate this new feature, I first generate a small random matrix.
+set.seed(123) nr1 = 4; nr2 = 8; nr3 = 6; nr = nr1 + nr2 + nr3 nc1 = 6; nc2 = 8; nc3 = 10; nc = nc1 + nc2 + nc3 mat = cbind(rbind(matrix(rnorm(nr1*nc1, mean = 1, sd = 0.5), nr = nr1), matrix(rnorm(nr2*nc1, mean = 0, sd = 0.5), nr = nr2), matrix(rnorm(nr3*nc1, mean = 0, sd = 0.</description>
+    </item>
+    
+    <item>
+      <title>Re-analyze an AML proteomics dataset</title>
+      <link>/2022/03/04/re-analyze-an-aml-proteomics-dataset/</link>
+      <pubDate>Fri, 04 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/03/04/re-analyze-an-aml-proteomics-dataset/</guid>
+      <description>I recently came across a paper entitled “The proteogenomic subtypes of acute myeloid leukemia” published on Cancer Cell, which performed subtype classifications on acute myeloid leukemia (AML) with the proteomics data. In the paper, the classification was performed by hierarchical clustering on the distance matrix of the proteomics dataset.
+The motivations for me to reanalyze this dataset are the following two:
+I have never analyzed proteomics data, thus I want to see how the data looks like; I have never applied cola package on proteomics datasets.</description>
+    </item>
+    
+    <item>
+      <title>Easily convert static heatmaps to interactive heatmaps in Shiny apps</title>
+      <link>/2022/03/01/easily-convert-static-heatmaps-to-interactive-heatmaps-in-shiny-apps/</link>
+      <pubDate>Tue, 01 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/03/01/easily-convert-static-heatmaps-to-interactive-heatmaps-in-shiny-apps/</guid>
+      <description>Some people might have already implemented ComplexHeatmap in their Shiny apps, where a static heatmap is automatically generated by adjusting parameters for heatmaps. For example, in the following example, in the left panel, users can control three types of parameters for heatmaps:
+ Whether to apply clustering? Whether to order heatmaps by row and column names? Whether to perform k-means clustering with 2-group on both rows and columns?  The following code can be directly copied and pasted to an R session.</description>
+    </item>
+    
+    <item>
+      <title>Spiral visualization of daily git commits</title>
+      <link>/2022/02/03/spiral-visualization-of-daily-git-commits/</link>
+      <pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/02/03/spiral-visualization-of-daily-git-commits/</guid>
+      <description>In this blog, I will apply spiral visualization on git daily commits. The following three plots are for R package circlize (which is developed by me), the R package ggplot2 and the JavaScript library jQuery. Each loop is a complete year. The point size corresponds to the number of commits on that day.
+Next we visualize the git commits for the five programming languages: R, Perl, Python, PHP and Julia.</description>
+    </item>
+    
+    <item>
+      <title>A completely customized annotation</title>
+      <link>/2021/10/17/a-completely-customized-annotation/</link>
+      <pubDate>Sun, 17 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/10/17/a-completely-customized-annotation/</guid>
+      <description>For most annotation functions implemented in ComplexHeatmap, they only draw one same type of annotation graphics, e.g. anno_points() only draws points. From ComplexHeatmap version 2.9.4, I added a new annotation function anno_customize(), with which you can completely freely define graphics for every annotation cell.
+The input for anno_customize() should be a categorical vector.
+library(ComplexHeatmap) x = c(&amp;quot;a&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;d&amp;quot;) For each level, you need to define a graphics function for it.</description>
+    </item>
+    
+    <item>
+      <title>Visualize the &#39;real&#39; circular genome</title>
+      <link>/2021/09/18/visualize-the-real-circular-genome/</link>
+      <pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/09/18/visualize-the-real-circular-genome/</guid>
+      <description>circlize applies circular visualization. Essentially, it visualizes data in categories. E.g. for genomic data, the circle is segmented and each segment (or called sector) corresponds to one single chromosome. The following code visualizes 24 chromosomes of human genome.
+library(circlize) circos.initializeWithIdeogram() Now the question is how to visualize a “real” circular genome where the complete circle corresponds to the genome and the “end” of the genome goes smoothly over the “start” of the genome.</description>
+    </item>
+    
+    <item>
+      <title>Create self-defined annotations</title>
+      <link>/2021/08/04/create-self-defined-annotations/</link>
+      <pubDate>Wed, 04 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/08/04/create-self-defined-annotations/</guid>
+      <description>ComplexHeatmap already provides many annotation functions that draw various types of graphics, but still, users might want more new types. Here I demonstrate how to create new annotation graphics.
+In the ComplexHeatmap book (https://jokergoo.github.io/ComplexHeatmap-reference/book/heatmap-annotations.html#implement-new-annotation-functions), I have already explained how to create new annotations with the function AnnotationFunction(). Here I demonstrate a simplified way to construct a new annotation type which also allows reordering, subsetting and splitting.
+From version 2.</description>
+    </item>
+    
+    <item>
+      <title>Make triangle heatmap</title>
+      <link>/2021/07/22/make-triangle-heatmap/</link>
+      <pubDate>Thu, 22 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/07/22/make-triangle-heatmap/</guid>
+      <description>For the following heatmap symmetric to the diagonal, users might only want to draw the lower or upper triangle heatmap.
+library(ComplexHeatmap) m = cor(matrix(rnorm(100), 10)) Heatmap(m) By observing the heatmap, the simplest way is to compare the row index and column index of the heatmap. Note here since the heatmap rows and columns are already reordered by clusering, we need to reorder the matrix before sending to heatmap, and in the heatmap, no reordering should be applied.</description>
+    </item>
+    
+    <item>
+      <title>Multiple color themes in a single heatmap</title>
+      <link>/2021/05/11/multiple-color-themes-in-a-single-heatmap/</link>
+      <pubDate>Tue, 11 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/11/multiple-color-themes-in-a-single-heatmap/</guid>
+      <description>Some people might want to use multiple color schemas in a single heatmap to highlight group-wise patterns. If groups are also separated in heatmap, then actually each group can be treated as a single heatmap with its own color theme, later these heatmaps can be concatenated into the final heatmap.
+In the following example, we assume there are two groups on columns. Colors for group A use the theme “green-black-red” and colors for group B use “purple-white-orange”.</description>
+    </item>
+    
+    <item>
+      <title>Implement interactive heatmap from scratch</title>
+      <link>/2021/04/05/implement-interactive-heatmap-from-scratch/</link>
+      <pubDate>Mon, 05 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/04/05/implement-interactive-heatmap-from-scratch/</guid>
+      <description>In InteractiveComplexHeatmap, we mainly use the combination of InteractiveComplexHeatmapOutput() and makeInteractiveComplexHeatmap() to create the interactive heatmap widget in the Shiny application. The interactive widgets contains many tools for manipulating heatmaps. However, sometimes users may want to build their own interactive heatmap widget, e.g. to define their own logic to respond to the clicking or brushing event on heatmaps, while not use the one provided by InteractiveComplexHeatmap. What they only want is the information of the heatmap cells that were selected from heatmaps.</description>
+    </item>
+    
+    <item>
+      <title>3D Heatmap</title>
+      <link>/2021/03/24/3d-heatmap/</link>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/03/24/3d-heatmap/</guid>
+      <description>From version 2.7.9, ComplexHeatmap can make simple 3D heatmap with a new function Heatmap3D().  Motivation ComplexHeatmap has a densityHeatmap() to visualize a list of density distributions, such as in the following example:
+library(ComplexHeatmap) set.seed(123) mat = matrix(rnorm(500), ncol = 10) colnames(mat) = letters[1:10] densityHeatmap(mat) In basic R graphics, since distributions can also be visualized by histograms, from ComplexHeatmap version 2.7.9, I added a new function frequencyHeatmap() which is like a histogram-version of density heatmap.</description>
+    </item>
+    
+    <item>
+      <title>Control labels in anno_block()</title>
+      <link>/2021/03/11/control-labels-in-anno_block/</link>
+      <pubDate>Thu, 11 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/03/11/control-labels-in-anno_block/</guid>
+      <description>In ComplexHeatmap, labels and other related settings in anno_block() always correspond to the heatmap slices from top to bottom after the heatmap is generated, which means, you always need to first generate the heatmap, then to observe how the heatmap slices are ordered and finally to set a proper value for labels. It is difficult to map the labels in anno_block() to the heatmap slices if clustering is applied, or when the ordering is unknown before the heatmap is drawn.</description>
+    </item>
+    
+    <item>
+      <title>Cluster groups in ComplexHeatmap</title>
+      <link>/2021/03/05/cluster-groups-in-complexheatmap/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/03/05/cluster-groups-in-complexheatmap/</guid>
+      <description>When making heatmaps, we always have many additionally grouping information for the samples, sush as subtypes, phenotypes. To emphasize the difference between groups, we might want to only perform clustering on group level, while not on the complete dataset. For these scenarios, ComplexHeatmap has two functions: cluster_between_groups() and cluster_within_group(). The two functions all perform clustering on group level. The difference is, in cluster_between_groups(), inside each group, the order of samples is unchanged, while in cluster_within_group(), samples in each group are still clustered.</description>
+    </item>
+    
+    <item>
+      <title>Differentiate brush and hover event in Shiny</title>
+      <link>/2021/02/21/differentiate-brush-and-hover-event-in-shiny/</link>
+      <pubDate>Sun, 21 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/02/21/differentiate-brush-and-hover-event-in-shiny/</guid>
+      <description>In my last post I described how I distinguish click and brush event in plotOutput in Shiny. In this post I try to solve another problem which is to differentiate hover and brush event.
+Similar as click, brush also intializes a hover event. To distinguish hover and brush, I didn’t use the default hover in plotOutput. Here I implement my own one. The implementation contains two parts:</description>
+    </item>
+    
+    <item>
+      <title>Differentiate brush and click event in Shiny</title>
+      <link>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</link>
+      <pubDate>Sat, 20 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/02/20/differentiate-brush-and-click-event-in-shiny/</guid>
+      <description>I am recently developing a package InteractiveComplexHeatmap which generates interactive heatmaps as Shiny apps. One basic interactivity on heatmap is to click on heatmap cells or to select a region from it. Shiny allows to set click and brush arguments in plotOutput() to perform clicking or brushing on the heatmap image, and on the server side, to respond to these two actions. In InteractiveComplexHeatmap, I defined an action to respond to click event and an action to respond to brush event.</description>
+    </item>
+    
+    <item>
+      <title>Interactivate indirect use of pheatmap(), heatmap.2() and heatmap()</title>
+      <link>/2021/01/22/interactivate-indirect-use-of-pheatmap-heatmap.2-and-heatmap/</link>
+      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/01/22/interactivate-indirect-use-of-pheatmap-heatmap.2-and-heatmap/</guid>
+      <description>With InteractiveComplexHeatmap, the following heatmaps can be exported as an interactive Shiny app:
+heatmaps directly produced from ComplexHeatmap, heatmaps from other functions or packages which are implement with ComplexHeatmap, heatmaps originally produced by stats::heatmap(), gplots::heatmap.2() and pheatmap::pheatmap(), but can be reproduced by the “translation functions”: ComplexHeatmap:::heatmap(), ComplexHeatmap:::heatmap.2() and ComplexHeatmap::pheatmap().  All these types of heatmaps can be turned into interactive just by calling htShiny() after the heatmaps are drawn.</description>
+    </item>
+    
+    <item>
+      <title>Set heatmap cell width in circos.heatmap function</title>
+      <link>/2021/01/07/set-heatmap-cell-width-in-circos.heatmap-function/</link>
+      <pubDate>Thu, 07 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/01/07/set-heatmap-cell-width-in-circos.heatmap-function/</guid>
+      <description>In a previous post I introduced making circular heatmaps with the circlize package. From version 0.4.12, I add a new argument cell_width in circos.heatmap() function so that the heatmap cell width is adjustable.
+First I generate a random dataset for making the heatmaps.
+library(circlize) set.seed(123) mat1 = rbind(cbind(matrix(rnorm(50*5, mean = 1), nr = 50), matrix(rnorm(50*5, mean = -1), nr = 50)), cbind(matrix(rnorm(50*5, mean = -1), nr = 50), matrix(rnorm(50*5, mean = 1), nr = 50)) ) rownames(mat1) = paste0(&amp;quot;R&amp;quot;, 1:100) colnames(mat1) = paste0(&amp;quot;C&amp;quot;, 1:10) mat1 = mat1[sample(100, 100), ] # randomly permute rows split = sample(letters[1:5], 100, replace = TRUE) split = factor(split, levels = letters[1:5]) col_fun1 = colorRamp2(c(-2, 0, 2), c(&amp;quot;blue&amp;quot;, &amp;quot;white&amp;quot;, &amp;quot;red&amp;quot;)) The value for cell_width is simply a numeric vector with the same length as the number of rows of the input matrix.</description>
+    </item>
+    
+    <item>
+      <title>Translate from other heatmap functions to ComplexHeatmap</title>
+      <link>/2020/12/14/translate-from-other-heatmap-functions-to-complexheatmap/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/12/14/translate-from-other-heatmap-functions-to-complexheatmap/</guid>
+      <description>In my previous post “Translate from pheatmap to ComplexHeatmap”, I introduced a ComplexHeatmap::pheatmap() which smoothly executes pheatmap::pheatmap() code without any problem. With the newly developed InteractiveComplexHeatmap package, the output of pheatmap() can be directly exported as an interactive Shiny app.
+library(ComplexHeatmap) ht = pheatmap(...) library(InteractiveComplexHeatmap) ht_shiny(ht) To facilitate the users who are still using heatmap() and heatmap.2() functions, to make the output of these two functions can be exported as interactive Shiny apps as well, I implemented two similar translation functions ComplexHeatmap::heatmap() and ComplexHeatmap::heatmap.</description>
+    </item>
+    
+    <item>
+      <title>Make some fun circular plots</title>
+      <link>/2020/11/28/make-some-fun-circular-plots/</link>
+      <pubDate>Sat, 28 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/28/make-some-fun-circular-plots/</guid>
+      <description>The same set of data and plotting rules, but one is in the normal coordinate system and the other is in the circular-transformed coordinate system.
+library(circlize) par(mar = c(1, 1, 1, 1)) layout(cbind(1:2), heights = c(1, 2)) x0 = runif(1000) x1 = runif(1000) plot(NULL, xlim = c(0, 1), ylim = c(0, 1), axes = FALSE, ann = FALSE) segments(x0, 0, x1, 1, col = rand_color(1000, luminosity = &amp;quot;bright&amp;quot;, transparency = 0.</description>
+    </item>
+    
+    <item>
+      <title>Visualize relations between genes and pathways</title>
+      <link>/2020/11/27/visualize-relations-between-genes-and-pathways/</link>
+      <pubDate>Fri, 27 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/27/visualize-relations-between-genes-and-pathways/</guid>
+      <description>@venkan provides an interesting use case for circlize which is to visualize the relations bewteen genes and pathways with integrating genes’ genomic positions. An example plot looks like:
+In that plot, the “pathway” is in the same track as the ideograms. Thus, to use circlize to implement it, we need to make “pathway” as a fake chromosome and concatenate it to the normal chromosomes. In this blog post, I will demonstrate how to implement it.</description>
+    </item>
+    
+    <item>
+      <title>Arrange links evenly along the sectors</title>
+      <link>/2020/11/23/arrange-links-evenly-along-the-sectors/</link>
+      <pubDate>Mon, 23 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/23/arrange-links-evenly-along-the-sectors/</guid>
+      <description>People use circos.link() to visualize interactions/relations between sectors. When one sector has more than one other sectors to interact with, it actually becomes important of how to arrange links on that sector to make every link readable.
+In the following example, I created a random interaction data frame df:
+set.seed(123) sectors = letters[1:20] df = data.frame(from = sample(sectors, 40, replace = TRUE), to = sample(sectors, 40, replace = TRUE)) df = unique(df) df = df[df$from !</description>
+    </item>
+    
+    <item>
+      <title>Helper functions for genome-scale heatmap</title>
+      <link>/2020/11/22/helper-functions-for-genome-scale-heatmap/</link>
+      <pubDate>Sun, 22 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/11/22/helper-functions-for-genome-scale-heatmap/</guid>
+      <description>In my previous blog post, I demonstrated how to make a genome-scale heatmap with multiple other tracks. The key thing there is to split the genome into bins and to normalize various genomic signals to average them into every bin of the genome. From ComplexHeatmap version 2.7.1.1003, I added some helper functions which simplify the binning of the genome and the overlapping between genomic bins and genomic signals with two new functions bin_genome() and normalize_genomic_signals_to_bins().</description>
+    </item>
+    
+    <item>
+      <title>Make genome-scale heatmap</title>
+      <link>/2020/10/29/make-genome-scale-heatmap/</link>
+      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/29/make-genome-scale-heatmap/</guid>
+      <description>Many people are interested in making genome-scale heatmap with multiple tracks, like examples here and here. In this blog post, I will demonstrate how to implement it with ComplexHeatmap.
+To make genome-scale plot, we first need the ranges on chromosome-level. There are many ways to obtain this information. In following, I use circlize::read.chromInfo() function.
+library(circlize) library(GenomicRanges) chr_df = read.chromInfo()$df chr_df = chr_df[chr_df$chr %in% paste0(&amp;quot;chr&amp;quot;, 1:22), ] chr_gr = GRanges(seqnames = chr_df[, 1], ranges = IRanges(chr_df[, 2] + 1, chr_df[, 3])) chr_gr ## GRanges object with 22 ranges and 0 metadata columns: ## seqnames ranges strand ## &amp;lt;Rle&amp;gt; &amp;lt;IRanges&amp;gt; &amp;lt;Rle&amp;gt; ## [1] chr1 1-249250621 * ## [2] chr2 1-243199373 * ## [3] chr3 1-198022430 * ## [4] chr4 1-191154276 * ## [5] chr5 1-180915260 * ## .</description>
+    </item>
+    
+    <item>
+      <title>Recent improvements on legends</title>
+      <link>/2020/10/29/recent-improvements-on-legends/</link>
+      <pubDate>Thu, 29 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/29/recent-improvements-on-legends/</guid>
+      <description>In this post, I will demonstrate several improvements on the legends in ComplexHeatmap package (version 2.7.1).
+First I load the ComplexHeatmap package.
+library(ComplexHeatmap) Discrete legends Now it works with multi-line labels:
+lgd = Legend(labels = c(&amp;quot;aaaaa\naaaaa&amp;quot;, &amp;quot;bbbbb\nbbbbb&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;), legend_gp = gpar(fill = 1:4)) When the multi-line legend labels are in different rows:
+lgd = Legend(labels = c(&amp;quot;aaaaa\naaaaa&amp;quot;, &amp;quot;c&amp;quot;, &amp;quot;d&amp;quot;, &amp;quot;bbbbb\nbbbbb&amp;quot;), legend_gp = gpar(fill = 1:4), nrow = 2) Legend() function has a new argument graphics where users can self-define the graphics drawn in the legend.</description>
+    </item>
+    
+    <item>
+      <title>Changes in ComplexHeatmap 2.6.0</title>
+      <link>/2020/10/28/changes-in-complexheatmap-2.6.0/</link>
+      <pubDate>Wed, 28 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/28/changes-in-complexheatmap-2.6.0/</guid>
+      <description>The ComplexHeatmap package is still growing. Till now, there are 62 CRAN/Bioconductor packages that depend on ComplexHeatmap where 7 packages are also mine :). It has approxiamtely 10k downloads per month, 600 issues on GitHub and nearly 600 GitHub stars. The ComplexHeatmap paper has more than 1100 citations. Thank you for liking ComplexHeatmap!
+In version 2.6.0 which corresponds to the new Bioconductor release, there are following major changes that are user-visible:</description>
+    </item>
+    
+    <item>
+      <title>Concatenate two genomes in the circular plot</title>
+      <link>/2020/10/16/concatenate-two-genomes-in-the-circular-plot/</link>
+      <pubDate>Fri, 16 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/16/concatenate-two-genomes-in-the-circular-plot/</guid>
+      <description>There are some scenarios where users want to visualize more than one genomes in the circular plots. This can be done by making “a combined genome”. In the following example, I combine both human and mouse genomes.
+library(circlize) human_cytoband = read.cytoband(species = &amp;quot;hg19&amp;quot;)$df mouse_cytoband = read.cytoband(species = &amp;quot;mm10&amp;quot;)$df One thing important is since the two genome will be combined, the chromosome names for each genome need to be adjusted.</description>
+    </item>
+    
+    <item>
+      <title>Visualize traffic intersection loads with Chord diagram</title>
+      <link>/2020/10/13/visualize-traffic-intersection-loads-with-chord-diagram/</link>
+      <pubDate>Tue, 13 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/13/visualize-traffic-intersection-loads-with-chord-diagram/</guid>
+      <description>In this blog post, the author demonstrated how to visualize the traffic loads with Sankey diagram. It looks very nice and here I implemente it with Chord diagram.
+Following data frame contains data for the traffic loads, which is basically the number of vehicles that travel through every two directions.
+df = read.table(textConnection( &amp;quot;B A 1000 C A 5000 D A 690 A B 2200 C B 1240 D B 5000 A C 5000 B C 2400 D C 2000 A D 2000 B D 3000 C D 3000 &amp;quot;)) The colors for the four directions:</description>
+    </item>
+    
+    <item>
+      <title>Host massive analysis reports with GitHub Page</title>
+      <link>/2020/09/26/host-massive-analysis-reports-with-github-page/</link>
+      <pubDate>Sat, 26 Sep 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/09/26/host-massive-analysis-reports-with-github-page/</guid>
+      <description>https://github.com/pricing
+https://docs.github.com/en/free-pro-team@latest/github/managing-large-files/what-is-my-disk-quota
+https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token
+username = ... token = ... library(GetoptLong) library(gh) delete_repo = function(repo, dir, where = c(&amp;quot;remote&amp;quot;, &amp;quot;local&amp;quot;)) { qqcat(&amp;quot;delete repo @{repo}\n&amp;quot;) if(&amp;quot;remote&amp;quot; %in% where) { gh(&amp;quot;DELETE /repos/:owner/:repo&amp;quot;, owner = username, repo = repo, .token = token) } if(&amp;quot;local&amp;quot; %in% where) { owd = getwd() on.exit(setwd(owd)) setwd(dir) if(file.exists(&amp;quot;.git&amp;quot;)) { unlink(&amp;quot;.git&amp;quot;, recursive = TRUE, force = TRUE) } } } create_repo = function(repo, dir, ignore = &amp;quot;^.*&amp;quot;, where = c(&amp;quot;remote&amp;quot;, &amp;quot;local&amp;quot;)) { all_repos = gh(qq(&amp;quot;GET /users/@{username}/repos&amp;quot;)) all_repos = vapply(all_repos, &amp;quot;[[&amp;quot;, &amp;quot;&amp;quot;, &amp;quot;name&amp;quot;) if(repo %in% all_repos) { delete_repo(repo, dir) } else { delete_repo(repo, dir, where = &amp;quot;local&amp;quot;) } qqcat(&amp;quot;creating repo for @{repo}\n&amp;quot;) if(&amp;quot;remote&amp;quot; %in% where) { new_repo = gh(&amp;quot;POST /user/repos&amp;quot;, name = repo, owner = username, .</description>
+    </item>
+    
+    <item>
+      <title>Reverse x-axes in the circular plot</title>
+      <link>/2020/08/17/reverse-x-axes-in-the-circular-plot/</link>
+      <pubDate>Mon, 17 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/08/17/reverse-x-axes-in-the-circular-plot/</guid>
+      <description>By default, in circlize, the directions of x-axes of all cells are clockwise, which means, in the cells located on top of the circle, the direction of x-axes is from left to right, which fits how we normally read the figures. For example, the following figure shows several tracks with different graphics.
+library(circlize) circos.par(gap.degree = 4) circos.initialize(letters[1:8], xlim = c(0, 10)) circos.track(ylim = c(0, 10), panel.fun = function(x, y) { circos.</description>
+    </item>
+    
+    <item>
+      <title>Integrate ComplexHeatmap with cowplot package</title>
+      <link>/2020/07/14/integrate-complexheatmap-with-cowplot-package/</link>
+      <pubDate>Tue, 14 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/07/14/integrate-complexheatmap-with-cowplot-package/</guid>
+      <description>The cowplot package is used to combine multiple plots into a single figure. In most cases, ComplexHeatmap works perfectly with cowplot, but there are some cases that need special attention.
+Also there are some other packages that combine multiple plots, such as multipanelfigure, but I think the mechanism behind is the same.
+Following functionalities in ComplexHeatmap cause problems with using cowplot.
+anno_zoom()/anno_link(). The adjusted positions by these two functions rely on the size of the graphics device.</description>
+    </item>
+    
+    <item>
+      <title>Block annotation over several slices</title>
+      <link>/2020/07/06/block-annotation-over-several-slices/</link>
+      <pubDate>Mon, 06 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/07/06/block-annotation-over-several-slices/</guid>
+      <description>In ComplexHeatmap package, anno_block() function draws rectangles for row/column slices, like in the following plot. Then what if we want to draw the rectangles over several slices to show they belong to certain groups?
+set.seed(123) mat = matrix(rnorm(50*50), nrow = 50) library(ComplexHeatmap) ha = HeatmapAnnotation(foo = anno_block(gp = gpar(fill = 2:6), labels = LETTERS[1:5])) split = rep(1:5, each = 10) Heatmap(mat, name = &amp;quot;mat&amp;quot;, column_split = split, top_annotation = ha, column_title = NULL) Currently, it is difficult to directly support it in anno_block(), however, there is workaround for it.</description>
+    </item>
+    
+    <item>
+      <title>Rasterization in ComplexHeatmap</title>
+      <link>/2020/06/30/rasterization-in-complexheatmap/</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/30/rasterization-in-complexheatmap/</guid>
+      <description>Guillaume Devailly recently wrote an article on image rasterization to efficiently visualize huge matrices in R, as well as comparing several R functions that support image rasterization. In this post, I discusse the support for raster image in ComplexHeatmap in more details.
+When we produce so-called “high quality figures”, normally we save the figures as vector graphics in the format of e.g. pdf or svg. The vector graphics basically store details of every single graphic elements, thus, if a heatmap made from a very huge matrix is saved as vector graphics, the final file size would be very big.</description>
+    </item>
+    
+    <item>
+      <title>Align heatmap legends</title>
+      <link>/2020/06/29/align-heatmap-legends/</link>
+      <pubDate>Mon, 29 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/29/align-heatmap-legends/</guid>
+      <description>In this post, I will demonstrate the automatic alignment of heatmap legends. This new feature in avaiable in ComplexHeatmap &amp;gt;= 2.5.4.
+In the following heatmaps, I use a random 10x10 matrix generated as follows:
+library(ComplexHeatmap) set.seed(123) m = matrix(rnorm(100), 10) In the older versions (&amp;lt;= 2.5.3), the legends are put in the middle of a viewport which almost has the same height as the whole plot. It looks nice when there are no column names in the heatmap.</description>
+    </item>
+    
+    <item>
+      <title>Which heatmap function is faster?</title>
+      <link>/2020/06/19/which-heatmap-function-is-faster/</link>
+      <pubDate>Fri, 19 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/19/which-heatmap-function-is-faster/</guid>
+      <description>In this post I test the performance (the running time) of four heatmap functions: gplots::heatmap.2(), heatmap() which is natively supported in R, ComplexHeatmap::Heatmap() and pheatmap::pheatmap().
+We generate a 1000x1000 random matrix.
+library(ComplexHeatmap) library(pheatmap) library(gplots) library(microbenchmark) set.seed(123) n = 1000 mat = matrix(rnorm(n*n), nrow = n) First I test drawing heatmaps as well as drawing dendrograms (with applying clustering):
+t1 = microbenchmark( &amp;quot;heatmap()&amp;quot; = { pdf(NULL) heatmap(mat) dev.off() }, &amp;quot;heatmap.</description>
+    </item>
+    
+    <item>
+      <title>Changes in circlize 0.4.10</title>
+      <link>/2020/06/14/changes-in-circlize-0.4.10/</link>
+      <pubDate>Sun, 14 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/14/changes-in-circlize-0.4.10/</guid>
+      <description>circlize 0.4.10 is now on CRAN. Besides the bug fixes, following are the user-visible changes/features.
+library(circlize) set.seed(123) Add circos.barplot(), circos.boxplot() and circos.violin() circos.barplot(), circos.boxplot() and circos.violin() are used inside the panel.fun. Please note the values on x-axes are the integer indices of bars, boxes or violins for which xlim should be properly set in circos.initialize().
+Barplots For circular barplots, you can either specify a vector which generates a “normal” barplot, or a matrix which generates a stacked barplot.</description>
+    </item>
+    
+    <item>
+      <title>Multiple-group Chord diagram</title>
+      <link>/2020/06/08/multiple-group-chord-diagram/</link>
+      <pubDate>Mon, 08 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/08/multiple-group-chord-diagram/</guid>
+      <description>From verion 0.4.10 of the circlize package, there is a new group argument in chordDiagram() function which is very convenient for making multiple-group Chord diagrams.
+I first generate a random matrix where there are three groups (A, B, and C). Note this new functionality works the same for the input as a data frame.
+library(circlize) mat1 = matrix(rnorm(25), nrow = 5) rownames(mat1) = paste0(&amp;quot;A&amp;quot;, 1:5) colnames(mat1) = paste0(&amp;quot;B&amp;quot;, 1:5) mat2 = matrix(rnorm(25), nrow = 5) rownames(mat2) = paste0(&amp;quot;A&amp;quot;, 1:5) colnames(mat2) = paste0(&amp;quot;C&amp;quot;, 1:5) mat3 = matrix(rnorm(25), nrow = 5) rownames(mat3) = paste0(&amp;quot;B&amp;quot;, 1:5) colnames(mat3) = paste0(&amp;quot;C&amp;quot;, 1:5) mat = matrix(0, nrow = 10, ncol = 10) rownames(mat) = c(rownames(mat2), rownames(mat3)) colnames(mat) = c(colnames(mat1), colnames(mat2)) mat[rownames(mat1), colnames(mat1)] = mat1 mat[rownames(mat2), colnames(mat2)] = mat2 mat[rownames(mat3), colnames(mat3)] = mat3 mat ## B1 B2 B3 B4 B5 C1 C2 C3 C4 C5 ## A1 1.</description>
+    </item>
+    
+    <item>
+      <title>Parse command-line arguments</title>
+      <link>/2020/06/06/parse-command-line-arguments/</link>
+      <pubDate>Sat, 06 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/06/06/parse-command-line-arguments/</guid>
+      <description>pre.terminal { background: hsl(70, 0%, 15%); color: white; } pre.terminal .hljs { background: hsl(70, 0%, 15%); color: white; }  There are already several R packages which parse command-line arguments such as getopt, optparse, argparse, docopt. Here GetoptLong is another command-line argument parser (actually it was developed very early. The first CRAN version was in 2013) which wraps the powerful Perl module Getopt::Long. GetoptLong package also provides some adaptations for easier use in R.</description>
+    </item>
+    
+    <item>
+      <title>Word cloud as heatmap annotation</title>
+      <link>/2020/05/31/word-cloud-as-heatmap-annotation/</link>
+      <pubDate>Sun, 31 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/31/word-cloud-as-heatmap-annotation/</guid>
+      <description>I am recently developing a new package simplifyEnrichment which clusters GO terms into clusters and visualizes the summaries of GO terms in each cluster as word cloud. The results are visualized by ComplexHeatmap where the word clouds are the heatmap annotations. In this post, I will describe how to implement word clouds as the heatmap annotation by ComplexHeatmap.
+To achieve this, we need two functionalities: one draws the word cloud and one links the word cloud to the corresponding rows in the heatmap.</description>
+    </item>
+    
+    <item>
+      <title>Make circular heatmaps</title>
+      <link>/2020/05/21/make-circular-heatmaps/</link>
+      <pubDate>Thu, 21 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/21/make-circular-heatmaps/</guid>
+      <description>Circular heatmaps are pretty. With circlize package, it is possible to implement circular heatmaps by the low-level function circos.rect(). From version 0.4.10, I implemented a new high-level function circos.heatmap() which simplifies the creation of circular heatmaps. In this post, I will demostrate the usage of the new circos.heatmap() function.
+First let’s generate a random matrix and randomly split it into five groups.
+set.seed(123) mat1 = rbind(cbind(matrix(rnorm(50*5, mean = 1), nr = 50), matrix(rnorm(50*5, mean = -1), nr = 50)), cbind(matrix(rnorm(50*5, mean = -1), nr = 50), matrix(rnorm(50*5, mean = 1), nr = 50)) ) rownames(mat1) = paste0(&amp;quot;R&amp;quot;, 1:100) colnames(mat1) = paste0(&amp;quot;C&amp;quot;, 1:10) mat1 = mat1[sample(100, 100), ] # randomly permute rows split = sample(letters[1:5], 100, replace = TRUE) split = factor(split, levels = letters[1:5]) Following plot is the normal layout of the heatmap (by the ComplexHeatmap package).</description>
+    </item>
+    
+    <item>
+      <title>Interactive ComplexHeatmap</title>
+      <link>/2020/05/15/interactive-complexheatmap/</link>
+      <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/15/interactive-complexheatmap/</guid>
+      <description>Key message: heatmaps can be exported into a Shiny app by ht_shiny(ht).  Heatmaps are mainly for visualizing common patterns that are shared by groups of rows and columns. After the patterns have been seen, the next step is to extract the corresponding rows and columns from the heatmap, which requires interactivity on the heatmaps. ComplexHeatmap package is used for generating static heatmaps. From version 2.5.3, it is now possible to make complex heatmaps interactive!</description>
+    </item>
+    
+    <item>
+      <title>Set cell width/height in the heatmap</title>
+      <link>/2020/05/11/set-cell-width/height-in-the-heatmap/</link>
+      <pubDate>Mon, 11 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/11/set-cell-width/height-in-the-heatmap/</guid>
+      <description>When making a heatmap, the width and height of heatmap cells are automatically adjusted to fill in the figure (e.g. the following figure), which means, when you change the width and height of the final figure, the width and height of the cells change accordingly.
+library(ComplexHeatmap) set.seed(123) mat = matrix(rnorm(100), 10) Heatmap(mat, name = &amp;quot;mat&amp;quot;) When the matrix is small, there are scenarios where you might want to manually set the width and height of cells to fixed values, so that you can, e.</description>
+    </item>
+    
+    <item>
+      <title>Translate from pheatmap to ComplexHeatmap</title>
+      <link>/2020/05/06/translate-from-pheatmap-to-complexheatmap/</link>
+      <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/06/translate-from-pheatmap-to-complexheatmap/</guid>
+      <description>Introduction pheatmap is a great R package for making heatmaps, inspiring a lot of other heatmap packages such as ComplexHeatmap. From version 2.5.2 of ComplexHeatmap, I implemented a new ComplexHeatmap::pheatmap() function which actually maps all the parameters in pheatmap::pheatmap() to proper parameters in ComplexHeatmap::Heatmap(), which means, it converts a pheatmap to a complex heatmap. By doing this, the most significant improvement is now you can add multiple pheatmaps and annotations (defined by ComplexHeatmap::rowAnnotation()).</description>
+    </item>
+    
+    <item>
+      <title>Substitute with an evaluated expression</title>
+      <link>/2019/10/06/substitute-with-an-evaluated-expression/</link>
+      <pubDate>Sun, 06 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/06/substitute-with-an-evaluated-expression/</guid>
+      <description>In Perl, if we want to substitute with an evaluated expression with regular expression, we can do as follows.
+%map = ( &amp;quot;a&amp;quot; =&amp;gt; &amp;quot;one&amp;quot;, &amp;quot;b&amp;quot; =&amp;gt; &amp;quot;two&amp;quot;, &amp;quot;c&amp;quot; =&amp;gt; &amp;quot;three&amp;quot;, ); $txt = &amp;quot;a, b, c&amp;quot;; $txt =~s/([a|b|c])/$map{$1}/g; Here $map{$1} is evaluated and $txt will be one, two, three.
+To be formal, the matched text s is replaced by f(s) where f() is a transformation to the text s.</description>
+    </item>
+    
+    <item>
+      <title>Put Chord diagram horizontally or vertically symmetric</title>
+      <link>/2017/03/17/put-chord-diagram-horizontally-or-vertically-symmetric/</link>
+      <pubDate>Fri, 17 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/03/17/put-chord-diagram-horizontally-or-vertically-symmetric/</guid>
+      <description>In Chord diagram, when there are two groups (which correspond to rows and columns if the input is a adjacency matrix), it is always visually beautiful to rotate the diagram to be symmetric on horizontal direction or vertical direction. Actually it is quite easy to calculate a proper degree that needs to be rotated for the circle. In this post, I will show how to calculate such kind of “rotated degree value”.</description>
+    </item>
+    
+    <item>
+      <title>Reverse x-axis in the circular layout</title>
+      <link>/2016/11/21/reverse-x-axis-in-the-circular-layout/</link>
+      <pubDate>Mon, 21 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/11/21/reverse-x-axis-in-the-circular-layout/</guid>
+      <description>In circlize package, x-axis in always clockwise in each sector, no matter it is on the top of the circle or at the bottom. However, you can manually reverse the original positions on x-axis to pretend you have a reversed x-axis. Take following example:
+library(circlize) ## ======================================== ## circlize version 0.4.9 ## CRAN page: https://cran.r-project.org/package=circlize ## Github page: https://github.com/jokergoo/circlize ## Documentation: https://jokergoo.github.io/circlize_book/book/ ## ## If you use it in published research, please cite: ## Gu, Z.</description>
+    </item>
+    
+    <item>
+      <title>Visualize positive and negative signals in the enriched heatmap</title>
+      <link>/2016/11/21/visualize-positive-and-negative-signals-in-the-enriched-heatmap/</link>
+      <pubDate>Mon, 21 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/11/21/visualize-positive-and-negative-signals-in-the-enriched-heatmap/</guid>
+      <description>Enriched heatmaps are used to visualize the enrichment of genomic signals on a set of genomic targets of interest. It is broadly used to visualize e.g. how histone marks are enriched to specific sites.
+Sometimes we want to visualize the general correlation around certain genomic targets or how the difference between two subgroups looks like in the vicinity of e.g. gene TSS. In this case, the signals contain both positive and negative value and it makes more sense to visualize the enrichment for the positive and negative signals separatedly.</description>
+    </item>
+    
+    <item>
+      <title>Test 测试</title>
+      <link>/2014/01/01/test-%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Wed, 01 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/01/01/test-%E6%B5%8B%E8%AF%95/</guid>
+      <description>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试 测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试 测试测试测试测试测试测试测试测试</description>
+    </item>
+    
+  </channel>
+</rss>

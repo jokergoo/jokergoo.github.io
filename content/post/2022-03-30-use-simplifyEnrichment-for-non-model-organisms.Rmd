@@ -1,0 +1,158 @@
+---
+title: "Use simplifyEnrichment for non-model organisms"
+date: 2023-03-30
+---
+
+```{r, echo = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+    error = FALSE,
+    tidy  = FALSE,
+    message = FALSE,
+    warning = FALSE,
+    fig.width = 8,
+    fig.height = 8,
+    fig.align = "center"
+)
+```
+
+```{r}
+library(simplifyEnrichment)
+```
+
+To perform GO clustering with the **simplifyEnrichment** package, the first step
+is to calculate GO similarities with the function `GO_similarity()`. The semantic similarity
+depends on the genes annotated to GO terms, thus, an `OrgDb` package is needed for 
+the use of `GO_similarity()`. For example, for mouse:
+
+```{r, eval = FALSE}
+GO_similarity(go_id, db = "org.Mm.eg.db")
+```
+
+On Bioconductor, there are the following `OrgDb` packages that can be used with `GO_similarity()`.
+
+```{r, echo = FALSE}
+tb = read.table(textConnection(
+"Package;Organism
+org.Hs.eg.db;Human
+org.Mm.eg.db;Mouse
+org.Rn.eg.db;Rat
+org.Dm.eg.db;Fly
+org.At.tair.db;Arabidopsis
+org.Sc.sgd.db;Yeast
+org.Dr.eg.db;Zebrafish
+org.Ce.eg.db;Worm
+org.Bt.eg.db;Bovine
+org.Gg.eg.db;Chicken
+org.Ss.eg.db;Pig
+org.Mmu.eg.db;Rhesus
+org.Cf.eg.db;Canine
+org.EcK12.eg.db;E coli strain K12
+org.Xl.eg.db;Xenopus
+org.Ag.eg.db;Anopheles
+org.Pt.eg.db;Chimp
+org.EcSakai.eg.db;E coli strain Sakai
+org.Mxanthus.db;Myxococcus xanthus DK 1622
+"), sep = ";", header = TRUE)
+kable(tb)
+```
+
+
+But what if there is no such Bioconductor package for your organism? Don't worry, there are more
+resources provided on the Bioconductor cloud, where the data can be easily retrieved with 
+the **AnnotationHub** package.
+
+
+To use **AnnotationHub**, first we need to create an `AnnotationHub` object. In this step, a local cache
+folder will be created and the same data will be directly read from the cache.
+
+```{r}
+library(AnnotationHub)
+ah = AnnotationHub()
+ah
+```
+
+`ah` contains summary of all available datasets on the cloud. To download an `OrgDb` object for a specific
+organism, we can pre-filter `ah` to let it only restrict on the `OrgDb` data type.
+
+
+```{r}
+ah = ah[ah$rdataclass == "OrgDb"]
+ah
+```
+
+Still, you can see there are more than 1800 organisms with their `OrgDb` data available on the Bioconductor cloud.
+So it is very likely you can find your organism there.
+
+Use `mcols()` to get a more informative description of all `OrgDb` records. In the following table,
+IDs as row names (e.g. `"AH5012"`) will be used to retrieve the corresponding dataset from the cloud.
+
+```{r}
+head(mcols(ah))
+```
+
+There are two ways to search for the specific organism. First you can directly search in the 
+meta columns of `ah` (suggested columns are `species`, `taxonomyid`, `description`). For example:
+
+```{r}
+meta = mcols(ah)
+rownames(meta)[ which(meta$species == "Bos taurus") ]
+rownames(meta)[ which(meta$taxonomyid == 9031) ]
+```
+
+Second, you can use the `query()` function by providing a list of keywords. To search for a specific
+organism, I suggest to use its Latin name. In the next example, I search for the data for dolphins (Latin name is "Tursiops truncatus").
+
+```{r}
+query(ah, "Tursiops truncatus")
+```
+
+The Hub ID is `"AH108106"`. Then we can retrieve the `OrgDb` object with `ah[["AH108106"]]`:
+
+```{r}
+orgdb = ah[["AH108106"]]
+orgdb
+```
+
+We can check the supported columns in the object `orgdb`:
+
+```{r}
+columns(orgdb)
+```
+
+In the next section of code, I will demonstrate how to perform simplifyEnrichment analysis
+on dolphnins. First I generate a random list of GO IDs.
+
+```{r}
+all_GO_ids = select(orgdb, keys(orgdb, keytype = "GO"), c("GO", "ONTOLOGY"), keytype = "GO")
+all_GO_ids = all_GO_ids[all_GO_ids$ONTOLOGY == "BP", ]
+
+set.seed(666)
+go_id = sample(all_GO_ids$GO, 500)
+head(go_id)
+```
+
+Next I calculate the GO similarities. This time, I directly set the `db` argument with the `orgdb` object.
+
+```{r}
+mat = GO_similarity(go_id, db = orgdb)
+```
+
+If you are not using the newest version of **simplifyEnrichment**, you need to also set `ont = "BP"` to get rid of errors:
+
+```{r, eval = FALSE}
+mat = GO_similarity(go_id, db = orgdb, ont = "BP")
+```
+
+And make the heatmap with word clouds.
+
+```{r, fig.width = 8, fig.height = 4}
+simplifyGO(mat)
+```
+
+## Session info
+
+```{r}
+sessionInfo()
+```
+

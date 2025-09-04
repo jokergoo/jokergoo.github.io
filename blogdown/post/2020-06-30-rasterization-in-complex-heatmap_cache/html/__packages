@@ -1,0 +1,7 @@
+base
+knitr
+ComplexHeatmap
+RColorBrewer
+circlize
+magick
+GetoptLong

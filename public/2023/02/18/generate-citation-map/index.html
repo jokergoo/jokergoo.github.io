@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.84.4" />
+
+
+<title>Generate citation map - Zuguang Gu</title>
+<meta property="og:title" content="Generate citation map - Zuguang Gu">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo-text">
+A Bioinformagician
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="/post/">Post</a></li>
+    
+    <li><a href="/software/">Software</a></li>
+    
+    <li><a href="/publication/">Publication</a></li>
+    
+    <li><a href="/talks/">Talks</a></li>
+    
+    <li><a href="https://github.com/jokergoo">GitHub</a></li>
+    
+    <li><a href="/cv/">CV</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">4 min read</span>
+    
+
+    <h1 class="article-title">Generate citation map</h1>
+
+    
+    <span class="article-date">2023-02-18</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>In Web of Science, you can generate a nice citation map to show how your papers are cited world wide. In this blog post,
+I will demonstrate how to fetch the citation data and how to make such citation map in R.</p>
+<p>The citation data is not straightforward to find. Since the citation map is presented on a web page, the data is actually
+downloaded by the browser. Thus, we just need to find the corresponding file there.</p>
+<p>In the following steps, I assume you are using Chrome browser.</p>
+<p><strong>Step 1:</strong> Log into your personal Web of Science.</p>
+<p><strong>Step 2:</strong> Open the “Developer Tools”. There are two ways to open it.</p>
+<ol style="list-style-type: decimal">
+<li>right click on the web page and click “Inspect” (which is the last one in the menu).</li>
+<li>or, in Chrome, View -&gt; Developer -&gt; Developer’s Tools</li>
+</ol>
+<p><strong>Step 3:</strong> In your Web of Science dashboard, click “My research profile”.</p>
+<p><img width="100%" src="https://user-images.githubusercontent.com/449218/219885010-2f701532-d5aa-4d3c-9c3f-83a70b3f73e3.png"></p>
+<p><strong>Step 4:</strong> In this page, click “Open dashboard” next to “Metrics”.</p>
+<p><strong>Step 5:</strong> Scroll downward to the section “Geographic Citation Map”, click “Click to show map”.</p>
+<p><img width="100%" src="https://user-images.githubusercontent.com/449218/219885008-9175cd66-5a03-4e55-92f3-4317a0a9aae9.png"></p>
+<p><strong>Step 6:</strong> In the Developer Tool, click on the “Netowrk” tab. You might see
+there are many files under downloading. Once all the files are downloaded, double click on the file above
+<code>natigation_poin.svg</code> (with name <code>?task_id=...</code>, normally the one with the largest file size).</p>
+<p><img width="100%" src="https://user-images.githubusercontent.com/449218/219885006-4c28d2a9-413f-4bc3-9847-5d1042346435.png"></p>
+<p>This will download the file, which is a json file that contains all the publication data for the citation map.</p>
+<p><img width="100%" src="https://user-images.githubusercontent.com/449218/219885001-0fe4e447-7fa3-4870-8509-c490c3409a20.png"></p>
+<p><strong>Step 7:</strong> Save the output into a file, e.g, by pressing “Ctrl + s”. Let’s save it into a file called <code>citation.json</code>.
+Unfortunately, this json file cannot be directly read by packages such as <strong>jsonlite</strong> or <strong>rjson</strong> (Actually it is not in json format). We need to slightly modify it a little bit.</p>
+<p>The content in <code>citation.json</code> is a valid JavaScript command. We explicitely let it be assgined to a variable. Simply add <code>citation =</code> in the very beginning
+of <code>citation.json</code> (we assume the variable is called <code>citation</code>).</p>
+<p><img width="100%" src="https://user-images.githubusercontent.com/449218/219884999-ada7add0-0d2e-4da1-a40b-e05d9346c189.png"></p>
+<p><strong>Step 8:</strong> Now we can use the <strong>V8</strong> package to execute the JavaScript code.</p>
+<pre class="r"><code>library(V8)
+ct = v8()
+ct$source(&quot;~/citation.json&quot;)</code></pre>
+<pre><code>## [1] &quot;[object Object]&quot;</code></pre>
+<p><strong>Step 9:</strong> Transfer the JavaScript variable <code>citation</code> into R by the <code>get()</code> method.</p>
+<pre class="r"><code>citation = ct$get(&quot;citation&quot;)</code></pre>
+<p>OK, now the citation data is obtained, and we can process it in R.</p>
+<p>I will not show the value of <code>citation</code> here because it is a little bit complex. I only take the <code>results</code> element which is a data frame.
+Also I only take the first four columns and the fifth column in <code>results</code> contains all the paper information (e.g. authors, titles) which is not needed for the visualization.</p>
+<pre class="r"><code>results = citation$results[, 1:4]
+head(results)</code></pre>
+<pre><code>##                     address publicationCount       lat       lon
+## 1             Putian, China                2  25.35331 119.05826
+## 2 Blacksburg, United States               10  37.22957 -80.41394
+## 3   Richmond, United States                7  37.55376 -77.46026
+## 4           Toronto, Canada              328  43.64455 -79.40712
+## 5  New Haven, United States               75  41.30815 -72.92816
+## 6         Sydney, Australia              135 -33.86785 151.20732</code></pre>
+<p>Now in the object <code>results</code>, there are the geographical coordinates (<code>lat</code> and <code>lon</code>), which can be used for the map.</p>
+<p>The next chunk of code is optional. It basically merges different insitutes/universities in the same city into one record.</p>
+<pre class="r"><code>tb = data.frame(address = tapply(results$address, results$address, function(x) x[1]),
+                publicationCount = tapply(results$publicationCount, results$address, sum),
+                lat = tapply(results$lat, results$address, mean),
+                lon = tapply(results$lon, results$address, mean))</code></pre>
+<p>Next we draw the world map. I basically follow a tutorial from the internet (<a href="https://r-spatial.org/r/2018/10/25/ggplot2-sf.html" class="uri">https://r-spatial.org/r/2018/10/25/ggplot2-sf.html</a>).</p>
+<pre class="r"><code>library(&quot;sf&quot;)
+library(&quot;rnaturalearth&quot;)
+library(&quot;rnaturalearthdata&quot;)
+world = ne_countries(scale = &quot;medium&quot;, returnclass = &quot;sf&quot;)
+
+library(ggplot2)
+library(ggrepel)
+library(RColorBrewer)
+
+ggplot(data = world) + geom_sf(color = &quot;grey&quot;, fill = NA) + 
+    geom_point(data = tb[order(tb$publicationCount), ], 
+        aes(x = lon, y = lat, color = publicationCount, size = publicationCount)) + 
+    scale_colour_gradientn(colours = rev(brewer.pal(9, &quot;Spectral&quot;))) +
+    scale_size(range = c(0.2, 3)) +
+    geom_text_repel(data = tb[order(-tb$publicationCount)[1:20], ], 
+        mapping = aes(x = lon, y = lat, label = gsub(&quot;, .*$&quot;, &quot;&quot;, address)), 
+        box.padding = 0.5, max.overlaps = Inf, min.segment.length = 0, size = 3)</code></pre>
+<p><img src="/post/2023-02-18-generate-citation-map_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
+
+    </div>
+  </article>
+
+  
+  <script src="https://utteranc.es/client.js"
+    repo="jokergoo/jokergoo.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+  
+  
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,118 @@
+---
+title: "Online GREAT analysis"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+---
+
+
+Repo: https://github.com/jokergoo/jokergoo.github.io/tree/master/talks
+
+We first read the regions (peaks of the transcription factor JUN) as a data frame.
+
+```{r}
+bed = read.table("Encode3_JUN_hg19.bed")
+head(bed)
+dim(bed)
+```
+
+Use `submitGreatJob()` to submit the regions to the GREAT web server. By default
+the species is human (hg19). Current version of GREAT support `"hg38"`, `"hg19"`, `"mm10"`, `"mm9"`.
+
+
+```{r, message = FALSE, warning = FALSE}
+library(rGREAT)
+job = submitGreatJob(bed)
+```
+
+
+The summary of the job.
+
+```{r}
+job
+```
+
+Next step is to select one or more ontology categories and to retrieve the result tables.
+There are many ontologies integrated in GREAT. The total ontologies can be get by:
+
+```{r}
+availableOntologies(job)
+```
+
+By default three GO ontologies are used. 
+
+```{r}
+tbl = getEnrichmentTables(job)
+```
+
+Once the result tables are retrieved, they are cached.
+
+```{r}
+job
+```
+
+More ontologies can be set via the `ontology` argument.
+
+```r
+getEnrichmentTable(job, ontology = c("GO Biological Process", "Mouse Phenotype"))
+```
+
+
+`tbl` is a list of three tables and each table contains enrichment results for a GO ontology:
+
+```{r}
+names(tbl)
+head(tbl[["GO Biological Process"]])
+```
+
+```{r, fig.width = 7, fig.height = 7}
+plotVolcano(job, ontology = "GO Biological Process")
+```
+
+The global region-gene association plots:
+
+```{r, fig.width = 10}
+plotRegionGeneAssociationGraphs(job)
+```
+
+Or the association specifically for a specific term.
+
+```{r, fig.width = 10}
+plotRegionGeneAssociations(job, ontology = "GO Molecular Function",
+    term_id = "GO:0004984")
+```
+
+The table of the associations between genes and regions.
+
+```{r}
+getRegionGeneAssociations(job, ontology = "GO Molecular Function",
+    term_id = "GO:0004984")
+```
+
+Note, you cannot get the association bewteen genes and _all_ regions.
+It is not supported by the web GREAT.
+
+There is a Shiny app that contains all the results.
+
+```{r, eval = FALSE}
+shinyReport(job)
+```
+
+
+Bonus: If you use the GO category, you can use the **simplifyEnrichment** to summarize the results. 
+
+
+```{r, message = FALSE, fig.width = 9, fig.height = 5.5}
+library(simplifyEnrichment)
+tb = tbl[["GO Biological Process"]]
+sig_go = tb$ID[tb$Binom_Adjp_BH < 0.01]
+length(sig_go)
+simplifyGO(sig_go)
+```
+
+
+```{r}
+sessionInfo()
+```
+
