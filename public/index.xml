@@ -720,8 +720,8 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/publication/</guid>
-      <description>Updated on 2025-09-04.
- Total Google Scholar citations: 18732.   By topics   By citations    I published papers on variety of topics, applying data science as the core method in general.  ol { list-style-type: decimal; } li { display: list-item; text-align: -webkit-match-parent; unicode-bidi: isolate; }   Bioinformatics software    Zuguang Gu, simona: a comprehensive R package for semantic similarity analysis on bio-ontologies.</description>
+      <description>Updated on 2025-10-22.
+ Total Google Scholar citations: 19369.   By topics   By citations    I published papers on variety of topics, applying data science as the core method in general.  ol { list-style-type: decimal; } li { display: list-item; text-align: -webkit-match-parent; unicode-bidi: isolate; }   Bioinformatics software    Zuguang Gu, simona: a comprehensive R package for semantic similarity analysis on bio-ontologies.</description>
     </item>
     
     <item>
@@ -730,7 +730,7 @@ Math.random() &#34;) : document.write(&#34;&#34;) ;  </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/software/</guid>
-      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2025-07-28.  Total downloads: 8M.  table tr td { white-space: nowrap; } table tr td:first-child { padding-left: 10 px; border-left: 5px solid #CBF8DF; } table tr th:first-child { padding-left: 0px; } table tr.header { display: none; } table, td, th { border: 1px solid white; vertical-align: top; }  Visualization     Package Downloads GitHub Stars Publication    spiralize: Visualize data on spirals.</description>
+      <description>R  Downloads are from CRAN/Bioconductor/anaconda, updated on 2025-10-22.  Total downloads: 9.1M.  table tr td { white-space: nowrap; } table tr td:first-child { padding-left: 10 px; border-left: 5px solid #CBF8DF; } table tr th:first-child { padding-left: 0px; } table tr.header { display: none; } table, td, th { border: 1px solid white; vertical-align: top; }  Visualization     Package Downloads GitHub Stars Publication    spiralize: Visualize data on spirals.</description>
     </item>
     
     <item>
